@@ -3,12 +3,12 @@ import Link from "next/link";
 
 const Banner = () => {
   return (
-    <main className="banner w-full flex items-center h-[85vh]">
+    <main className="banner w-full flex items-center h-[85vh] text-white">
       <div className="w-2/5 h-8/12 m-auto flex flex-col justify-between items-start">
-        <p id="h1" className="text-8xl font-semibold text-white">
+        <p id="h1" className="text-8xl font-semibold">
           Doctor Genesis
         </p>
-        <p className="w-5/6 text-white">
+        <p className="w-5/6">
           Quando a compaixão da medicina encontra o poder da tecnologia, nascem
           soluções que salvam vidas e transformam o futuro.
         </p>
@@ -18,7 +18,7 @@ const Banner = () => {
         >
           <span
             className="about text-white transition-colors
-                   group-hover:bg-linear-to-r group-hover:from-[#2b7fff] group-hover:to-[#00d3f2]
+                   group-hover:bg-linear-to-r group-hover:from-blue-500 group-hover:to-[#00d3f2]
                    group-hover:bg-clip-text group-hover:text-transparent"
           >
             Saiba Mais

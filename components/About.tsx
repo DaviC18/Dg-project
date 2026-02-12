@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const About = () => {
   return (
-    <section className="bg-white w-full flex flex-col justify-center items-center">
+    <section className="bg-white w-full flex flex-col justify-center items-center gap-5">
       <div className="w-4/5 text-black flex flex-col justify-center items-center gap-10 py-10 ">
         <h1
           className="text-6xl font-semibold bg-linear-to-b from-[#2b7fff] to-[#00d3f2]
@@ -68,7 +68,7 @@ const About = () => {
                   enviado o formulario a IA irá análisar
                 </li>
                 <li style={{ fontSize: "14px" }}>
-                  depois de análisado irá dar um pré-dignostico para o médico{" "}
+                  depois de análisado enviará um pré-dignostico para o médico{" "}
                 </li>
               </ul>
             </div>

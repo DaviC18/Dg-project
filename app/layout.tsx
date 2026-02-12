@@ -15,6 +15,9 @@ const montserratSans = Montserrat({
 export const metadata: Metadata = {
   title: "Doctor Genesis",
   description: "AI to the humanity",
+  icons: {
+    icon: "/dg-tab.ico",
+  },
 };
 
 export default function RootLayout({
@@ -23,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt">
       <body className={`${montserratSans.variable} antialiased `}>
         {children}
       </body>

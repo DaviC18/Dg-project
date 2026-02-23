@@ -55,19 +55,12 @@ body {
   transition: width 0.3s ease-in-out;
 }
 
-.menu ul a:hover::after {
+.menu ul li:hover ~ a::after {
   width: 100%;
 }
 
 .banner {
   background-image: url(../public/assets/images/banner-bg.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-
-.phone {
-  background-image: url(../public/assets/images/phone.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

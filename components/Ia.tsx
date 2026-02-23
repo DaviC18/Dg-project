@@ -11,7 +11,7 @@ const Ia = () => {
           médico uma análise preliminar, sugerindo hipóteses clínicas, níveis de
           urgência e exames iniciais recomendados.
         </p>
-        <div className="w-full flex flex-col justify-center items-center gap-14">
+        <div className="w-full flex flex-col justify-center items-center gap-16">
           <div className="flex gap-10">
             <div className="flex flex-col gap-2 w-4/5">
               <h1 className="text-3xl font-semibold">Como a IA funciona?</h1>
@@ -47,7 +47,6 @@ const Ia = () => {
               </ul>
             </div>
           </div>
-          <div className="w-full h-0.75 bg-black"></div>
           <div className="w-full flex flex-col justify-center items-center gap-7">
             <h1 className="text-3xl font-semibold">
               Benefícios da IA para médicos e pacientes
@@ -95,7 +94,6 @@ const Ia = () => {
               </tbody>
             </table>
           </div>
-          <div className="w-full h-[3.5px] bg-black"></div>
           <div className="flex flex-col gap-5">
             <h1 className="text-3xl font-semibold text-center">
               Segurança e Ética

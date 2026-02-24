@@ -44,7 +44,7 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-.menu ul a::after {
+.menu ul li a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -55,7 +55,8 @@ body {
   transition: width 0.3s ease-in-out;
 }
 
-.menu ul li:hover ~ a::after {
+/* mudar para "li:hover a::after" (ou "li a:hover::after") */
+.menu ul li:hover a::after {
   width: 100%;
 }
 

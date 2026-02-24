@@ -1,12 +1,14 @@
 // biome-ignore assist/source/organizeImports: <component>
-import Navbar from "@/components/Navbar";
+import NavbarDesktop from "@/components/NavbarDesktop";
 import type { ReactNode } from "react";
 import "../globals.css";
+import NavbarMobile from "@/components/NavbarMobile";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div>
-      <Navbar />
+      <NavbarDesktop />
+      <NavbarMobile />
       {children}
     </div>
   );

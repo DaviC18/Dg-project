@@ -5,7 +5,7 @@ const About = () => {
     <section className="bg-white w-full flex flex-col justify-center items-center gap-5">
       <div className="w-4/5 text-black flex flex-col justify-center items-center gap-10 py-10 ">
         <h1
-          className="text-6xl font-semibold bg-linear-to-b from-[#2b7fff] to-[#00d3f2]
+          className="text-6xl font-semibold bg-linear-to-b max-sm:text-center from-[#2b7fff] to-[#00d3f2]
                    bg-clip-text text-transparent"
         >
           Nossa Missão
@@ -17,7 +17,7 @@ const About = () => {
         </p>
         <div className="slides flex flex-col justify-center items-center gap-5">
           <h1 className="text-2xl font-semibold text-center">Passos</h1>
-          <div className="flex justify-center items-center gap-20">
+          <div className="flex justify-center items-center flex-wrap gap-20">
             <div className="slide flex flex-col justify-center items-center gap-3.5 w-75 p-2.5 shadow-[0_0_15px_0_rgba(0,0,0,0.5)] rounded-lg">
               <h1 className="text-xl font-semibold">1° passo</h1>
               <Image

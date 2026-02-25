@@ -1,7 +1,13 @@
+// biome-ignore assist/source/organizeImports: <section>
+import type { SectionKey } from "@/app/types/sections";
 import { BrainCircuit, Home, Library, Plus, UserRound } from "lucide-react";
 import Link from "next/link";
 
-const NavbarMobile = () => {
+type Props = {
+  scrollToSection: (key: SectionKey) => void;
+};
+
+const NavbarMobile = ({ scrollToSection }: Props) => {
   return (
     <div className="max-sm:flex hidden fixed bottom-5 left-0 w-full bg-cover justify-center items-center gap-2">
       <div
@@ -16,40 +22,40 @@ const NavbarMobile = () => {
       >
         <form action="" className="flex justify-center items-center gap-2">
           <label htmlFor="/" className="w-1/4">
-            <div className="">
-              <Link
-                href="/"
-                className="flex flex-col justify-center items-center"
+            <div className="flex justify-center items-center">
+              <input type="radio" name="action" id="home" className="sr-only" />
+              <button
+                type="button"
+                className="flex cursor-pointer flex-col justify-center items-center"
               >
                 <Home size={20} />
                 <span className="text-sm">Home</span>
-              </Link>
+              </button>
             </div>
-            <input type="radio" name="action" id="home" className="sr-only" />
           </label>
           <label htmlFor="/" className="w-1/4">
-            <div className="">
-              <Link
-                href="/"
-                className="flex flex-col justify-center items-center"
+            <div className="flex justify-center items-center">
+              <input type="radio" name="action" id="home" className="sr-only" />
+              <button
+                type="button"
+                className="flex cursor-pointer flex-col justify-center items-center"
               >
                 <Library size={20} />
                 <span className="text-sm">About</span>
-              </Link>
+              </button>
             </div>
-            <input type="radio" name="action" id="home" className="sr-only" />
           </label>
           <label htmlFor="/" className="w-1/4">
-            <div className="">
-              <Link
-                href="/"
-                className="flex flex-col justify-center items-center"
+            <div className="flex justify-center items-center">
+              <input type="radio" name="action" id="home" className="sr-only" />
+              <button
+                type="button"
+                className="flex cursor-pointer flex-col justify-center items-center"
               >
                 <BrainCircuit size={20} />
                 <span className="text-sm">AI</span>
-              </Link>
+              </button>
             </div>
-            <input type="radio" name="action" id="home" className="sr-only" />
           </label>
           <label htmlFor="/" className="w-1/4">
             <div className="flex justify-center items-center">
@@ -79,7 +85,7 @@ const NavbarMobile = () => {
               className="cursor-pointer flex flex-col justify-center items-center"
             >
               <Plus size={20} />
-              <span className="text-sm">Criar</span>
+              <span className="text-sm">Create</span>
             </button>
           </div>
         </label>

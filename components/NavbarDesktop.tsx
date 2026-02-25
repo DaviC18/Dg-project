@@ -1,7 +1,13 @@
+// biome-ignore assist/source/organizeImports: <section>
+import type { SectionKey } from "@/app/types/sections";
 import { Plus, UserRound } from "lucide-react";
 import Link from "next/link";
 
-const Navbar = () => {
+type Props = {
+  scrollToSection: (key: SectionKey) => void;
+};
+
+const NavbarDesktop = ({ scrollToSection }: Props) => {
   return (
     <header className=" w-full h-16 flex items-center bg-linear-to-r from-blue-500 to-cyan-300">
       <nav className="w-full flex items-center justify-between max-w-360 mx-auto px-4 sm:px-6 lg:px-8 ">
@@ -12,22 +18,30 @@ const Navbar = () => {
         </div>
 
         <div className="max-sm:hidden w-1/3 menu flex items-center justify-center">
-          <ul className="w-3/5 flex gap-6 text-white">
-            <li className="w-1/3 text-center group">
-              <Link href="/" className="a relative inline-block no-underline">
+          <ul className="w-3/5 flex justify-center items-center gap-6 text-white">
+            <button
+              type="button"
+              onClick={() => scrollToSection("banner")}
+              className="w-1/3 cursor-pointer relative inline-block"
+            >
+              <span className="a no-underline text-center inline-block">
                 Home
-              </Link>
-            </li>
-            <li className="w-1/3 text- text-center">
-              <Link href="/" className="a relative inline-block no-underline">
-                Sobre
-              </Link>
-            </li>
-            <li className="w-1/3 text- text-center">
-              <Link href="/" className="a relative inline-block no-underline">
-                IA
-              </Link>
-            </li>
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollToSection("about")}
+              className="w-1/3 group cursor-pointer relative inline-block"
+            >
+              <span className="a no-underline text-center">About</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollToSection("ai")}
+              className="w-1/3 group cursor-pointer relative inline-block"
+            >
+              <span className="a no-underline text-center">AI</span>
+            </button>
           </ul>
         </div>
 
@@ -50,4 +64,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavbarDesktop;

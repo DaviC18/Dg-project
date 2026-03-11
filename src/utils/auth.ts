@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: <api> */
 export function requireAuth() {
 	return async (request: any, reply: any) => {
 		try {

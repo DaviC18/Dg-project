@@ -10,5 +10,5 @@
     "outDir": "dist",
     "resolveJsonModule": true
   },
-  "include": ["src", "src/http/routes/auth/.ts"]
+  "include": ["src", "src/types/**/*.d.ts"]
 }

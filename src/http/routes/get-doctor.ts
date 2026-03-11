@@ -1,22 +1,21 @@
 import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 import { db } from "../../db/connections";
-import { schema } from "../../db/schema";
+import { users } from "../../db/schema/users";
 
 // biome-ignore lint/suspicious/useAwait: <async>
 export const getDoctorUser: FastifyPluginAsyncZod = async (app) => {
 	app.get("/user_doctor", async () => {
-		const result = await db
-			.select({
-				id: schema.doctor.id,
-				name: schema.doctor.name,
-				cpf: schema.doctor.cpf,
-				email: schema.doctor.email,
-				password: schema.doctor.password,
-			})
-			.from(schema.doctor)
-			.groupBy(schema.doctor.id)
-			.orderBy(schema.doctor.createdAt);
-
-		return result;
-	});
+			const rows = await db
+				.select({
+					id: users.id,
+					name: users.name,
+					cpf: users.cpf,
+					email: users.email,
+					created_at: users.createdAt,
+				})
+				.from(users)
+				.where(eq(users.role, "pacient"))
+				.orderBy(users.createdAt);
+			return rows;
+		});
 };

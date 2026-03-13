@@ -1,13 +1,14 @@
-// biome-ignore assist/source/organizeImports: <section>
-import type { SectionKey } from "@/app/types/sections";
+"use client";
+
+// biome-ignore assist/source/organizeImports: <>
 import { Plus, UserRound } from "lucide-react";
 import Link from "next/link";
+import { useSectionRefs } from "./useSectionRefs";
+import type { SectionKey } from "@/app/types/sections";
 
-type Props = {
-  scrollToSection: (key: SectionKey) => void;
-};
+const NavbarDesktop = () => {
+  const { scrollToSection } = useSectionRefs();
 
-const NavbarDesktop = ({ scrollToSection }: Props) => {
   return (
     <header className=" w-full h-16 flex items-center bg-linear-to-r from-blue-500 to-cyan-300">
       <nav className="w-full flex items-center justify-between max-w-360 mx-auto px-4 sm:px-6 lg:px-8 ">
@@ -21,7 +22,7 @@ const NavbarDesktop = ({ scrollToSection }: Props) => {
           <ul className="w-3/5 flex justify-center items-center gap-6 text-white">
             <button
               type="button"
-              onClick={() => scrollToSection("banner")}
+              onClick={() => scrollToSection("banner" as SectionKey)}
               className="w-1/3 cursor-pointer relative inline-block"
             >
               <span className="a no-underline text-center inline-block">
@@ -30,14 +31,14 @@ const NavbarDesktop = ({ scrollToSection }: Props) => {
             </button>
             <button
               type="button"
-              onClick={() => scrollToSection("about")}
+              onClick={() => scrollToSection("about" as SectionKey)}
               className="w-1/3 group cursor-pointer relative inline-block"
             >
               <span className="a no-underline text-center">About</span>
             </button>
             <button
               type="button"
-              onClick={() => scrollToSection("ai")}
+              onClick={() => scrollToSection("ai" as SectionKey)}
               className="w-1/3 group cursor-pointer relative inline-block"
             >
               <span className="a no-underline text-center">AI</span>

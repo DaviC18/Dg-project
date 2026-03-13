@@ -1,14 +1,22 @@
+// biome-ignore assist/source/organizeImports: <>
 import Image from "next/image";
+import { useSectionRefs } from "./useSectionRefs";
+import { useEffect, useRef } from "react";
+import type { SectionKey } from "@/app/types/sections";
 
-type Props = {
-  registerRef?: (el: HTMLElement | null) => void;
-};
+const About: React.FC = () => {
+  const { registerRef } = useSectionRefs();
+  const localRef = useRef<HTMLElement | null>(null);
 
-const About: React.FC<Props> = ({ registerRef }) => {
+  useEffect(() => {
+    registerRef("about" as SectionKey, localRef.current);
+    return () => registerRef("about" as SectionKey, null);
+  }, [registerRef]);
+
   return (
     <section
-      ref={(el) => registerRef?.(el)}
-      className="bg-white w-full flex flex-col justify-center items-center gap-5"
+      ref={localRef}
+      className="about bg-white w-full flex flex-col justify-center items-center gap-5"
     >
       <div className="w-4/5 text-black flex flex-col justify-center items-center gap-10 py-10 ">
         <h1

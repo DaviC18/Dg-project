@@ -12,22 +12,6 @@ const Page = () => {
           </span>
         </div>
         <div className="w-1/2 max-sm:w-full flex flex-col gap-10 justify-center items-center">
-          <div className="w-60">
-            <label className="w-full flex justify-between items-center bg-white rounded-full">
-              <input
-                id="toggle"
-                type="checkbox"
-                className="sr-only peer"
-                aria-label="Ativar notificações"
-              />
-              <span className="w-1/2 text-lg  py-0.5 font-medium text-center rounded-full bg-linear-to-br from-blue-500 to-cyan-400 text-white peer-checked:bg-none peer-checked:text-black">
-                Paciente
-              </span>
-              <span className="w-1/2 text-lg  py-0.5 font-medium text-center rounded-full bg-transparent text-black peer-checked:bg-linear-to-br peer-checked:from-blue-500 peer-checked:to-cyan-400 peer-checked:text-white">
-                Médico
-              </span>
-            </label>
-          </div>
           <div className="w-full flex justify-center items-center">
             <form action="" className="flex flex-col gap-5">
               <div className="flex justify-between">

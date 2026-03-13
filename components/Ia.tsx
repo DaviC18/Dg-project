@@ -1,13 +1,19 @@
-type Props = {
-  registerRef?: (el: HTMLElement | null) => void;
-};
+// biome-ignore assist/source/organizeImports: <>
+import { useEffect, useRef } from "react";
+import { useSectionRefs } from "./useSectionRefs";
+import type { SectionKey } from "@/app/types/sections";
 
-const Ia: React.FC<Props> = ({ registerRef }) => {
+const Ia: React.FC = () => {
+  const { registerRef } = useSectionRefs();
+  const localRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    registerRef("ai" as SectionKey, localRef.current);
+    return () => registerRef("ai" as SectionKey, null);
+  }, [registerRef]);
+
   return (
-    <section
-      ref={(el) => registerRef?.(el)}
-      className="w-full flex justify-center"
-    >
+    <section ref={localRef} className="ai w-full flex justify-center">
       <div className="w-4/5 text-black flex flex-col justify-center items-center gap-10 py-10 ">
         <h1 className=" text-6xl font-semibold bg-linear-to-b from-blue-500 to-cyan-400 bg-clip-text text-transparent">
           Our AI

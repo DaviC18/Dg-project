@@ -6,7 +6,7 @@ import { requireRole } from "../../utils/auth";
 const doctorRoutes: FastifyPluginAsync = async (app) => {
 	// opção A: rota com caminho completo
 	app.get(
-		"/only",
+		"/doctorOnly",
 		{ preHandler: requireRole("doctor") },
 		async (request, reply) => {
 			// só médicos chegam aqui

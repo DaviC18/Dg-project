@@ -1,3 +1,4 @@
+// biome-ignore assist/source/organizeImports: <>
 import bcrypt from "bcryptjs";
 import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 import z from "zod";
@@ -8,6 +9,7 @@ import { eq } from "drizzle-orm";
 const CreateUserBody = z.object({
 	name: z.string().min(1),
 	cpf: z.string().length(11),
+	age: z.string().length(8),
 	email: z.string().email(),
 	password: z.string().min(6),
 	role: z.enum(["pacient", "doctor"]),
@@ -26,15 +28,30 @@ export const authRoutes: FastifyPluginAsyncZod = async (app) => {
 			return reply.status(400).send({ error: parse.error });
 		}
 
-		const { name, cpf, email, password, role } = parse.data;
+		const { name, biagerth, cpf, email, password, role } = parse.data;
 		const passwordHash = await bcrypt.hash(password, 10);
 
+		function calcAge(dateBirth: Date) {
+			const today = new Date()
+			let age = today.getFullYear() - dateBirth.getFullYear()
+
+			const getMonth = today.getMonth()
+			const getDay = today.getDate();
+
+			const monthBirth = dateBirth.getMonth();
+			const dayBirth = dateBirth.getDate()
+
+			if(getMonth < monthBirth || (getMonth === monthBirth && getDay < dayBirth)) age--
+
+			return age
+		}
 		try {
 			const result = await db
 				.insert(users)
 				.values({
 					name,
 					cpf,
+					age: calcAge(birth),
 					email,
 					password: passwordHash,
 					role,

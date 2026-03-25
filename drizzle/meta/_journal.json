@@ -15,6 +15,13 @@
       "when": 1768870120733,
       "tag": "0001_loud_hulk",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1773523502385,
+      "tag": "0002_melted_kang",
+      "breakpoints": true
     }
   ]
 }

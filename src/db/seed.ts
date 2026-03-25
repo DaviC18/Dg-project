@@ -12,8 +12,10 @@ async function main() {
 			columns: {
 				name: f.companyName(),
 				cpf: f.number(),
+				age: f.string(),
 				email: f.email(),
 				password: f.string(),
+				role: f.boolean(),
 			},
 		},
 	}));

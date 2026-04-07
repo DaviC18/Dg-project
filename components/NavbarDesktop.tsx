@@ -5,6 +5,7 @@ import { Plus, UserRound } from "lucide-react";
 import Link from "next/link";
 import { useSectionRefs } from "./useSectionRefs";
 import type { SectionKey } from "@/app/types/sections";
+import UserClerk from "./UserClerk";
 
 const NavbarDesktop = () => {
   const { scrollToSection } = useSectionRefs();
@@ -41,7 +42,9 @@ const NavbarDesktop = () => {
               onClick={() => scrollToSection("ai" as SectionKey)}
               className="w-1/3 group cursor-pointer relative inline-block"
             >
-              <span className="a no-underline text-center">AI</span>
+              <Link href="/#about" className="a no-underline text-center">
+                Ai
+              </Link>
             </button>
           </ul>
         </div>
@@ -53,12 +56,7 @@ const NavbarDesktop = () => {
           >
             <Plus size={20} />
           </Link>
-          <Link
-            href=""
-            className="group p-2 bg-white text-blue-400 rounded-full cursor-pointer transition-all duration-300 hover:bg-blue-500 hover:text-white "
-          >
-            <UserRound size={20} />
-          </Link>
+          <UserClerk />
         </figure>
       </nav>
     </header>

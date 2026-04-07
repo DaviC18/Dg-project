@@ -18,7 +18,7 @@ const Ia: React.FC = () => {
         <h1 className=" text-6xl font-semibold bg-linear-to-b from-blue-500 to-cyan-400 bg-clip-text text-transparent">
           Our AI
         </h1>
-        <p className="w-4/6 text-center font-semibold ">
+        <p className="w-4/6 max-md:w-full text-center font-semibold ">
           Our AI is a technology to support clinical diagnosis. She analyzes the
           data completed by patients in pre-screening and offers the physician a
           preliminary analysis, suggesting clinical hypotheses, levels of
@@ -30,7 +30,7 @@ const Ia: React.FC = () => {
               <h1 className="text-3xl font-semibold max-sm:text-center">
                 How does AI work?
               </h1>
-              <ul className=" w-4/5 flex flex-col gap-1 max-sm:justify-center max-sm:items-center max-sm:text-center">
+              <ul className="w-4/5 max-sm:w-full flex flex-col gap-1 max-sm:justify-center max-sm:items-center max-sm:text-center">
                 <li className="text-sm font-semibold">
                   1. Data Collection: The patient fills out the form with
                   symptoms, medical history and duration.
@@ -50,11 +50,11 @@ const Ia: React.FC = () => {
               </ul>
             </div>
             <div className="h-full w-0.75 rounded-xl bg-black max-sm:h-0.75 max-sm:w-full"></div>
-            <div className="w-2/5 max-sm:w-full flex flex-col gap-2.5 max-sm:justify-center max-sm:items-center">
-              <h1 className="text-start text-3xl font-semibold">
+            <div className="w-2/5 max-sm:w-full flex flex-col items-start gap-2.5 max-sm:justify-center max-sm:items-center">
+              <h1 className="text-start text-3  xl max-sm:text-center font-semibold">
                 What does AI NOT do?
               </h1>
-              <ul className="font-semibold max-sm:text-center text-sm  w-4/5  max-sm:flex max-sm:flex-col max-sm:justify-center max-sm:items-center">
+              <ul className="font-semibold start text-sm w-full flex flex-col items-start text-start justify-center  max-sm:flex-col max-sm:justify-center max-sm:items-center">
                 <li>1. It does not replace the doctor</li>
                 <li>2. Does not provide closed diagnoses</li>
                 <li>3. Does not prescribe medications</li>

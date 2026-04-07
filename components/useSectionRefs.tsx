@@ -20,14 +20,6 @@ export const SectionRefsProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const scrollToSection = useCallback((key: SectionKey) => {
     const el = refs.current[key];
-    console.log(
-      "[scrollToSection] key:",
-      key,
-      "found:",
-      !!el,
-      "refs:",
-      refs.current,
-    );
     if (!el) {
       console.warn("scrollToSection: element not found for key:", key);
       return;

@@ -25,7 +25,7 @@ const About: React.FC = () => {
         >
           Our Mission
         </h1>
-        <p className="w-3/5 text-center font-semibold">
+        <p className="w-4/6 max-md:w-full text-center font-semibold">
           Our mission is to revolutionize medical care, using intelligence
           artificial to make diagnosis more agile, accurate, accessible and
           facilitating the patient's interaction at the consultation with their

@@ -60,6 +60,13 @@ body {
   width: 100%;
 }
 
+.image_ai {
+  background-image: url(../public/assets/images/image-ia.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 .banner {
   background-image: url(../public/assets/images/banner-bg.png);
   background-repeat: no-repeat;

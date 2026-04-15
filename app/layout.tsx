@@ -8,11 +8,6 @@ const montserratSans = Montserrat({
   subsets: ["latin"],
 });
 
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
-
 export const metadata: Metadata = {
   title: "Doctor Genesis",
   description: "AI to the humanity",
@@ -23,12 +18,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${montserratSans.variable} antialiased `}>
+      <body className={`${montserratSans.variable} antialiased`}>
         <ClerkProvider>{children}</ClerkProvider>
       </body>
     </html>

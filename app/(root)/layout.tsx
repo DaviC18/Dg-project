@@ -1,3 +1,4 @@
+import FormDiagnostic from "@/components/FormDiagnostic";
 import NavbarDesktop from "@/components/NavbarDesktop";
 import NavbarMobile from "@/components/NavbarMobile";
 import { SectionRefsProvider } from "@/components/useSectionRefs";
@@ -8,6 +9,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <SectionRefsProvider>
       <NavbarDesktop />
       <NavbarMobile />
+      <FormDiagnostic />
       {children}
     </SectionRefsProvider>
   );

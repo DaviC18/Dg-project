@@ -1,11 +1,10 @@
 "use client";
 
 // biome-ignore assist/source/organizeImports: <>
-import { Plus, Search, UserRound } from "lucide-react";
+import { Plus, Search } from "lucide-react";
 import Link from "next/link";
 import { useSectionRefs } from "./useSectionRefs";
 import type { SectionKey } from "@/app/types/sections";
-import UserClerk from "./UserClerkMobile";
 import UserClerkDesktop from "./UserClerkDesktop";
 
 const NavbarDesktop = () => {

@@ -1,6 +1,6 @@
 // biome-ignore assist/source/organizeImports: <>
 import { useEffect, useRef } from "react";
-import { useSectionRefs } from "./useSectionRefs";
+import { useSectionRefs } from "../app/hooks/useSectionRefs";
 import type { SectionKey } from "@/app/types/sections";
 
 const Ia: React.FC = () => {

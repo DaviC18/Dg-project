@@ -1,6 +1,6 @@
 // biome-ignore assist/source/organizeImports: <>
 import Image from "next/image";
-import { useSectionRefs } from "./useSectionRefs";
+import { useSectionRefs } from "../app/hooks/useSectionRefs";
 import { useEffect, useRef } from "react";
 import type { SectionKey } from "@/app/types/sections";
 

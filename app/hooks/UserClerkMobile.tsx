@@ -47,6 +47,7 @@ const UserClerkMobile = ({ children }: { children: ReactNode }) => {
           className="w-9 h-9 flex items-center justify-center bg-white text-blue-400 rounded-full cursor-pointer transition-all duration-300 hover:bg-blue-500 hover:text-white"
         >
           <UserRound size={20} />
+          {children}
         </button>
       </SignInButton>
     );

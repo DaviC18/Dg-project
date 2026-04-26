@@ -3,12 +3,14 @@
 // biome-ignore assist/source/organizeImports: <>
 import { Plus, Search } from "lucide-react";
 import Link from "next/link";
-import { useSectionRefs } from "./useSectionRefs";
+import { useSectionRefs } from "../app/hooks/useSectionRefs";
 import type { SectionKey } from "@/app/types/sections";
-import UserClerkDesktop from "./UserClerkDesktop";
+import UserClerkDesktop from "@/app/hooks/UserClerkDesktop";
+import { useFormDiagnostic } from "@/app/hooks/FormContext";
 
 const NavbarDesktop = () => {
   const { scrollToSection } = useSectionRefs();
+  const { openForm } = useFormDiagnostic();
 
   return (
     <header className=" w-full h-16 flex items-center bg-linear-to-r from-blue-500 to-cyan-300">
@@ -58,6 +60,7 @@ const NavbarDesktop = () => {
           </button>
           <button
             type="button"
+            onClick={openForm}
             className="p-2 max-sm:hidden bg-white text-blue-400 rounded-full cursor-pointer transition-all duration-300 hover:bg-blue-500 hover:text-white"
           >
             <Plus size={20} />

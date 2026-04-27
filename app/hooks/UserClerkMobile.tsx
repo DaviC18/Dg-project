@@ -1,14 +1,11 @@
 "use client";
 
-/** biome-ignore-all assist/source/organizeImports: <> */
-import { SignInButton, useClerk, useUser } from "@clerk/nextjs";
+import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import { UserRound } from "lucide-react";
-import Image from "next/image";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 const UserClerkMobile = ({ children }: { children: ReactNode }) => {
   const { isLoaded, isSignedIn, user } = useUser();
-  const clerk = useClerk();
 
   if (!isLoaded) {
     return (
@@ -20,24 +17,16 @@ const UserClerkMobile = ({ children }: { children: ReactNode }) => {
 
   if (isSignedIn && user) {
     return (
-      <button
-        type="button"
-        onClick={() => clerk.openUserProfile()}
-        className="flex flex-col justify-center items-center cursor-pointer"
-      >
-        {user.imageUrl ? (
-          <Image
-            src={user.imageUrl}
-            alt={user.fullName || "User"}
-            width={33}
-            height={33}
-            className="rounded-full max-sm:w-5.5 max-sm:h-5.5"
-          />
-        ) : (
-          <UserRound size={33} />
-        )}
+      <div className="flex flex-col justify-center items-center">
+        <UserButton
+          appearance={{
+            elements: {
+              userButtonAvatarBox: { width: "25px", height: "25px" },
+            },
+          }}
+        />
         {children}
-      </button>
+      </div>
     );
   } else {
     return (

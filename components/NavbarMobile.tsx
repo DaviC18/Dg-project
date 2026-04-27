@@ -15,7 +15,7 @@ const NavbarMobile = () => {
     <div className="max-sm:flex hidden px-3 fixed bottom-5 left-0 w-full bg-cover justify-center items-center gap-2">
       <div className="w-full bg-white/20 backdrop-blur-xl border border-black/20 shadow-xl py-1.5 px-2.5 text-center rounded-full text-black">
         <form action="" className="flex justify-center items-center gap-2">
-          <label className="w-1/4">
+          <label className="w-1/5">
             <div className="flex justify-center items-center">
               <input type="radio" name="action" id="home" className="sr-only" />
               <button
@@ -29,7 +29,7 @@ const NavbarMobile = () => {
             </div>
           </label>
 
-          <label className="w-1/4">
+          <label className="w-1/5">
             <div className="flex justify-center items-center">
               <input
                 type="radio"
@@ -48,7 +48,7 @@ const NavbarMobile = () => {
             </div>
           </label>
 
-          <label className="w-1/4">
+          <label className="w-1/5">
             <div className="flex justify-center items-center">
               <button
                 type="button"
@@ -62,7 +62,7 @@ const NavbarMobile = () => {
             </div>
           </label>
 
-          <label className="w-1/4">
+          <label className="w-1/5">
             <div className="flex justify-center items-center">
               <input type="radio" name="action" id="ai" className="sr-only" />
               <button
@@ -76,7 +76,7 @@ const NavbarMobile = () => {
             </div>
           </label>
 
-          <div className="flex justify-center items-center">
+          <div className="w-1/5">
             <UserClerkMobile>
               <span className="text-center text-sm">User</span>
             </UserClerkMobile>

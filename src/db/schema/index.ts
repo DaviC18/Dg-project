@@ -1,3 +1,3 @@
-import { users } from "./users";
+import { form } from "./form";
 
-export const schema = { users };
+export const schema = { form };

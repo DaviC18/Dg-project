@@ -1,21 +1,29 @@
+// biome-ignore assist/source/organizeImports: <>
 import { db, sql } from "./connections.js";
-import { users } from "./schema/users";
+import { form } from "./schema/form";
 import { reset, seed } from "drizzle-seed";
 
 async function main() {
 	// limpa apenas as duas tabelas que vamos seedar
-	await reset(db, { users });
+	await reset(db, { form });
 
-	await seed(db, { users }).refine((f) => ({
-		users: {
-			count: 5,
+	await seed(db, { form }).refine((f) => ({
+		form: {
+			count: 9,
 			columns: {
-				name: f.companyName(),
-				cpf: f.number(),
-				age: f.string(),
-				email: f.email(),
-				password: f.string(),
-				role: f.boolean(),
+				userId: f.string(),
+				symptomsDescription: f.string(),
+				startDate: f.date({
+					minDate: "2020-01-01",
+					maxDate: "2026-12-31",
+				}),
+				symptomsStatus: f.string(),
+				painLevel: f.int(),
+				hadBefore: f.string(),
+				hadBeforeWhen: f.string(),
+				seenByProfessional: f.string(),
+				seenByWho: f.string(),
+				consent: f.boolean(),
 			},
 		},
 	}));

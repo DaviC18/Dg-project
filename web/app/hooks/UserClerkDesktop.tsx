@@ -1,0 +1,39 @@
+"use client";
+
+import { SignInButton, useClerk, UserButton, useUser } from "@clerk/nextjs";
+import { UserRound } from "lucide-react";
+
+const UserClerkDesktop = () => {
+  const { isLoaded, isSignedIn, user } = useUser();
+
+  if (!isLoaded) {
+    return <div className="w-9 h-9 rounded-full bg-white/20" />;
+  }
+
+  if (isSignedIn && user) {
+    return (
+      <div className="mt-1.5">
+        <UserButton
+          appearance={{
+            elements: {
+              userButtonAvatarBox: { width: "36px", height: "36px" },
+            },
+          }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <SignInButton>
+      <button
+        type="button"
+        className="w-9 h-9 flex items-center w- justify-center bg-white text-blue-400 rounded-full cursor-pointer transition-all duration-300 hover:bg-blue-500 hover:text-white"
+      >
+        <UserRound size={20} />
+      </button>
+    </SignInButton>
+  );
+};
+
+export default UserClerkDesktop;

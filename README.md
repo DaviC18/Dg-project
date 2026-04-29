@@ -35,7 +35,6 @@ This project follows a **monorepo architecture**, separating concerns while main
 Doctor Genesis/
 ├─ web/        # Frontend (Next.js)
 ├─ server/     # Backend (Fastify API)
-└─ README.md
 ```
 
 ### Design Philosophy
@@ -84,7 +83,7 @@ Doctor Genesis/
 ```json
 {
   "formId": "form_123",
-  "model": "gpt-4.1",
+  "model": "gemini-3-flash-preview",
   "result": {
     "summary": "Patient presents symptoms consistent with...",
     "alerts": "Monitor for signs of worsening condition.",

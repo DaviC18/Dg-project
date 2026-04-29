@@ -1,0 +1,56 @@
+{
+  "name": "dg-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "module": "exnext",
+  "moduleResolution": "bundler",
+  "scripts": {
+    "db:seed": "tsx src/db/seed.ts",
+    "start": "tsx src/server.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "dev": "tsx watch src/server.ts",
+    "check": "ultracite check",
+    "fix": "ultracite fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaviC18/DG-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaviC18/DG-server/issues"
+  },
+  "homepage": "https://github.com/DaviC18/DG-server#readme",
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.5",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^25.0.9",
+    "drizzle-kit": "^0.31.8",
+    "drizzle-seed": "^0.3.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "ultracite": "^7.2.5"
+  },
+  "dependencies": {
+    "@clerk/fastify": "^3.1.15",
+    "@fastify/cors": "^11.2.0",
+    "@fastify/jwt": "^10.0.0",
+    "@fastify/multipart": "^9.4.0",
+    "@fastify/swagger": "^9.6.1",
+    "@fastify/swagger-ui": "^5.2.4",
+    "@google/genai": "^1.50.1",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
+    "drizzle-orm": "^0.45.1",
+    "fastify": "^5.7.1",
+    "fastify-type-provider-zod": "^6.1.0",
+    "postgres": "^3.4.8",
+    "zod": "^4.3.5",
+    "zod-to-json-schema": "^3.25.2"
+  }
+}

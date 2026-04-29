@@ -1,0 +1,14 @@
+# Variebles
+@baseUrl = http://localhost:5234
+
+# Health Check
+# @name healthCheck
+GET {{baseUrl}}/health
+
+### 
+
+#Get forms
+# @name getForms
+GET {{baseUrl}}/forms
+
+### 

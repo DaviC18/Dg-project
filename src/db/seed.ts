@@ -2,12 +2,13 @@
 import { db, sql } from "./connections.js";
 import { form } from "./schema/form";
 import { reset, seed } from "drizzle-seed";
+import { preDiagnostic } from "./schema/preDiagnostic.js";
 
 async function main() {
 	// limpa apenas as duas tabelas que vamos seedar
-	await reset(db, { form });
+	await reset(db, { form, preDiagnostic });
 
-	await seed(db, { form }).refine((f) => ({
+	await seed(db, { form, preDiagnostic }).refine((f) => ({
 		form: {
 			count: 9,
 			columns: {

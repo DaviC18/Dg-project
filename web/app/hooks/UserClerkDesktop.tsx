@@ -1,6 +1,7 @@
+/** biome-ignore-all assist/source/organizeImports: <> */
 "use client";
 
-import { SignInButton, useClerk, UserButton, useUser } from "@clerk/nextjs";
+import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import { UserRound } from "lucide-react";
 
 const UserClerkDesktop = () => {

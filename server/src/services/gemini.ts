@@ -9,6 +9,7 @@ const gemini = new GoogleGenAI({
 
 const model = "gemini-3-flash-preview";
 
+
 const preDiagnosticSchema = z.object({
 	resumo: z.string().describe("Resumo objetivo do formulário preenchido."),
 	alertas: z

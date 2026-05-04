@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Tokenkey } from "../app/hooks/TokenKey";
 import { useSubmitFormToken } from "@/app/hooks/useSubmitFormToken";
 import { useFormDiagnostic } from "@/app/hooks/FormContext";
+import { DebugTokenButton } from "./token";
 
 const FormDiagnostic = () => {
   const { handleSubmit } = useSubmitFormToken();
@@ -130,8 +131,8 @@ const FormDiagnostic = () => {
                     <div>
                       <input
                         type="radio"
-                        name="hadBeforeWhen"
-                        id="hadBeforeWhen"
+                        name="hadBefore"
+                        id="hadBefore"
                         className="cursor-pointer"
                         value="no"
                       />
@@ -214,6 +215,7 @@ const FormDiagnostic = () => {
                 >
                   Submit
                 </Tokenkey>
+                <DebugTokenButton />
               </div>
             </div>
           </div>

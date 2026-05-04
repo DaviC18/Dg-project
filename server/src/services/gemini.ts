@@ -11,17 +11,17 @@ const model = "gemini-3-flash-preview";
 
 
 const preDiagnosticSchema = z.object({
-	resumo: z.string().describe("Resumo objetivo do formulário preenchido."),
-	alertas: z
+	summary: z.string().describe("Resumo objetivo do formulário preenchido."),
+	alerts: z
 		.array(z.string())
 		.describe("Sinais de alerta identificados no caso."),
-	sugestoesAoMedico: z
+	suggestionsToTheDoctor: z
 		.array(z.string())
 		.describe("Sugestões clínicas para o médico avaliar."),
-	examesSugeridos: z
+	examsSuggested: z
 		.array(z.string())
 		.describe("Exames que podem ser considerados."),
-	observacoes: z
+	observations: z
 		.array(z.string())
 		.describe("Observações importantes e limitações do pré-diagnóstico."),
 });

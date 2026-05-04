@@ -1,14 +1,22 @@
 # Variebles
-@baseUrl = http://localhost:5234
+@baseUrl = http://localhost:3333
+@token = eyJhbGciOiJSUzI1NiIsImNhdCI6ImNsX0I3ZDRQRDExMUFBQSIsImtpZCI6Imluc18zQlhDVHlhaGZuQ1EyNmxHcFNQbWU5ZzZVZVIiLCJ0eXAiOiJKV1QifQ.eyJhenAiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAiLCJleHAiOjE3Nzc2ODQ5OTEsImZ2YSI6WzYxNjAsLTFdLCJpYXQiOjE3Nzc2ODQ2OTEsImlzcyI6Imh0dHBzOi8vZ2FtZS1iZWFnbGUtOTUuY2xlcmsuYWNjb3VudHMuZGV2IiwibmJmIjoxNzc3Njg0NjgxLCJzaWQiOiJzZXNzXzNDc0ZwbWpBeVZFNTZoS1dxRXVOeDNiUWluYyIsInN0cyI6ImFjdGl2ZSIsInN1YiI6InVzZXJfM0NQTlFpc1YwbzVmRnJwR1FPc0NZNmdKb2hGIiwidiI6Mn0.jOsthua0DVPAY_PRnZ7oYsXcsRXcfgMuZpb43k5p8oo9O956UjHTWP_Xhdda5jcInVlHVMwvtsG0o4_yvjCjiuUppmW-1jW7YSWfBRkwt2t_k6RDE4MX5Jnr9iG5j5tHlMi5PyeeiqpIlv4ggcYxwKE5u2BpcdkHM65lTRa8rghC2oXUB83fyiionvOQKsVUXcoSk7-RbiV6TMMDN-UjKFntLDCxlpuc2fQYuemIBWpORZcZiHGQ6yxuLTqDvVH5GM14JsGvH9e9bPTBOWwRaVyvCZZRa-bekfcjNpB92yZHbv4jz7vs7F1pAovjcLDksNgre5zUzUh53gLFRKiThQ
 
 # Health Check
 # @name healthCheck
-GET {{baseUrl}}/health
+GET {{baseUrl}}/
 
 ### 
 
-#Get forms
-# @name getForms
-GET {{baseUrl}}/forms
 
-### 
+# Get UserId Token
+GET {{baseUrl}}/me
+Authorization: Bearer {{token}}
+
+###
+
+# Get Form Token
+GET {{baseUrl}}/protected
+Authorization: Bearer {{token}}
+
+###

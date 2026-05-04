@@ -1,3 +1,5 @@
+"use client"
+
 // biome-ignore assist/source/organizeImports: <>
 import Image from "next/image";
 import { useSectionRefs } from "../app/hooks/useSectionRefs";

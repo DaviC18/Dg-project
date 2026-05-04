@@ -7,6 +7,8 @@ import { z } from "zod";
 
 const envSchema = z.object({
 	PORT: z.coerce.number().default(5234),
+	CLERK_SECRET_KEY: z.string().min(1),
+	CLERK_PUBLISHABLE_KEY: z.string().min(1),
 	GEMINI_API_KEY: z.string().min(1),
 	DATABASE_URL: z
 		.string()
@@ -20,6 +22,8 @@ const envSchema = z.object({
 
 export const env = envSchema.parse({
 	PORT: process.env.PORT,
+	CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+	CLERK_PUBLISHABLE_KEY: process.env.CLERK_PUBLISHABLE_KEY,
 	GEMINI_API_KEY: process.env.GEMINI_API_KEY,
 	DATABASE_URL: process.env.DATABASE_URL,
 	JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,

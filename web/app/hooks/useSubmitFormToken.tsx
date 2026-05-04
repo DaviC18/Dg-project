@@ -28,7 +28,7 @@ export function useSubmitFormToken() {
       consent: formData.get("consent") === "on",
     };
 
-    const response = await fetch("http://localhost:5432/protected", {
+    const response = await fetch("http://localhost:3333/protected", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -37,10 +37,9 @@ export function useSubmitFormToken() {
       body: JSON.stringify(payload),
     });
 
-    if (!response.ok) {
-      console.error("Erro ao enviar formulário");
-      return;
-    }
+    const responseText = await response.text();
+    console.log("STATUS:", response.status);
+    console.log("RESPOSTA:", responseText);
 
     const data = await response.json();
     console.log(data);

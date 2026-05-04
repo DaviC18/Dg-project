@@ -1,3 +1,5 @@
+"use client"
+
 // biome-ignore assist/source/organizeImports: <>
 import Image from "next/image";
 import { useSectionRefs } from "../app/hooks/useSectionRefs";
@@ -36,7 +38,7 @@ const Banner: React.FC = () => {
           className="group cursor-pointer border-2 border-white py-2.5 px-7 rounded-full transition-all duration-300 hover:bg-white max-[840px]:mt-5"
         >
           <span
-            className="about text-white transition-colors
+            className="about text-white transition-colors\r\n      
                    group-hover:bg-linear-to-r group-hover:from-blue-500 group-hover:to-[#00d3f2]
                    group-hover:bg-clip-text group-hover:text-transparent"
           >

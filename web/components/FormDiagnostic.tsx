@@ -1,4 +1,3 @@
-/** biome-ignore-all assist/source/organizeImports: <> */
 "use client";
 
 import { X } from "lucide-react";
@@ -6,7 +5,6 @@ import { useEffect } from "react";
 import { Tokenkey } from "../app/hooks/TokenKey";
 import { useSubmitFormToken } from "@/app/hooks/useSubmitFormToken";
 import { useFormDiagnostic } from "@/app/hooks/FormContext";
-import { DebugTokenButton } from "./token";
 
 const FormDiagnostic = () => {
   const { handleSubmit } = useSubmitFormToken();
@@ -215,7 +213,6 @@ const FormDiagnostic = () => {
                 >
                   Submit
                 </Tokenkey>
-                <DebugTokenButton />
               </div>
             </div>
           </div>

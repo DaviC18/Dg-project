@@ -5,29 +5,15 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1768869864045,
-      "tag": "0000_smooth_deathstrike",
+      "when": 1778344028727,
+      "tag": "0000_curved_shiver_man",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1768870120733,
-      "tag": "0001_loud_hulk",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1773523502385,
-      "tag": "0002_melted_kang",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1777598408289,
-      "tag": "0003_hard_liz_osborn",
+      "when": 1778344149167,
+      "tag": "0001_cute_nomad",
       "breakpoints": true
     }
   ]

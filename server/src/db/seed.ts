@@ -1,15 +1,15 @@
 // biome-ignore assist/source/organizeImports: <>
 import { db, sql } from "./connections.js";
-import { form } from "./schema/form";
+import { forms } from "./schema/forms.js";
 import { reset, seed } from "drizzle-seed";
-import { preDiagnostic } from "./schema/preDiagnostic.js";
+import { preDiagnostics } from "./schema/preDiagnostics.js";
 
 async function main() {
 	// limpa apenas as duas tabelas que vamos seedar
-	await reset(db, { form, preDiagnostic });
+	await reset(db, { forms, preDiagnostics });
 
-	await seed(db, { form, preDiagnostic }).refine((f) => ({
-		form: {
+	await seed(db, { forms, preDiagnostics }).refine((f) => ({
+		forms: {
 			count: 9,
 			columns: {
 				userId: f.string(),
@@ -29,14 +29,14 @@ async function main() {
 		},
 	}));
 
-	const forms = await db.select().from(form);
+	const formsTable = await db.select().from(forms);
 
-	if (!forms.length) {
+	if (!formsTable.length) {
 		throw new Error("Nenhum form foi criado.");
 	}
 
-	await db.insert(preDiagnostic).values(
-		forms.map((f) => ({
+	await db.insert(preDiagnostics).values(
+		formsTable.map((f) => ({
 			formId: f.id,
 			userId: f.userId,
 			model: "gemini-3-flash-preview ",

@@ -1,22 +1,28 @@
 import { getAuth } from "@clerk/fastify";
 import type { FastifyPluginCallbackZod } from "fastify-type-provider-zod";
 import { db } from "../../db/connections";
-import { preDiagnostic } from "../../db/schema/preDiagnostic";
-import { eq } from "drizzle-orm";
 
 export const getPreDiagnostic: FastifyPluginCallbackZod = (app) => {
-	app.get("/pre-diagnostic", async (request, reply) => {
+	app.get("/pre-diagnostics", async (request, reply) => {
 		const { userId } = getAuth(request);
 
 		if (!userId) {
 			return reply.code(401).send({ error: "Not authenticated" });
 		}
 
-		const preDiagnostics = await db
-			.select()
-			.from(preDiagnostic)
-			.where(eq(preDiagnostic.userId, userId));
+		try {
+			const resultPreDiagnostic = await db.query.preDiagnostics.findMany({
+			where: (p, { eq }) => eq(p.userId, userId),
+			with: {
+				form: true, // 🔥 traz o formulário junto
+			},
+			orderBy: (p, { desc }) => desc(p.createdAt),
+		});
 
-		return reply.send(preDiagnostics);
+		return reply.status(200).send(resultPreDiagnostic);
+		} catch (err) {
+			console.error("ERROR TO GET THE PRE DIAGNOSTIC")
+			reply.code(501).send({err: "Error to get the pre diagnostic"})
+		}
 	});
 };

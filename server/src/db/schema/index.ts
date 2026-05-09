@@ -1,4 +1,10 @@
-import { form } from "./form";
-import { preDiagnostic } from "./preDiagnostic";
+import { forms } from "./forms";
+import { preDiagnostics } from "./preDiagnostics";
+import { formsRelations, preDiagnosticRelations } from "./relations";
 
-export const schema = { form, preDiagnostic };
+export const schema = {
+	forms,
+	preDiagnostics,
+	formsRelations,
+	preDiagnosticRelations,
+};

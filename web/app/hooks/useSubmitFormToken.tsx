@@ -10,6 +10,7 @@ export function useSubmitFormToken() {
 
     const formData = new FormData(e.currentTarget);
     const token = await getToken();
+    console.log("TOKEN: ", token);
 
     if (!token) {
       console.error("Usuário sem token");
@@ -28,7 +29,7 @@ export function useSubmitFormToken() {
       consent: formData.get("consent") === "on",
     };
 
-    const response = await fetch("http://localhost:3333/protected", {
+    const response = await fetch("http://localhost:3333/forms", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -37,11 +38,9 @@ export function useSubmitFormToken() {
       body: JSON.stringify(payload),
     });
 
-    const responseText = await response.text();
-    console.log("STATUS:", response.status);
-    console.log("RESPOSTA:", responseText);
-
     const data = await response.json();
+    console.log("STATUS:", response.status);
+    console.log("RESPOSTA:", data);
     console.log(data);
   };
 

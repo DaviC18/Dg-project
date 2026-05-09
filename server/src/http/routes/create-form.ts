@@ -3,59 +3,61 @@ import { getAuth } from "@clerk/fastify";
 import type { FastifyPluginCallbackZod } from "fastify-type-provider-zod";
 import { db } from "../../db/connections";
 import { z } from "zod";
-import { form } from "../../db/schema/form";
+import { forms } from "../../db/schema/forms";
+
+const bodySchema = z.object({
+	symptomsDescription: z.string().min(1),
+	startDate: z.string(),
+	symptomsStatus: z.string(),
+	painLevel: z.coerce.number().int().min(0).max(10),
+	hadBefore: z.string(),
+	hadBeforeWhen: z.string().nullable().optional(),
+	seenByProfessional: z.string(),
+	seenByWho: z.string().nullable().optional(),
+	consent: z.boolean(),
+});
 
 export const createForm: FastifyPluginCallbackZod = (app) => {
 	app.post(
-		"/protected",
+		"/forms",
 		{
 			schema: {
-				body: z.object({
-					symptomsDescription: z.string().min(1),
-					startDate: z.string(),
-					symptomsStatus: z.string(),
-					painLevel: z.coerce.number().int().min(0).max(10),
-					hadBefore: z.string(),
-					hadBeforeWhen: z.string().nullable().optional(),
-					seenByProfessional: z.string(),
-					seenByWho: z.string().nullable().optional(),
-					consent: z.boolean(),
-				}),
+				body: bodySchema,
 			},
 		},
 		async (request, reply) => {
 			const { userId } = getAuth(request);
 
+			const data = bodySchema.parse(request.body);
+
 			if (!userId) {
 				return reply.code(401).send({ error: "Not authenticated" });
 			}
 
-			const {
-				symptomsDescription,
-				startDate,
-				symptomsStatus,
-				painLevel,
-				hadBefore,
-				hadBeforeWhen,
-				seenByProfessional,
-				seenByWho,
-				consent,
-			} = request.body;
+			const { consent } = data;
 
-			await db.insert(form).values({
-				userId,
-				symptomsDescription,
-				startDate,
-				symptomsStatus,
-				painLevel,
-				hadBefore,
-				hadBeforeWhen,
-				seenByProfessional,
-				seenByWho,
-				consent,
-			});
+			if (!consent) {
+				return reply.send({
+					message: "Consent is required to generate the preliminary diagnosis.",
+				});
+			}
 
-			return reply.code(201).send({ message: "Form saved successfully" });
+			try {
+				const [form] = await db
+					.insert(forms)
+					.values({
+						...data,
+						userId,
+					})
+					.returning();
+
+				return reply.code(201).send(form);
+			} catch (err) {
+				console.error("ERRO TO INSERT THE PRE FORM: ", err);
+				return reply.code(500).send({
+					err: "Failed to insert pre form",
+				});
+			}
 		}
 	);
 };

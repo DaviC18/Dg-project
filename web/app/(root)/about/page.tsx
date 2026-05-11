@@ -1,3 +1,5 @@
+import NavbarDesktop from "@/components/NavbarDesktop";
+import NavbarMobile from "@/components/NavbarMobile";
 import Link from "next/link";
 
 const steps = [
@@ -22,7 +24,10 @@ const steps = [
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-white text-slate-950">
-      <header className="mx-auto flex w-full max-w-7xl items-center justify-between py-6"></header>
+      <header className="mx-auto flex w-full max-w-7xl items-center justify-between py-6">
+        <NavbarDesktop />
+        <NavbarMobile />
+      </header>
 
       <section className="mx-auto w-full max-w-7xl px-6 py-10 lg:py-16">
         <div className="mx-auto max-w-3xl text-center">

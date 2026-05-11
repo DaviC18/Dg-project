@@ -1,3 +1,6 @@
+import NavbarDesktop from "@/components/NavbarDesktop";
+import NavbarMobile from "@/components/NavbarMobile";
+
 const cards = [
   {
     title: "Input",
@@ -16,7 +19,10 @@ const cards = [
 export default function IaPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-950">
-      <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6"></header>
+      <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6">
+        <NavbarDesktop />
+        <NavbarMobile />
+      </header>
 
       <section className="mx-auto w-full max-w-7xl px-6 py-10 lg:py-16">
         <div className="mx-auto max-w-3xl text-center">

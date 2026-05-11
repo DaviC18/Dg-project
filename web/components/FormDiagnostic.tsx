@@ -21,7 +21,7 @@ const FormDiagnostic = () => {
 
   return (
     <section className="fixed overflow-auto inset-0 z-50 bg-black/60 select-none flex justify-center items-center max-lg:items-start">
-      <div className="absolute  w-3/4 px-7 pt-4 pb-7.5 max-lg:my-5 bg-[#f4f4f4] rounded-2xl flex flex-col justify-between gap-5">
+      <div className="absolute  w-3/4 px-7 pt-4 pb-7.5 max-lg:my-5  bg-[#f4f4f4] rounded-2xl flex flex-col justify-between gap-5">
         <div className="w-full flex justify-end items-center">
           <button onClick={closeForm} type="button" className="cursor-pointer">
             <X size={30} className="text-gray-700" />

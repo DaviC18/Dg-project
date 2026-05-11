@@ -13,4 +13,4 @@ const navLinks = [
   },
 ];
 
-export const contants = navLinks;
+export { navLinks };

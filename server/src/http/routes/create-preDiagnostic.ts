@@ -1,3 +1,5 @@
+/** biome-ignore-all assist/source/organizeImports: <> */
+
 import { getAuth } from "@clerk/fastify";
 import { z } from "zod";
 import type { FastifyPluginCallbackZod } from "fastify-type-provider-zod";
@@ -6,7 +8,7 @@ import { PreDiagnostic } from "../../services/gemini";
 import { preDiagnostics } from "../../db/schema/preDiagnostics";
 
 const bodySchema = z.object({
-	formId: z.string().min(1),
+	formId: z.string().min(10),
 	model: z.string().min(1),
 });
 
@@ -49,7 +51,7 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 			try {
 				const [preDiagnostic] = await db
 					.insert(preDiagnostics)
-					.values({userId, formId, model, result: iaResults})
+					.values({ userId, formId, model, result: iaResults })
 					.returning();
 
 				return reply.code(201).send(preDiagnostic);

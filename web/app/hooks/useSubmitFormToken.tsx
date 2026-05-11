@@ -41,7 +41,6 @@ export function useSubmitFormToken() {
     const data = await response.json();
     console.log("STATUS:", response.status);
     console.log("RESPOSTA:", data);
-    console.log(data);
   };
 
   return { handleSubmit };

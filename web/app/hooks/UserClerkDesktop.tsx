@@ -29,7 +29,7 @@ const UserClerkDesktop = () => {
     <SignInButton>
       <button
         type="button"
-        className="w-9 h-9 flex items-center w- justify-center bg-white text-blue-400 rounded-full cursor-pointer transition-all duration-300 hover:bg-blue-500 hover:text-white"
+        className="w-9 h-9 flex items-center w- justify-center  text-inherit rounded-full cursor-pointer transition-all duration-300 hover:bg-slate-500/25"
       >
         <UserRound size={20} />
       </button>

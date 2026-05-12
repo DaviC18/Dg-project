@@ -10,6 +10,7 @@ const UserClerkMobile = ({ children }: { children: ReactNode }) => {
   if (!isLoaded) {
     return (
       <div className="flex flex-col justify-center items-center">
+        <UserRound />
         {children}
       </div>
     );
@@ -30,15 +31,14 @@ const UserClerkMobile = ({ children }: { children: ReactNode }) => {
     );
   } else {
     return (
-      <SignInButton>
-        <button
-          type="button"
-          className="w-9 h-9 flex items-center justify-center bg-white text-blue-400 rounded-full cursor-pointer transition-all duration-300 hover:bg-blue-500 hover:text-white"
-        >
-          <UserRound size={20} />
-          {children}
-        </button>
-      </SignInButton>
+      <div className="w-9 h-9 flex flex-col items-center justify-center text-inherit rounded-full cursor-pointer transition-all duration-300 ">
+        <SignInButton>
+          <div>
+            <UserRound />
+          </div>
+        </SignInButton>
+        {children}
+      </div>
     );
   }
 };

@@ -51,7 +51,7 @@ const NavbarMobile = () => {
               <span className="text-sm">IA</span>
             </Link>
           </li>
-          <li className="w-1/5">
+          <li className="w-1/5 flex justify-center items-center">
             <UserClerkMobile>
               <span className="text-sm">User</span>
             </UserClerkMobile>

@@ -41,14 +41,14 @@ const NavbarDesktop = () => {
         <figure className="relative max-sm:w-1/2 w-1/3 flex items-center justify-end gap-2">
           <Link
             href="/list"
-            className="p-2 group text-inherit rounded-full cursor-pointer transition-all duration-300 "
+            className="p-2 group text-inherit rounded-full cursor-pointer transition-all duration-300 hover:bg-slate-500/25"
           >
             <Search size={23} className="" />
           </Link>
           <button
             type="button"
             onClick={openForm}
-            className="p-2 max-sm:hidden group text-inherit rounded-full cursor-pointer transition-all duration-300 "
+            className="p-2 max-sm:hidden group text-inherit rounded-full cursor-pointer transition-all duration-300 hover:bg-slate-500/25"
           >
             <Plus size={23} className="" />
           </button>

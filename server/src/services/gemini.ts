@@ -9,21 +9,16 @@ const gemini = new GoogleGenAI({
 
 const model = "gemini-3-flash-preview";
 
-
 const preDiagnosticSchema = z.object({
-	summary: z.string().describe("Resumo objetivo do formulário preenchido."),
-	alerts: z
-		.array(z.string())
-		.describe("Sinais de alerta identificados no caso."),
+	summary: z.string().describe("Objective summary of the completed form."),
+	alerts: z.array(z.string()).describe("Warning signs identified in the case."),
 	suggestionsToTheDoctor: z
 		.array(z.string())
-		.describe("Sugestões clínicas para o médico avaliar."),
-	examsSuggested: z
-		.array(z.string())
-		.describe("Exames que podem ser considerados."),
+		.describe("Clinical suggestions for the physician to evaluate."),
+	examsSuggested: z.array(z.string()).describe("Tests that may be considered."),
 	observations: z
 		.array(z.string())
-		.describe("Observações importantes e limitações do pré-diagnóstico."),
+		.describe("Important observations and limitations of pre-diagnosis."),
 });
 
 type PreDiagnosticResult = z.infer<typeof preDiagnosticSchema>;
@@ -40,16 +35,21 @@ export const PreDiagnostic = async (formData: {
 	consent: boolean;
 }): Promise<PreDiagnosticResult> => {
 	const prompt = `
-Você é um assistente clínico. Analise o formulário abaixo e gere um PRÉ-DIAGNÓSTICO para um médico.
+You are a clinical assistant. Analyze the form below and generate a PRE-DIAGNOSIS for a physician.
 
-Regras:
-- Não faça diagnóstico definitivo.
-- Seja objetivo e técnico.
-- Retorne APENAS JSON válido.
-- Inclua resumo, alertas, sugestões ao médico, exames sugeridos e observações.
-- Se faltar informação, diga isso nas observações.
+Rules:
 
-Dados do formulário:
+- Do not make a definitive diagnosis.
+
+- Be objective and technical.
+
+- Return ONLY valid JSON.
+
+- Include a summary, alerts, suggestions for the physician, suggested tests, and observations.
+
+- If information is missing, state this in the observations.
+
+Form data:
 ${JSON.stringify(formData, null, 2)}
 `;
 
@@ -81,7 +81,7 @@ export const generateEmbeddings = async (text: string) => {
 	const values = response.embeddings?.[0].values;
 
 	if (!values) {
-		throw new Error("Não foi possível gerar os embeddings");
+		throw new Error("It was not possible to generate the embeddings.");
 	}
 
 	return values;

@@ -12,17 +12,17 @@ export const getPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 
 		try {
 			const resultPreDiagnostic = await db.query.preDiagnostics.findMany({
-			where: (p, { eq }) => eq(p.userId, userId),
-			with: {
-				form: true, // 🔥 traz o formulário junto
-			},
-			orderBy: (p, { desc }) => desc(p.createdAt),
-		});
+				where: (p, { eq }) => eq(p.userId, userId),
+				with: {
+					form: true, // 🔥 traz o formulário junto
+				},
+				orderBy: (p, { desc }) => desc(p.createdAt),
+			});
 
-		return reply.status(200).send(resultPreDiagnostic);
+			return reply.status(200).send(resultPreDiagnostic);
 		} catch (err) {
-			console.error("ERROR TO GET THE PRE DIAGNOSTIC")
-			reply.code(501).send({err: "Error to get the pre diagnostic"})
+			console.error("ERROR TO GET THE PRE DIAGNOSTIC");
+			reply.code(501).send({ err: "Error to get the pre diagnostic" });
 		}
 	});
 };

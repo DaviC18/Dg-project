@@ -19,7 +19,7 @@ const NavbarDesktop = () => {
         </div>
 
         <div className="max-[640px]:hidden w-1/3 menu flex items-center justify-center">
-          <ul className="flex w-[250px] justify-between items-center gap-3">
+          <ul className="flex w-62.5 justify-between items-center gap-3">
             <li className="text-inherit ">
               <Link className="w-full" href="/">
                 Home
@@ -39,21 +39,18 @@ const NavbarDesktop = () => {
         </div>
 
         <figure className="relative max-sm:w-1/2 w-1/3 flex items-center justify-end gap-2">
-          <button
-            type="button"
-            className="p-2 group text-inherit rounded-full cursor-pointer transition-all duration-300 border-2 border-blue-500 hover:bg-blue-500 hover:text-white"
+          <Link
+            href="/list"
+            className="p-2 group text-inherit rounded-full cursor-pointer transition-all duration-300 "
           >
-            <Search
-              size={20}
-              className="text-blue-500 group-hover:text-white"
-            />
-          </button>
+            <Search size={23} className="" />
+          </Link>
           <button
             type="button"
             onClick={openForm}
-            className="p-2 max-sm:hidden group text-inherit rounded-full cursor-pointer transition-all duration-300 border-2 border-blue-500 hover:bg-blue-500 hover:text-white"
+            className="p-2 max-sm:hidden group text-inherit rounded-full cursor-pointer transition-all duration-300 "
           >
-            <Plus size={20} className="text-blue-500 group-hover:text-white" />
+            <Plus size={23} className="" />
           </button>
           <div className="max-sm:hidden">
             <UserClerkDesktop />

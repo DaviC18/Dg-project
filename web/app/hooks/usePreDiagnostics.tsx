@@ -1,52 +1,32 @@
 "use client";
 
-import { useAuth } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
+import { useAuth } from "@clerk/nextjs";
 
-type PreDiagnostics = {
-  id: string;
-  formId: string;
-  userId: string;
-  model: string;
-  created: string;
-  result: {
-    summary: string;
-    alerts: string[];
-    suggestionsToTheDoctor: string[];
-    examsSuggested: string[];
-    observations: string[];
-  };
-  form: {
-    id: string;
-    symptomsDescription: string;
-    startDate: string;
-    symptomsStatus: string;
-    painLevel: number;
-    hadBefore: string;
-    hadBeforeWhen: string | null;
-    seenByProfessional: string;
-    seenByWho: string | null;
-    consent: boolean;
-    createdAt: string;
-  };
-};
-
-export const usePreDiagnostics = () => {
-  const { getToken } = useAuth();
-  const [data, setData] = useState<PreDiagnostics[]>([]);
+export function usePreDiagnostics() {
+  const { getToken, isLoaded, isSignedIn } = useAuth();
+  const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const load = async () => {
+      if (!isLoaded) return;
+
+      if (!isSignedIn) {
+        setError("Usuário não autenticado no frontend.");
+        setLoading(false);
+        return;
+      }
+
       try {
         const token = await getToken();
 
         if (!token) {
-          throw new Error("Usuário sem Token");
+          throw new Error("Token não encontrado.");
         }
 
-        const response = await fetch("http:localhost:3333/pre-diagnostics", {
+        const response = await fetch("http://localhost:3333/pre-diagnostics", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -60,14 +40,14 @@ export const usePreDiagnostics = () => {
         const json = await response.json();
         setData(json);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Erro ao carregar");
+        setError(err instanceof Error ? err.message : "Erro desconhecido");
       } finally {
         setLoading(false);
       }
     };
 
     load();
-  }, [getToken]);
+  }, [getToken, isLoaded, isSignedIn]);
 
   return { data, loading, error };
-};
+}

@@ -2,14 +2,11 @@
 
 // biome-ignore assist/source/organizeImports: <>
 import { BrainCircuit, Home, Library, Plus } from "lucide-react";
-import { useSectionRefs } from "../app/hooks/useSectionRefs";
-import type { SectionKey } from "@/app/types/sections";
 import UserClerkMobile from "@/app/hooks/UserClerkMobile";
 import { useFormDiagnostic } from "@/app/hooks/FormContext";
 import Link from "next/link";
 
 const NavbarMobile = () => {
-  const { scrollToSection } = useSectionRefs();
   const { openForm } = useFormDiagnostic();
 
   return (

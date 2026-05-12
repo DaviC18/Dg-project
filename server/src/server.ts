@@ -8,7 +8,6 @@ import {
 } from "fastify-type-provider-zod";
 import { env } from "./env";
 import { createForm } from "./http/routes/create-form";
-import { createPreDiagnostic } from "./http/routes/create-preDiagnostic";
 import { getForm } from "./http/routes/get-form";
 import { getPreDiagnostic } from "./http/routes/get-preDiagnostic";
 import { clerkPlugin } from "@clerk/fastify";
@@ -33,7 +32,6 @@ app.register(clerkPlugin, {
 	secretKey: env.CLERK_SECRET_KEY,
 });
 app.register(createForm);
-app.register(createPreDiagnostic);
 app.register(getForm);
 app.register(getPreDiagnostic);
 app.register(getUser);

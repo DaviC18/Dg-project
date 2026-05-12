@@ -5,6 +5,7 @@ import { Plus, Search } from "lucide-react";
 import Link from "next/link";
 import UserClerkDesktop from "@/app/hooks/UserClerkDesktop";
 import { useFormDiagnostic } from "@/app/hooks/FormContext";
+import { navLinks } from "@/app/(root)/constants";
 
 const NavbarDesktop = () => {
   const { openForm } = useFormDiagnostic();
@@ -20,23 +21,24 @@ const NavbarDesktop = () => {
 
         <div className="max-[640px]:hidden w-1/3 menu flex items-center justify-center">
           <ul className="flex w-62.5 justify-between items-center gap-3">
-            <li className="text-inherit ">
-              <Link className="w-full" href="/">
-                Home
-              </Link>
-            </li>
-            <li className="text-inherit ">
-              <Link className="w-full" href="/about">
-                About
-              </Link>
-            </li>
-            <li className="text-inherit ">
-              <Link className="w-full" href="/ia">
-                IA
-              </Link>
-            </li>
+            {navLinks.map((el) => (
+              <li
+                key={el.id}
+                className="w-1/3 flex justify-center items-center text-inherit opacity-85 px-3.5 py-0.5 rounded-full hover:bg-slate-500/25 hover:opacity-100 duration-200 all ease-in"
+              >
+                <Link className="w-full flex justify-center" href="/ia">
+                  {el.title}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
+
+        {/* <li className="w-1/3 flex justify-center items-center text-inherit opacity-85 px-3 py-0.5 rounded-full bg-red-500 hover:opacity-100 duration-300 all ease-in">
+          <Link className="w-full flex justify-center" href="/ia">
+            IA
+          </Link>
+        </li> */}
 
         <figure className="relative max-sm:w-1/2 w-1/3 flex items-center justify-end gap-2">
           <Link

@@ -64,7 +64,7 @@ const Page = () => {
               ))
             ) : (
               <div className="my-5 flex items-center justify-center">
-                <h1>Carregando pré-diagnósticos...</h1>
+                <h1>Sem pré-diagnosticos</h1>
               </div>
             )}
           </div>

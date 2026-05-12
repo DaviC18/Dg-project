@@ -29,7 +29,7 @@ export function useSubmitFormToken() {
       consent: formData.get("consent") === "on",
     };
 
-    const response = await fetch("http://localhost:3333/forms", {
+    const formResponse = await fetch("http://localhost:3333/forms", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -38,8 +38,8 @@ export function useSubmitFormToken() {
       body: JSON.stringify(payload),
     });
 
-    const data = await response.json();
-    console.log("STATUS:", response.status);
+    const data = await formResponse.json();
+    console.log("STATUS:", formResponse.status);
     console.log("RESPOSTA:", data);
   };
 

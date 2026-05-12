@@ -1,9 +1,10 @@
-// biome-ignore assist/source/organizeImports: <>
 import { getAuth } from "@clerk/fastify";
 import type { FastifyPluginCallbackZod } from "fastify-type-provider-zod";
-import { db } from "../../db/connections";
 import { z } from "zod";
+import { db } from "../../db/connections";
 import { forms } from "../../db/schema/forms";
+import { preDiagnostics } from "../../db/schema/preDiagnostics";
+import { PreDiagnostic } from "../../services/gemini";
 
 const bodySchema = z.object({
 	symptomsDescription: z.string().min(1),
@@ -28,17 +29,15 @@ export const createForm: FastifyPluginCallbackZod = (app) => {
 		async (request, reply) => {
 			const { userId } = getAuth(request);
 
-			const data = bodySchema.parse(request.body);
-
 			if (!userId) {
 				return reply.code(401).send({ error: "Not authenticated" });
 			}
 
-			const { consent } = data;
+			const data = bodySchema.parse(request.body);
 
-			if (!consent) {
-				return reply.send({
-					message: "Consent is required to generate the preliminary diagnosis.",
+			if (!data.consent) {
+				return reply.code(400).send({
+					error: "Consent is required to generate the preliminary diagnosis.",
 				});
 			}
 
@@ -51,11 +50,26 @@ export const createForm: FastifyPluginCallbackZod = (app) => {
 					})
 					.returning();
 
-				return reply.code(201).send(form);
+				const iaResults = await PreDiagnostic(form);
+
+				const [preDiagnostic] = await db
+					.insert(preDiagnostics)
+					.values({
+						formId: form.id,
+						userId,
+						model: "gemini-3-flash-preview",
+						result: iaResults,
+					})
+					.returning();
+
+				return reply.code(201).send({
+					form,
+					preDiagnostic,
+				});
 			} catch (err) {
-				console.error("ERRO TO INSERT THE PRE FORM: ", err);
+				console.error("ERROR TO CREATE FORM AND PRE-DIAGNOSTIC:", err);
 				return reply.code(500).send({
-					err: "Failed to insert pre form",
+					error: "Failed to create form and pre-diagnostic",
 				});
 			}
 		}

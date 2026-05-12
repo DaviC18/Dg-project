@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
+import type { PreDiagnostics } from "../types/preDiagnotics";
 
 export function usePreDiagnostics() {
   const { getToken, isLoaded, isSignedIn } = useAuth();
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<PreDiagnostics[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

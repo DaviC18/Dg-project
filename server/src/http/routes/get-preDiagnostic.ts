@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/complexity/noUselessCatchBinding: <> */
 import { getAuth } from "@clerk/fastify";
 import type { FastifyPluginCallbackZod } from "fastify-type-provider-zod";
 import { db } from "../../db/connections";
@@ -20,9 +21,9 @@ export const getPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 			});
 
 			return reply.status(200).send(resultPreDiagnostic);
-		} catch (err) {
+		} catch (_error) {
 			console.error("ERROR TO GET THE PRE DIAGNOSTIC");
-			reply.code(501).send({ err: "Error to get the pre diagnostic" });
+			reply.code(501).send({ error: "Error to get the pre diagnostic" });
 		}
 	});
 };

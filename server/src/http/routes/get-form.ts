@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/complexity/noUselessCatchBinding: <> */
 import { getAuth } from "@clerk/fastify";
 import type { FastifyPluginCallbackZod } from "fastify-type-provider-zod";
 import { db } from "../../db/connections";
@@ -12,16 +13,16 @@ export const getForm: FastifyPluginCallbackZod = (app) => {
 
 		try {
 			const resultForms = await db.query.forms.findMany({
-			where: (f, { eq }) => eq(f.userId, userId),
-			with: {
-				preDiagnostics: true, // 🔥 join automático
-			},
-			orderBy: (f, { desc }) => desc(f.createdAt),
-		});
-		return reply.status(200).send(resultForms);
-		} catch (err){
-			console.error("ERROR TO GET THE FORM")
-			reply.code(501).send({err: "Error to get the form"})
+				where: (f, { eq }) => eq(f.userId, userId),
+				with: {
+					preDiagnostics: true, // 🔥 join automático
+				},
+				orderBy: (f, { desc }) => desc(f.createdAt),
+			});
+			return reply.status(200).send(resultForms);
+		} catch (_err) {
+			console.error("ERROR TO GET THE FORM");
+			reply.code(500).send({ err: "Error to get the form" });
 		}
 	});
 };

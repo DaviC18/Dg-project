@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-linear-to-b from-[#060b18] via-[#0b1020] to-[#060b18] text-white border-blue-500">
+    <main className="min-h-screen bg-linear-to-b from-[#060b18] via-[#0b1020] to-[#060b18] text-foreground border-blue-500">
       <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6">
         <NavbarDesktop />
         <NavbarMobile />
@@ -13,7 +13,7 @@ export default function HomePage() {
 
       <section className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 py-12 lg:grid-cols-2 lg:py-20">
         <div className="space-y-8">
-          <p className="text-sm uppercase tracking-[0.35em] text-cyan-300/90">
+          <p className="text-sm uppercase tracking-[0.35em] text-cyan-200">
             Pre-diagnosis assistant
           </p>
 

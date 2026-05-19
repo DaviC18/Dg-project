@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Geist, Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ptBR } from "@clerk/localizations";
+import { cn } from "@/lib/utils";
+import { ThemeProvider } from "next-themes";
+
+const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 const montserratSans = Montserrat({
   variable: "--font-montserrat-sans",
@@ -20,9 +25,18 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={cn("font-sans", inter.variable)}>
       <body className={`${montserratSans.variable} antialiased`}>
-        <ClerkProvider>{children}</ClerkProvider>
+        <ClerkProvider localization={ptBR}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

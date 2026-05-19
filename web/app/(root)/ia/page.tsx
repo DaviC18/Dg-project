@@ -18,7 +18,7 @@ const cards = [
 
 export default function IaPage() {
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-950">
+    <main className="min-h-screen bg-white text-slate-950">
       <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6">
         <NavbarDesktop />
         <NavbarMobile />

@@ -2,6 +2,8 @@
 
 import { useAuth } from "@clerk/nextjs";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export function useSubmitFormToken() {
   const { getToken } = useAuth();
 
@@ -10,7 +12,6 @@ export function useSubmitFormToken() {
 
     const formData = new FormData(e.currentTarget);
     const token = await getToken();
-    console.log("TOKEN: ", token);
 
     if (!token) {
       console.error("Usuário sem token");
@@ -29,7 +30,7 @@ export function useSubmitFormToken() {
       consent: formData.get("consent") === "on",
     };
 
-    const formResponse = await fetch("http://localhost:3333/forms", {
+    const formResponse = await fetch(`${API_URL}/forms`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -39,8 +40,8 @@ export function useSubmitFormToken() {
     });
 
     const data = await formResponse.json();
-    console.log("STATUS:", formResponse.status);
-    console.log("RESPOSTA:", data);
+    // console.log("STATUS:", formResponse.status);
+    // console.log("RESPOSTA:", data);
   };
 
   return { handleSubmit };

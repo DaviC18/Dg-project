@@ -521,7 +521,7 @@ This project currently uses the ISC license declared in the backend package conf
 
 <div align="center">
 
-## Davi C18
+## Davi Curty
 
 Full-stack developer focused on scalable systems, AI integrations, and modern web architecture.
 

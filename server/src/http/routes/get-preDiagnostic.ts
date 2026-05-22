@@ -14,12 +14,8 @@ export const getPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 		try {
 			const resultPreDiagnostic = await db.query.preDiagnostics.findMany({
 				where: (p, { eq }) => eq(p.userId, userId),
-				with: {
-					form: true, // 🔥 traz o formulário junto
-				},
 				orderBy: (p, { desc }) => desc(p.createdAt),
 			});
-
 			return reply.status(200).send(resultPreDiagnostic);
 		} catch (_error) {
 			console.error("ERROR TO GET THE PRE DIAGNOSTIC");

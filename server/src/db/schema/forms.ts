@@ -16,9 +16,9 @@ export const forms = pgTable("forms", {
 	startDate: date("start_date").notNull(),
 	symptomsStatus: text("symptoms_status").notNull(),
 	painLevel: integer().notNull(),
-	hadBefore: text("had_before").notNull(),
+	hadBefore: boolean("had_before").notNull(),
 	hadBeforeWhen: text("had_before_when"),
-	seenByProfessional: text("seen_by_professional").notNull(),
+	seenByProfessional: boolean("seen_by_professional").notNull(),
 	seenByWho: text("seen_by_who"),
 	consent: boolean("consent").notNull(),
 	analysisStatus: text("analysis_status")

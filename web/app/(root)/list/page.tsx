@@ -1,3 +1,4 @@
+/** biome-ignore-all assist/source/organizeImports: <> */
 "use client";
 
 import { usePreDiagnostics } from "@/app/hooks/usePreDiagnostics";
@@ -61,12 +62,11 @@ const Page = () => {
                   key={el.id}
                   className="cursor-pointer rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                 >
-                  <h1 className="text-2xl font-semibold">
-                    Date: {el.form.createdAt}
-                  </h1>
+                  <h1 className="text-2xl font-semibold">Date: {el.id}</h1>
                   <p className="mt-4 text-base leading-7 text-slate-600">
                     {el.result.summary}
                   </p>
+                  <p></p>
                 </article>
               ))
             ) : (

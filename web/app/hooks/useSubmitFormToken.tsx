@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@clerk/nextjs";
+import { SymptomsStatus } from "../types/status";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -19,16 +20,40 @@ export function useSubmitFormToken() {
     }
 
     const payload = {
-      symptomsDescription: formData.get("symptomsDescription"),
-      startDate: formData.get("startDate"),
-      symptomsStatus: formData.get("symptomsStatus"),
-      painLevel: formData.get("painLevel"),
-      hadBefore: formData.get("hadBefore"),
-      hadBeforeWhen: formData.get("hadBeforeWhen"),
-      seenByProfessional: formData.get("seenByProfessional"),
-      seenByWho: formData.get("seenByWho"),
-      consent: formData.get("consent") === "on",
-    };
+  symptomsDescription: String(
+    formData.get("symptomsDescription")
+  ),
+
+  startDate: String(
+    formData.get("startDate")
+  ),
+
+  symptomsStatus:
+    formData.get("symptomsStatus") as SymptomsStatus,
+
+  painLevel: Number(
+    formData.get("painLevel")
+  ),
+
+  hadBefore:
+    formData.get("hadBefore") === "yes",
+
+  hadBeforeWhen:
+    formData.get("hadBeforeWhen")
+      ? String(formData.get("hadBeforeWhen"))
+      : null,
+
+  seenByProfessional:
+    formData.get("seenByProfessional") === "yes",
+
+  seenByWho:
+    formData.get("seenByWho")
+      ? String(formData.get("seenByWho"))
+      : null,
+
+  consent:
+    formData.get("consent") === "on",
+};
 
     const formResponse = await fetch(`${API_URL}/forms`, {
       method: "POST",
@@ -39,9 +64,28 @@ export function useSubmitFormToken() {
       body: JSON.stringify(payload),
     });
 
-    const data = await formResponse.json();
-    // console.log("STATUS:", formResponse.status);
-    // console.log("RESPOSTA:", data);
+    const formResult = await formResponse.json();
+
+    if (!formResponse.ok) {
+      console.error("Erro ao criar formulário:", formResult);
+      return;
+    }
+
+    const preDiagnosticResponse = await fetch(`${API_URL}/pre-diagnostics`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        formId: formResult.form.id,
+      }),
+    });
+
+    const preDiagnosticResult = await preDiagnosticResponse.json();
+    console.log(getToken);
+    console.log("Formulário criado:", formResult);
+    console.log("Pré-diagnóstico criado:", preDiagnosticResult);
   };
 
   return { handleSubmit };

@@ -81,8 +81,8 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 					.where(eq(forms.id, formId));
 
 				return reply.code(201).send(preDiagnostic);
-			} catch (err) {
-				console.error("ERROR TO INSERT THE PRE DIAGNOSTIC:", err);
+			} catch (error) {
+				console.error("ERROR TO GET THE PRE DIAGNOSTIC:", error);
 
 				await db
 					.update(forms)
@@ -91,9 +91,9 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 					})
 					.where(eq(forms.id, formId));
 
-				return reply.code(500).send({
-					error: "Failed to insert the pre diagnostic",
-				});
+				return reply
+					.code(500)
+					.send({ error: "Error to get the pre diagnostic" });
 			}
 		}
 	);

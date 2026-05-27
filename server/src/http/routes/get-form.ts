@@ -6,10 +6,14 @@ import { db } from "../../db/connections";
 export const getForm: FastifyPluginCallbackZod = (app) => {
 	app.get("/forms", async (request, reply) => {
 		const { userId } = getAuth(request);
+		const startedAt = Date.now();
 
 		if (!userId) {
+			request.log.warn({ event: "unauthorized_form_access" });
 			return reply.code(401).send({ error: "Not authenticated" });
 		}
+
+		request.log.info({ event: "form_accessing", userId });
 
 		try {
 			const resultForms = await db.query.forms.findMany({
@@ -19,9 +23,20 @@ export const getForm: FastifyPluginCallbackZod = (app) => {
 				},
 				orderBy: (f, { desc }) => desc(f.createdAt),
 			});
+
+			request.log.info({
+				event: "form_accessed",
+				userId,
+				durationMs: Date.now() - startedAt,
+			});
+
 			return reply.status(200).send(resultForms);
 		} catch (_err) {
-			console.error("ERROR TO GET THE FORM");
+			request.log.error({
+				event: "form_not_accessed",
+				userId,
+				durationMs: Date.now() - startedAt,
+			});
 			reply.code(500).send({ err: "Error to get the form" });
 		}
 	});

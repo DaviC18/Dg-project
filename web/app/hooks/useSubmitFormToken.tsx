@@ -20,40 +20,28 @@ export function useSubmitFormToken() {
     }
 
     const payload = {
-  symptomsDescription: String(
-    formData.get("symptomsDescription")
-  ),
+      symptomsDescription: String(formData.get("symptomsDescription")),
 
-  startDate: String(
-    formData.get("startDate")
-  ),
+      startDate: String(formData.get("startDate")),
 
-  symptomsStatus:
-    formData.get("symptomsStatus") as SymptomsStatus,
+      symptomsStatus: formData.get("symptomsStatus") as SymptomsStatus,
 
-  painLevel: Number(
-    formData.get("painLevel")
-  ),
+      painLevel: Number(formData.get("painLevel")),
 
-  hadBefore:
-    formData.get("hadBefore") === "yes",
+      hadBefore: formData.get("hadBefore") === "yes",
 
-  hadBeforeWhen:
-    formData.get("hadBeforeWhen")
-      ? String(formData.get("hadBeforeWhen"))
-      : null,
+      hadBeforeWhen: formData.get("hadBeforeWhen")
+        ? String(formData.get("hadBeforeWhen"))
+        : null,
 
-  seenByProfessional:
-    formData.get("seenByProfessional") === "yes",
+      seenByProfessional: formData.get("seenByProfessional") === "yes",
 
-  seenByWho:
-    formData.get("seenByWho")
-      ? String(formData.get("seenByWho"))
-      : null,
+      seenByWho: formData.get("seenByWho")
+        ? String(formData.get("seenByWho"))
+        : null,
 
-  consent:
-    formData.get("consent") === "on",
-};
+      consent: formData.get("consent") === "on",
+    };
 
     const formResponse = await fetch(`${API_URL}/forms`, {
       method: "POST",

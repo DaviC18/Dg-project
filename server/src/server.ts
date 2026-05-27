@@ -1,4 +1,5 @@
 /** biome-ignore-all assist/source/organizeImports: <> */
+/** biome-ignore-all lint/suspicious/useAwait: <> */
 import fastifyCors from "@fastify/cors";
 import fastifyMultipart from "@fastify/multipart";
 import fastify from "fastify";
@@ -14,7 +15,7 @@ import { getPreDiagnostic } from "./http/routes/get-preDiagnostic";
 import { clerkPlugin } from "@clerk/fastify";
 import { createPreDiagnostic } from "./http/routes/create-preDiagnostic";
 
-const app = fastify().withTypeProvider<ZodTypeProvider>();
+const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>();
 
 app.register(fastifyCors, {
 	origin: ["http://localhost:3000", "http://localhost:5173"],
@@ -27,7 +28,10 @@ app.register(fastifyMultipart);
 app.setSerializerCompiler(serializerCompiler);
 app.setValidatorCompiler(validatorCompiler);
 
-app.get("/", () => "ok");
+app.get("/", async (request) => {
+	request.log.info("something");
+	return "ok";
+});
 
 app.register(clerkPlugin, {
 	secretKey: env.CLERK_SECRET_KEY,
@@ -37,6 +41,9 @@ app.register(createPreDiagnostic);
 app.register(getForm);
 app.register(getPreDiagnostic);
 
-app.listen({ port: env.PORT || 3333 }, () => {
-	console.log("Server is running");
+app.listen({ port: env.PORT || 3333 }, (err) => {
+	if (err) {
+		app.log.error(err);
+		process.exit(1);
+	}
 });

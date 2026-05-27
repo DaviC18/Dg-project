@@ -21,10 +21,14 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 		{ schema: { body: bodySchema } },
 		async (request, reply) => {
 			const { userId } = getAuth(request);
+			const startedAt = Date.now();
 
 			const { formId } = bodySchema.parse(request.body);
 
 			if (!userId) {
+				request.log.warn({
+					event: "unauthorized_prediagnostic_creation",
+				});
 				return reply.code(401).send({ error: "Not authenticated" });
 			}
 
@@ -40,6 +44,7 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 			});
 
 			if (!form) {
+				request.log.warn({ event: "form_not_found", userId, formId });
 				return reply.code(404).send({ error: "Form not found" });
 			}
 
@@ -48,6 +53,7 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 			});
 
 			if (existing) {
+				request.log.warn({ event: "form_exitis" }, formId);
 				return reply
 					.code(409)
 					.send({ message: "Pre Diagnostic already exitis" });
@@ -59,6 +65,12 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 					analysisStatus: "processing",
 				})
 				.where(eq(forms.id, formId));
+
+			request.log.info({
+				event: "prediagnoctic_creation_start",
+				userId,
+				formId,
+			});
 
 			try {
 				const iaResults = await PreDiagnostic(form);
@@ -80,10 +92,15 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 					})
 					.where(eq(forms.id, formId));
 
-				return reply.code(201).send(preDiagnostic);
-			} catch (error) {
-				console.error("ERROR TO GET THE PRE DIAGNOSTIC:", error);
+				request.log.info({
+					event: "prediagnoctic_created",
+					userId,
+					formId,
+					durationMs: Date.now() - startedAt,
+				});
 
+				return reply.code(201).send(preDiagnostic);
+			} catch (err) {
 				await db
 					.update(forms)
 					.set({
@@ -91,9 +108,15 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 					})
 					.where(eq(forms.id, formId));
 
-				return reply
-					.code(500)
-					.send({ error: "Error to get the pre diagnostic" });
+				request.log.error({
+					event: "prediagnoctic_creation_failed",
+					userId,
+					formId,
+					durationMs: Date.now() - startedAt,
+					error: err,
+				});
+
+				return reply.code(500).send({ err: "Error to get the pre diagnostic" });
 			}
 		}
 	);

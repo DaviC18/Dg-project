@@ -32,13 +32,6 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 				return reply.code(401).send({ error: "Not authenticated" });
 			}
 
-			await db
-				.update(forms)
-				.set({
-					analysisStatus: "pending",
-				})
-				.where(eq(forms.id, formId));
-
 			const form = await db.query.forms.findFirst({
 				where: (f, { eq, and }) => and(eq(f.id, formId), eq(f.userId, userId)),
 			});
@@ -53,7 +46,10 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 			});
 
 			if (existing) {
-				request.log.warn({ event: "form_exitis" }, formId);
+				request.log.warn(
+					{ event: "pre_diagnostic_already_exists", formId, userId },
+					formId
+				);
 				return reply
 					.code(409)
 					.send({ message: "Pre Diagnostic already exitis" });

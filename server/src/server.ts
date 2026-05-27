@@ -14,8 +14,17 @@ import { getForm } from "./http/routes/get-form";
 import { getPreDiagnostic } from "./http/routes/get-preDiagnostic";
 import { clerkPlugin } from "@clerk/fastify";
 import { createPreDiagnostic } from "./http/routes/create-preDiagnostic";
+import { logger } from "./lib/logger";
 
-const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>();
+const app = fastify({ logger }).withTypeProvider<ZodTypeProvider>();
+
+app.addHook("onResponse", async (request, reply) => {
+	app.log.info({
+		method: request.method,
+		url: request.url,
+		statusCode: reply.statusCode,
+	});
+});
 
 app.register(fastifyCors, {
 	origin: ["http://localhost:3000", "http://localhost:5173"],

@@ -2,6 +2,9 @@
 import { GoogleGenAI } from "@google/genai";
 import { env } from "../env";
 import { z } from "zod";
+import { logger } from "../lib/logger";
+
+const startedAt = Date.now();
 
 const gemini = new GoogleGenAI({
 	apiKey: env.GEMINI_API_KEY,
@@ -28,9 +31,9 @@ export const PreDiagnostic = async (formData: {
 	startDate: string;
 	symptomsStatus: string;
 	painLevel: number;
-	hadBefore: string;
+	hadBefore: boolean;
 	hadBeforeWhen?: string | null;
-	seenByProfessional: string;
+	seenByProfessional: boolean;
 	seenByWho?: string | null;
 	consent: boolean;
 }): Promise<PreDiagnosticResult> => {
@@ -50,39 +53,85 @@ Rules:
 - If information is missing, state this in the observations.
 
 Form data:
-${JSON.stringify(formData, null, 2)}
+${JSON.stringify(
+	{
+		...formData,
+		hadBefore: formData.hadBefore ? "yes" : "no",
+		seenByProfessional: formData.seenByProfessional ? "yes" : "no",
+	},
+	null,
+	2
+)}
 `;
 
-	const response = await gemini.models.generateContent({
-		model,
-		contents: prompt,
-		config: {
-			responseMimeType: "application/json",
-			responseJsonSchema: z.toJSONSchema(preDiagnosticSchema),
-		},
-	});
+	try {
+		const response = await gemini.models.generateContent({
+			model,
+			contents: prompt,
+			config: {
+				responseMimeType: "application/json",
+				responseJsonSchema: z.toJSONSchema(preDiagnosticSchema),
+			},
+		});
 
-	if (!response.text) {
-		throw new Error("Não foi possível criar o pré-diagnóstico");
+		logger.info({
+			event: "ai_generation",
+			model,
+			durationMs: Date.now() - startedAt,
+			status: "success",
+		});
+
+		if (!response.text) {
+			throw new Error("Gemini returned empty response");
+		}
+
+		return preDiagnosticSchema.parse(JSON.parse(response.text));
+	} catch (err) {
+		logger.error({
+			event: "ai_generation",
+			model,
+			durationMs: Date.now() - startedAt,
+			status: "failed",
+			error: err,
+		});
+
+		throw err;
 	}
-
-	return preDiagnosticSchema.parse(JSON.parse(response.text));
 };
 
 export const generateEmbeddings = async (text: string) => {
-	const response = await gemini.models.embedContent({
-		model: "gemini-embedding-2",
-		contents: [{ text }],
-		config: {
-			taskType: "RETRIEVAL_DOCUMENT",
-		},
-	});
+	try {
+		const response = await gemini.models.embedContent({
+			model: "gemini-embedding-2",
+			contents: [{ text }],
+			config: {
+				taskType: "RETRIEVAL_DOCUMENT",
+			},
+		});
 
-	const values = response.embeddings?.[0].values;
+		logger.info({
+			event: "embedding_generation",
+			model: "gemini-embedding-2",
+			durationMs: Date.now() - startedAt,
+			status: "success",
+		});
 
-	if (!values) {
-		throw new Error("It was not possible to generate the embeddings.");
+		const values = response.embeddings?.[0].values;
+
+		if (!values) {
+			throw new Error("It was not possible to generate the embeddings.");
+		}
+
+		return values;
+	} catch (err) {
+		logger.error({
+			event: "embedding_generation",
+			model: "gemini-embedding-2",
+			durationMs: Date.now() - startedAt,
+			status: "failed",
+			error: err,
+		});
+
+		throw err;
 	}
-
-	return values;
 };

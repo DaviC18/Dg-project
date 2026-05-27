@@ -31,13 +31,14 @@ export const getForm: FastifyPluginCallbackZod = (app) => {
 			});
 
 			return reply.status(200).send(resultForms);
-		} catch (_err) {
+		} catch (err) {
 			request.log.error({
 				event: "form_not_accessed",
 				userId,
 				durationMs: Date.now() - startedAt,
+				error: err,
 			});
-			reply.code(500).send({ err: "Error to get the form" });
+			return reply.code(500).send({ err: "Error to get the form" });
 		}
 	});
 };

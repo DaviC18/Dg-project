@@ -47,7 +47,7 @@ export const createForm: FastifyPluginCallbackZod = (app) => {
 				request.log.info({
 					event: "form_created",
 					userId,
-					formid: form.id,
+					formId: form.id,
 					durationMs: Date.now() - startedAt,
 				});
 

@@ -6,6 +6,9 @@ dotenv.config(); // <<-- carrega .env antes de qualquer parse
 import { z } from "zod";
 
 const envSchema = z.object({
+	NODE_ENV: z
+		.enum(["development", "production", "test"])
+		.default("development"),
 	PORT: z.coerce.number().default(5234),
 	CLERK_SECRET_KEY: z.string().min(1),
 	CLERK_PUBLISHABLE_KEY: z.string().min(1),
@@ -21,6 +24,7 @@ const envSchema = z.object({
 });
 
 export const env = envSchema.parse({
+	NODE_ENV: process.env.NODE_ENV,
 	PORT: process.env.PORT,
 	CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
 	CLERK_PUBLISHABLE_KEY: process.env.CLERK_PUBLISHABLE_KEY,

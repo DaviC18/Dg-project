@@ -1,3 +1,4 @@
+/** biome-ignore-all assist/source/organizeImports: <> */
 import NavbarDesktop from "@/components/NavbarDesktop";
 import NavbarMobile from "@/components/NavbarMobile";
 import Image from "next/image";
@@ -5,7 +6,7 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-linear-to-b from-[#060b18] via-[#0b1020] to-[#060b18] text-foreground border-blue-500">
+    <main className="min-h-screen bg-linear-to-b from-[#060b18] via-[#0b1020] to-[#060b18] text-white border-blue-500">
       <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6">
         <NavbarDesktop />
         <NavbarMobile />

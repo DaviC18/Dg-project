@@ -2,9 +2,10 @@
 import { GoogleGenAI } from "@google/genai";
 import { env } from "../env";
 import { z } from "zod";
-import { logger } from "../lib/logger";
+import { loggerConfig } from "../lib/logger";
+import pino from "pino";
 
-const startedAt = Date.now();
+const logger = pino(loggerConfig);
 
 const gemini = new GoogleGenAI({
 	apiKey: env.GEMINI_API_KEY,
@@ -37,6 +38,7 @@ export const PreDiagnostic = async (formData: {
 	seenByWho?: string | null;
 	consent: boolean;
 }): Promise<PreDiagnosticResult> => {
+	const startedAt = Date.now();
 	const prompt = `
 You are a clinical assistant. Analyze the form below and generate a PRE-DIAGNOSIS for a physician.
 
@@ -100,6 +102,7 @@ ${JSON.stringify(
 };
 
 export const generateEmbeddings = async (text: string) => {
+	const startedAt = Date.now();
 	try {
 		const response = await gemini.models.embedContent({
 			model: "gemini-embedding-2",

@@ -1,9 +1,17 @@
-import pino from "pino";
 import { env } from "../env";
 
-export const logger = pino({
+export const loggerConfig = {
 	level: "info",
+
 	transport:
-		env.DATABASE_URL === "production" ? undefined : { target: "pino-pretty" },
+		env.NODE_ENV === "production"
+			? undefined
+			: {
+					target: "pino-pretty",
+					options: {
+						colorize: true,
+					},
+				},
+
 	redact: ["req.headers.authorization", "password", "token"],
-});
+};

@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-linear-to-b from-[#060b18] via-[#0b1020] to-[#060b18] text-white border-blue-500">
-      <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6">
+      <header className="flex w-full items-center justify-between px-6 py-6">
         <NavbarDesktop />
         <NavbarMobile />
       </header>

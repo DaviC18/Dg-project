@@ -29,6 +29,27 @@
       "when": 1779825331530,
       "tag": "0003_mysterious_purple_man",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1780678112055,
+      "tag": "0004_light_killmonger",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1780678524154,
+      "tag": "0005_conscious_inertia",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1780686950000,
+      "tag": "0006_shocking_blonde_phantom",
+      "breakpoints": true
     }
   ]
 }

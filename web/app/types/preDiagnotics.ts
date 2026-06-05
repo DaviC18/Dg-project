@@ -5,6 +5,7 @@ export type PreDiagnostics = {
   model: string;
   createdAt: string;
   result: {
+    title: string;
     summary: string;
     alerts: string[];
     suggestionsToTheDoctor: string[];

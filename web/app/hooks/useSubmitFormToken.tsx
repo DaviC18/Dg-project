@@ -1,9 +1,10 @@
+/** biome-ignore-all lint/style/noNonNullAssertion: <explanation> */
 "use client";
 
 import { useAuth } from "@clerk/nextjs";
-import { SymptomsStatus } from "../types/status";
+import type { SymptomsStatus } from "../types/status";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
 
 export function useSubmitFormToken() {
   const { getToken } = useAuth();
@@ -43,7 +44,7 @@ export function useSubmitFormToken() {
       consent: formData.get("consent") === "on",
     };
 
-    const formResponse = await fetch(`${API_URL}forms`, {
+    const formResponse = await fetch(new URL("/forms", API_URL!).toString(), {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -59,7 +60,7 @@ export function useSubmitFormToken() {
       return;
     }
 
-    const preDiagnosticResponse = await fetch(`${API_URL}pre-diagnostics`, {
+    const preDiagnosticResponse = await fetch(new URL("/pre-diagnostics", API_URL!).toString(), {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

@@ -5,7 +5,7 @@ import Robot from "@/public/assets/images/robot.png"
 const Error = () => {
   return (
     <div className="flex">
-      <div className="relative w-96 h-96">
+      <div className="relative w-64 h-64">
         <Image
           src={Robot}
           alt="robot_error"

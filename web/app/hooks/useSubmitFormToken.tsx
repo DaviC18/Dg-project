@@ -43,7 +43,7 @@ export function useSubmitFormToken() {
       consent: formData.get("consent") === "on",
     };
 
-    const formResponse = await fetch(`${API_URL}/forms`, {
+    const formResponse = await fetch(`${API_URL}forms`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -59,7 +59,7 @@ export function useSubmitFormToken() {
       return;
     }
 
-    const preDiagnosticResponse = await fetch(`${API_URL}/pre-diagnostics`, {
+    const preDiagnosticResponse = await fetch(`${API_URL}pre-diagnostics`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

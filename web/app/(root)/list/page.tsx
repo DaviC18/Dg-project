@@ -1,10 +1,13 @@
 /** biome-ignore-all assist/source/organizeImports: <> */
+/** biome-ignore-all lint/suspicious/noShadowRestrictedNames: <> */
 "use client";
 
 import { usePreDiagnostics } from "@/app/hooks/usePreDiagnostics";
 import NavbarDesktop from "@/components/NavbarDesktop";
 import NavbarMobile from "@/components/NavbarMobile";
+import Loader from "@/components/Loader"
 import { Search } from "lucide-react";
+import Error from "@/components/Error";
 
 const Page = () => {
   const { data, loading, error } = usePreDiagnostics();
@@ -43,14 +46,14 @@ const Page = () => {
         </div>
 
         {loading && (
-          <div className="my-5 flex items-center justify-center">
-            <h1>Carregando pré-diagnósticos...</h1>
+          <div className="mt-7 flex items-center justify-center">
+            <Loader />
           </div>
         )}
 
         {error && (
           <div className="my-5 flex items-center justify-center">
-            <h1>Erro: {error}</h1>
+            <Error />
           </div>
         )}
 

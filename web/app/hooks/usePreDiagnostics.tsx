@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 import type { PreDiagnostics } from "../types/preDiagnotics";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export function usePreDiagnostics() {
   const { getToken, isLoaded, isSignedIn } = useAuth();
   const [data, setData] = useState<PreDiagnostics[]>([]);
@@ -27,7 +29,7 @@ export function usePreDiagnostics() {
           throw new Error("Token não encontrado.");
         }
 
-        const response = await fetch("http://localhost:3333/pre-diagnostics", {
+        const response = await fetch(`${API_URL}pre-diagnostics`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

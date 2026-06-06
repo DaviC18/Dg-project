@@ -1,196 +1,236 @@
-# Doctor Genesis
+<div align="center">
 
-**AI-assisted clinical triage platform that collects patient symptoms, organizes the data, and generates a structured pre-diagnosis to support the consultation — without replacing the physician.**
+# 🤖 DG Project
 
-## Why this project exists
+### AI-Powered Healthcare Screening Platform
 
-Doctor Genesis was designed to reduce the time spent gathering basic information during clinical intake. The patient fills out a guided form, the backend validates and stores the data, and AI helps transform that information into a clean, structured pre-diagnosis for medical review.
+Modern healthcare triage powered by Artificial Intelligence.
 
-The goal is simple: **speed up triage, improve organization, and keep the final decision in human hands**.
+[Overview](#-overview) •
+[Highlights](#-highlights) •
+[Architecture](#-architecture) •
+[Tech Stack](#-tech-stack) •
+[Getting Started](#-getting-started) •
+[Future Improvements](#-future-improvements)
 
-## What it does
+</div>
 
-- Collects patient symptoms, pain level, timeline, and prior history through a guided form
-- Authenticates users with Clerk
-- Stores records in PostgreSQL through Drizzle ORM
-- Generates a preliminary diagnostic summary with Gemini
-- Returns structured data for later clinical review
-- Keeps the physician as the final authority on interpretation
+---
 
-## Key features
+## ✨ Overview
 
-- **Authenticated clinical flow** — only signed-in users can create and access records
-- **Structured intake** — symptom reports are validated before persistence
-- **Pre-diagnosis support** — AI assists the workflow, it does not replace medical judgment
-- **Separation of concerns** — frontend and backend are isolated in dedicated apps
-- **Type-safe stack** — TypeScript across the project
-- **Modern UI foundation** — Next.js, Tailwind CSS, and shadcn/ui on the web side
+DG Project is a modern full-stack healthcare platform designed to streamline patient pre-screening through secure authentication, structured data management, and AI-assisted analysis.
 
-## Tech stack
+The goal is not to replace medical professionals, but to improve the first layer of patient interaction by organizing information, highlighting possible concerns, and supporting a more efficient screening workflow.
+
+Built with a production-oriented mindset, the project combines a clean user experience with a scalable architecture and a modern TypeScript stack.
+
+---
+
+## 🚀 Highlights
+
+- 🤖 AI-assisted symptom analysis powered by Gemini
+- 🔐 Secure authentication and user management with Clerk
+- ⚡ High-performance API built with Fastify
+- 🗄️ Type-safe database layer using Drizzle ORM
+- 📱 Responsive and modern user experience
+- 🔄 Full-stack TypeScript architecture
+- 🏗️ Scalable project structure designed for maintainability
+
+---
+
+## 🎯 Project Vision
+
+Healthcare systems often struggle with the initial triage stage due to limited time, growing demand, and fragmented patient information.
+
+DG Project explores how artificial intelligence can support this stage by helping users describe symptoms more clearly, organize relevant data, and improve communication between patients and healthcare teams.
+
+Rather than acting as a diagnostic tool, the platform is positioned as a decision-support and intake layer for a smarter healthcare workflow.
+
+---
+
+## 🏛 Architecture
+
+```text
+┌─────────────┐
+│   Next.js   │
+│ Frontend UI │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│   Fastify   │
+│   REST API  │
+└──────┬──────┘
+       │
+ ┌─────┴─────┐
+ ▼           ▼
+PostgreSQL  Gemini AI
+ (Drizzle)  Analysis
+```
+
+---
+
+## 🛠 Tech Stack
 
 ### Frontend
+- TypeScript
 - Next.js
 - React
-- TypeScript
 - Tailwind CSS
 - shadcn/ui
-- Clerk
+- Clerk Authentication
 
 ### Backend
+- Node.js
 - Fastify
 - TypeScript
-- Zod
 - Drizzle ORM
-- PostgreSQL / postgres.js
-- Clerk Fastify
-- Gemini API
+- PostgreSQL
 
-## Architecture
+### AI
+- Google Gemini
 
-```text
-web/    -> Next.js application for the patient/clinic interface
-server/ -> Fastify API responsible for auth, validation, persistence, and AI-backed triage
+### DevOps & Tooling
+- Git
+- npm
+- ESLint
+- Prettier
+
+---
+
+## 🔑 Key Features
+
+### AI Symptom Analysis
+Users can describe symptoms and receive an AI-assisted preliminary assessment.
+
+### Secure Authentication
+Authentication flow powered by Clerk for a safer and cleaner user experience.
+
+### Patient Data Management
+Structured storage and retrieval of user information through a type-safe database layer.
+
+### Modern Dashboard Experience
+Responsive interface focused on clarity, usability, and accessibility.
+
+### Scalable API Design
+Backend architecture built to support maintainability and future growth.
+
+---
+
+## 🖼 Preview
+
+Add screenshots, dashboard previews, authentication screens, and AI interaction examples here.
+
+```md
+![Dashboard](./docs/dashboard.png)
+![AI Analysis](./docs/ai-analysis.png)
+![Authentication](./docs/auth.png)
 ```
 
-### Data flow
+---
 
-1. The user signs in.
-2. The user fills out the symptom form.
-3. The backend validates the payload with Zod.
-4. The form is stored in PostgreSQL.
-5. AI processes the structured data and produces a pre-diagnosis.
-6. The result is shown for medical review.
+## ⚙️ Getting Started
 
-## Available API routes
+### Prerequisites
+- Node.js
+- npm or pnpm
+- PostgreSQL database
+- Google Gemini API key
+- Clerk project credentials
 
-The backend currently exposes routes for:
+### Environment Variables
+Create a `.env` file in the backend and frontend according to your setup.
 
-- `GET /` — health check
-- `GET /me` — authenticated user lookup
-- `POST /forms` — create a symptom form
-- `GET /forms` — list the authenticated user’s forms
-- `GET /pre-diagnostics` — list generated pre-diagnostic records
-
-## Project structure
-
-```text
-server/
-├─ src/
-│  ├─ db/
-│  ├─ http/routes/
-│  ├─ services/
-│  ├─ types/
-│  ├─ utils/
-│  ├─ env.ts
-│  └─ server.ts
-├─ drizzle.config.ts
-└─ package.json
-
-web/
-├─ app/
-├─ components/
-├─ lib/
-├─ public/
-└─ package.json
-```
-
-## Environment variables
-
-### `server/.env`
+Example variables:
 
 ```env
-PORT=5234
-CLERK_SECRET_KEY=your_clerk_secret_key
-CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
-GEMINI_API_KEY=your_gemini_api_key
-DATABASE_URL=postgresql://user:password@host:5432/database
-JWT_SECRET_KEY=your_jwt_secret_key
+DATABASE_URL=
+GEMINI_API_KEY=
+CLERK_SECRET_KEY=
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 ```
 
-### `web/.env.local`
-
-```env
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
-CLERK_SECRET_KEY=your_clerk_secret_key
-```
-
-> Adjust the environment variables according to your deployment and Clerk configuration.
-
-## Getting started
-
-### 1) Clone the repository
+### Installation
 
 ```bash
+# Clone the repository
 git clone https://github.com/DaviC18/Dg-project.git
+
+# Enter the project
 cd Dg-project
+
+# Install dependencies
+npm install
 ```
 
-### 2) Install dependencies
+### Run the application
 
 ```bash
+# Start backend
 cd server
-npm install
+npm run dev
 
+# Start frontend
 cd ../web
-npm install
-```
-
-### 3) Run the backend
-
-```bash
-cd server
 npm run dev
 ```
 
-### 4) Run the frontend
+---
 
-```bash
-cd web
-npm run dev
-```
+## 📈 Future Improvements
 
-## Backend scripts
+- Appointment scheduling
+- Medical history timeline
+- Multi-language support
+- Doctor dashboard
+- Analytics and reporting
+- AI conversation history
+- Mobile application
 
-```bash
-npm run dev         # start development server
-npm run start       # run the API
-npm run db:generate # generate Drizzle migrations
-npm run db:migrate  # apply migrations
-npm run db:seed     # seed the database
-npm run check       # run Biome checks
-npm run fix         # auto-fix lint/style issues
-```
+---
 
-## Frontend scripts
+## 💡 What This Project Demonstrates
 
-```bash
-npm run dev     # start Next.js in development mode
-npm run build   # build for production
-npm run start   # run production build
-npm run lint    # run Biome checks
-npm run format  # format code
-```
+This project highlights practical experience with:
 
-## Highlights for recruiters
+- Full-stack development
+- Software architecture
+- Authentication systems
+- Database design
+- AI integration
+- REST API development
+- Modern frontend engineering
+- TypeScript ecosystem
 
-This repository demonstrates:
+---
 
-- **Product thinking** — solves a real operational pain point in clinical intake
-- **Full-stack delivery** — frontend, backend, auth, database, and AI integration
-- **Data validation discipline** — Zod + typed API contracts
-- **Modular architecture** — routes, services, schemas, and UI components separated cleanly
-- **Modern stack fluency** — Next.js, Fastify, Clerk, Drizzle, PostgreSQL, Gemini
-- **Domain awareness** — the system supports care; it does not pretend to replace it
+## ⚡ Performance & Scalability
 
-## Roadmap ideas
+- Type-safe backend and frontend architecture
+- Modular service-oriented structure
+- Optimized API communication
+- Secure authentication workflows
+- Extensible database schema
+- Ready for future cloud deployment
 
-- Add audit logs for clinical traceability
-- Introduce tests for critical routes and form validation
-- Add role-based access for doctors, assistants, and admins
-- Create dashboards with triage metrics and form status tracking
-- Add export options for clinical records
-- Improve observability with structured logging and request tracing
+---
 
-## License
+## 👨‍💻 Author
 
-No license file was found in the repository. Add one if you plan to publish or reuse the project openly.
+### Davi Curty
+
+Full-Stack Developer focused on building modern web applications, scalable systems, and AI-powered experiences.
+
+- GitHub: https://github.com/DaviC18
+- LinkedIn: https://www.linkedin.com/in/david-curty-84b2a0285?utm_source=share_via&utm_content=profile&utm_medium=member_android
+
+---
+
+## ⭐ Why This Project Matters
+
+DG Project is more than a technical exercise.
+
+It represents the combination of modern software engineering, artificial intelligence, and user-centered design to solve real-world healthcare challenges.
+
+The project demonstrates the ability to design, architect, and implement a complete full-stack application using technologies commonly adopted in production environments.

@@ -42,8 +42,7 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 			const { formId } = bodySchema.parse(request.body);
 
 			const form = await db.query.forms.findFirst({
-				where: (f, { eq, and }) =>
-					and(eq(f.id, formId), eq(f.userId, userId)),
+				where: (f, { eq, and }) => and(eq(f.id, formId), eq(f.userId, userId)),
 			});
 
 			if (!form) {
@@ -136,6 +135,6 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 					error: "Failed to create pre-diagnostic",
 				});
 			}
-		},
+		}
 	);
 };

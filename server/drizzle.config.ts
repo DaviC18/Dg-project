@@ -1,5 +1,5 @@
 /** biome-ignore-all assist/source/organizeImports: <> */
-import { env } from './src/env';
+import { env } from "./src/env";
 import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({

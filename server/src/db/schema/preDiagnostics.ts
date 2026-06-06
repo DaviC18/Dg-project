@@ -15,7 +15,7 @@ export const preDiagnostics = pgTable(
     id: uuid().primaryKey().defaultRandom(),
     formId: uuid("form_id").notNull(),
     userId: text("user_id").notNull(),
-    title: text("title").notNull(),
+    title: text().notNull(),
     result: jsonb("result").notNull(),
     model: text("model").notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),

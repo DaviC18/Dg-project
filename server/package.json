@@ -39,7 +39,8 @@
     "db:migrate": "drizzle-kit migrate",
     "dev": "tsx watch src/server.ts",
     "check": "ultracite check",
-    "fix": "ultracite fix"
+    "fix": "ultracite fix",
+    "env:check": "node -e \"console.log(process.env.DATABASE_URL)\""
   },
   "type": "module",
   "version": "1.0.0",

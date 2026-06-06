@@ -50,6 +50,20 @@
       "when": 1780686950000,
       "tag": "0006_shocking_blonde_phantom",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1780703812611,
+      "tag": "0007_steep_nightcrawler",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1780703886518,
+      "tag": "0008_odd_lady_ursula",
+      "breakpoints": true
     }
   ]
 }

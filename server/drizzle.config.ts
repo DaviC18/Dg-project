@@ -1,11 +1,11 @@
+/** biome-ignore-all assist/source/organizeImports: <> */
+import { env } from './src/env';
 import { defineConfig } from "drizzle-kit";
-import { env } from "./src/env.ts";
 
 export default defineConfig({
-	dialect: "postgresql",
-	casing: "snake_case",
-	schema: "./src/db/schema/**.ts",
+	schema: "./src/db/schema/**/*.ts",
 	out: "./drizzle",
+	dialect: "postgresql",
 	dbCredentials: {
 		url: env.DATABASE_URL,
 	},

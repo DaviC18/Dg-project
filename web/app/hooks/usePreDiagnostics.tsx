@@ -1,10 +1,11 @@
+/** biome-ignore-all lint/style/noNonNullAssertion: <> */
 "use client";
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 import type { PreDiagnostics } from "../types/preDiagnotics";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
 
 export function usePreDiagnostics() {
   const { getToken, isLoaded, isSignedIn } = useAuth();
@@ -29,7 +30,7 @@ export function usePreDiagnostics() {
           throw new Error("Token não encontrado.");
         }
 
-        const response = await fetch(`${API_URL}pre-diagnostics`, {
+        const response = await fetch(new URL("/pre-diagnostics", API_URL!).toString(), {
           headers: {
             Authorization: `Bearer ${token}`,
           },

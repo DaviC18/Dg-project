@@ -2,6 +2,7 @@
 import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
 import Fastify from 'fastify';
 import { createForm } from '../../http/routes/forms/create-form';
+import { serializerCompiler, validatorCompiler, type ZodTypeProvider } from "fastify-type-provider-zod";
 
 const formPayload = {
     symptomsDescription: "Dor de cabeça",
@@ -45,7 +46,9 @@ describe("Create Form", () => {
 
 
     beforeAll(async () => {
-        app = Fastify();
+        app = Fastify().withTypeProvider<ZodTypeProvider>();
+        app.setValidatorCompiler(validatorCompiler);
+        app.setSerializerCompiler(serializerCompiler);
 
         app.register(createForm)
 

@@ -1,7 +1,9 @@
+/** biome-ignore-all assist/source/organizeImports: <> */
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import Fastify from "fastify";
 import { createPreDiagnostic } from "../../http/routes/preDiagnostics/create-preDiagnostic";
 import { db } from "../../db/connections";
+import { serializerCompiler, validatorCompiler, type ZodTypeProvider } from "fastify-type-provider-zod";
 
 vi.mock("@clerk/fastify", () => ({
     getAuth: () => ({
@@ -13,7 +15,9 @@ describe("Create PreDiagnostic", () => {
     let app: ReturnType<typeof Fastify>;
 
     beforeAll(async () => {
-        app = Fastify();
+        app = Fastify().withTypeProvider<ZodTypeProvider>();
+        app.setValidatorCompiler(validatorCompiler);
+        app.setSerializerCompiler(serializerCompiler);
         app.register(createPreDiagnostic)
         await app.ready();
     })

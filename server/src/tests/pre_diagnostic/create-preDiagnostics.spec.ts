@@ -42,7 +42,6 @@ describe("Create PreDiagnostic", () => {
             url: "/pre-diagnostics",
             payload: {
                 formId: "some-form-id",
-                consent: false,
             }
         })
         expect(response.statusCode).toBe(400);

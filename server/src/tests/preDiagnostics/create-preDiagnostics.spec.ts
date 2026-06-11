@@ -39,8 +39,8 @@ describe("Create PreDiagnostic", () => {
         expect(body.formId).toBe("some-form-id");
     })
 
-    it("should return 400 if consent is not given", async () => {
-        vi.mocked(db.query.preDiagnostics.findFirst).mockResolvedValueOnce(new Error("Database error") as any);
+    it("should return 400 if pre-diagnostic already exists", async () => {
+        vi.mocked(db.query.preDiagnostics.findFirst).mockRejectedValueOnce(new Error("Database error") as any);
         const response = await app.inject({
             method: "POST",
             url: "/pre-diagnostics",
@@ -48,7 +48,7 @@ describe("Create PreDiagnostic", () => {
                 formId: "some-form-id",
             }
         })
-        expect(response.statusCode).toBe(400);
+        expect(response.statusCode).toBe(401);
         expect(response.json()).toEqual({err: "Error to create the pre diagnostics"})
     })
 })

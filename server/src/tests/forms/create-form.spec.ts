@@ -3,6 +3,25 @@ import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
 import Fastify from 'fastify';
 import { createForm } from '../../http/routes/forms/create-form';
 
+const formPayload = {
+    symptomsDescription: "Dor de cabeça",
+
+        startDate: "2026-06-01",
+
+        symptomsStatus: "worse",
+
+        painLevel: 7,
+
+        hadBefore: false,
+
+        hadBeforeWhen: null,
+
+        seenByProfessional: false,
+
+        seenByWho: null,
+
+}
+
 vi.mock("@clerk/fastify", () => ({
     getAuth: () => ({
         userId: "test-user-id"
@@ -14,7 +33,7 @@ vi.mock("../../db/connections", () => ({
         insert: vi.fn(() => ({
             values: vi.fn(() => ({
                 returning: vi.fn().mockResolvedValueOnce([
-                    {}
+                    {id: "form-id", userId: "test-user-id", symptomsDescription: "Dor de cabeça"}
                 ])
             }))
         }))
@@ -41,25 +60,7 @@ describe("Create Form", () => {
         const response = await app.inject({
             method: "POST",
             url: "/forms",
-            payload: {
-        symptomsDescription: "Dor de cabeça",
-
-        startDate: "2026-06-01",
-
-        symptomsStatus: "worse",
-
-        painLevel: 7,
-
-        hadBefore: false,
-
-        hadBeforeWhen: null,
-
-        seenByProfessional: false,
-
-        seenByWho: null,
-
-        consent: true,
-      },
+            payload: {...formPayload, formId: "some-form-id", consent: true},
         })
 
         expect(response.statusCode).toBe(201);
@@ -74,6 +75,7 @@ describe("Create Form", () => {
             method: "POST", 
             url: "/forms",
             payload: {
+                ...formPayload,
                 formId: "some-form-id",
                 consent: false,
             }

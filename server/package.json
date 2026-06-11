@@ -41,7 +41,11 @@
     "dev": "tsx watch src/server.ts",
     "check": "ultracite check",
     "fix": "ultracite fix",
-    "env:check": "node -e \"console.log(process.env.DATABASE_URL)\""
+    "env:check": "node -e \"console.log(process.env.DATABASE_URL)\"",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage"
   },
   "type": "module",
   "version": "1.0.0",

@@ -38,7 +38,8 @@ describe("Get Form", () => {
     it("should get forms successfully", async () => {
         const mockForms = [
             {id: "form-id", userId: "test-user-id", symptomsDescription: "Dor de cabeça", preDiagnostics: []}
-        ]
+        ];
+        vi.mocked(db.query.forms.findMany).mockResolvedValueOnce(mockForms as any);
         const response = await app.inject({
             method: "GET",
             url: "/forms",

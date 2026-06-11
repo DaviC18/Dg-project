@@ -1,12 +1,25 @@
+/** biome-ignore-all assist/source/organizeImports: <> */
 import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
 import Fastify from 'fastify';
 import { createForm } from '../../http/routes/forms/create-form';
 
-vi.mock("@cleck/fastify", () => ({
+vi.mock("@clerk/fastify", () => ({
     getAuth: () => ({
         userId: "test-user-id"
     })
 }))
+
+vi.mock("../../db/connections", () => ({
+    db: {
+        insert: vi.fn(() => ({
+            values: vi.fn(() => ({
+                returning: vi.fn().mockResolvedValueOnce([
+                    {}
+                ])
+            }))
+        }))
+    }}
+))
 
 describe("Create Form", () => {
     let app: ReturnType<typeof Fastify>;
@@ -59,7 +72,7 @@ describe("Create Form", () => {
     it("should return 400 if consent is not given", async () => {
         const response = await app.inject({
             method: "POST", 
-            url: "/pre-diagnostics",
+            url: "/forms",
             payload: {
                 formId: "some-form-id",
                 consent: false,

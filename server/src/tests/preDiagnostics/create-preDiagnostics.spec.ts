@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import Fastify from "fastify";
 import { createPreDiagnostic } from "../../http/routes/preDiagnostics/create-preDiagnostic";
+import { db } from "../../db/connections";
 
 vi.mock("@clerk/fastify", () => ({
     getAuth: () => ({
@@ -22,6 +23,8 @@ describe("Create PreDiagnostic", () => {
     })
 
     it("should create a pre-diagnostic successfully", async () => {
+        const mockPreDiagnostic = [{id: "pre-diagnostic-id", userId: "test-user-id", formId: "some-form-id"}];
+        vi.mocked(db.query.preDiagnostics.findFirst).mockResolvedValueOnce(mockPreDiagnostic as any);
         const response = await app.inject({
             method: "POST",
             url: "/pre-diagnostics",
@@ -37,6 +40,7 @@ describe("Create PreDiagnostic", () => {
     })
 
     it("should return 400 if consent is not given", async () => {
+        vi.mocked(db.query.preDiagnostics.findFirst).mockResolvedValueOnce(new Error("Database error") as any);
         const response = await app.inject({
             method: "POST",
             url: "/pre-diagnostics",

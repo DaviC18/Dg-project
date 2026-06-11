@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/style/useFilenamingConvention: <> */
+/** biome-ignore-all assist/source/organizeImports: <> */
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import Fastify from "fastify";
 import { getPreDiagnostic } from "../../http/routes/preDiagnostics/get-preDiagnostic";

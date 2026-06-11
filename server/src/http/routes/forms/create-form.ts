@@ -1,8 +1,8 @@
 import { getAuth } from "@clerk/fastify";
 import type { FastifyPluginCallbackZod } from "fastify-type-provider-zod";
-import { db } from "../../db/connections";
-import { forms } from "../../db/schema/forms";
-import { formSchema } from "../../types/status";
+import { db } from "../../../db/connections";
+import { forms } from "../../../db/schema/forms";
+import { formSchema } from "../../../types/status";
 
 export const createForm: FastifyPluginCallbackZod = (app) => {
 	app.post(

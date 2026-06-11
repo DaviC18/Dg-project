@@ -9,11 +9,11 @@ import {
 	type ZodTypeProvider,
 } from "fastify-type-provider-zod";
 import { env } from "./env";
-import { createForm } from "./http/routes/create-form";
-import { getForm } from "./http/routes/get-form";
-import { getPreDiagnostic } from "./http/routes/get-preDiagnostic";
+import { createForm } from "./http/routes/forms/create-form";
+import { getForm } from "./http/routes/forms/get-form";
+import { getPreDiagnostic } from "./http/routes/preDiagnostics/get-preDiagnostic";
 import { clerkPlugin } from "@clerk/fastify";
-import { createPreDiagnostic } from "./http/routes/create-preDiagnostic";
+import { createPreDiagnostic } from "./http/routes/preDiagnostics/create-preDiagnostic";
 import { loggerConfig } from "./lib/logger";
 
 const app = fastify({

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
 import Fastify from 'fastify';
-import { createForm } from '../../http/routes/create-form';
+import { createForm } from '../../http/routes/forms/create-form';
 
 vi.mock("@cleck/fastify", () => ({
     getAuth: () => ({

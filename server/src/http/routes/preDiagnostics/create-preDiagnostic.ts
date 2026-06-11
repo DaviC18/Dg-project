@@ -6,10 +6,10 @@ import { eq } from "drizzle-orm";
 import type { FastifyPluginCallbackZod } from "fastify-type-provider-zod";
 import { z } from "zod";
 
-import { db } from "../../db/connections";
-import { forms } from "../../db/schema/forms";
-import { preDiagnostics } from "../../db/schema/preDiagnostics";
-import { PreDiagnostic } from "../../services/gemini";
+import { db } from "../../../db/connections";
+import { forms } from "../../../db/schema/forms";
+import { preDiagnostics } from "../../../db/schema/preDiagnostics";
+import { PreDiagnostic } from "../../../services/gemini";
 
 const bodySchema = z.object({
 	formId: z.string().uuid(),

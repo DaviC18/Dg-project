@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import Fastify from "fastify";
 
-import { getForm } from "../../http/routes/get-form"
+import { getForm } from "../../http/routes/forms/get-form"
 import { db } from "../../db/connections";
 
 vi.mock("@clerk/fastify", () => ({

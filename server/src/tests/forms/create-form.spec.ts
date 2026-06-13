@@ -84,6 +84,7 @@ describe("Create Form", () => {
             }
         })
         expect(response.statusCode).toBe(400);
-        expect(response.json()).toEqual({err: "Error to create the Form"})
-    })
+        expect(response.json()).toEqual({
+  error: "Consent is required to generate the preliminary diagnosis.",
+})    })
 })

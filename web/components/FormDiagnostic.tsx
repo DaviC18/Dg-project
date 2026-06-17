@@ -123,7 +123,7 @@ const FormDiagnostic = () => {
                     <div>
                       <input
                         type="radio"
-                        name="hadBeforeWhen"
+                        name="hadBefore"
                         id="hadBeforeWhenYes"
                         className="cursor-pointer"
                         value="yes"

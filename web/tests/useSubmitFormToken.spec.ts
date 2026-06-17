@@ -133,7 +133,7 @@ describe("useSubmitFormToken", () => {
 					"Content-Type": "application/json",
                 }),
                 body: JSON.stringify({
-                    form: "form-id"
+                    formId: "form-id"
                 })
             })
 

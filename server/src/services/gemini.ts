@@ -14,20 +14,15 @@ const gemini = new GoogleGenAI({
 const model = "gemini-3-flash-preview";
 
 const preDiagnosticSchema = z.object({
-	title: z
-		.string()
-		.min(1)
-		.max(80)
-		.describe("Short neutral title for the case."),
-	summary: z.string().describe("Objective summary of the completed form."),
-	alerts: z.array(z.string()).describe("Warning signs identified in the case."),
-	suggestionsToTheDoctor: z
-		.array(z.string())
-		.describe("Clinical suggestions for the physician to evaluate."),
-	examsSuggested: z.array(z.string()).describe("Tests that may be considered."),
-	observations: z
-		.array(z.string())
-		.describe("Important observations and limitations of pre-diagnosis."),
+  title: z.string().min(1).max(80),
+  summary: z.string(),
+  alerts: z.array(z.string()),
+  suggestionsToTheDoctor: z.array(z.string()),
+  examsSuggested: z.array(z.string()),
+  observations: z.array(z.string()),
+  urgencyLevel: z.enum(["low", "medium", "high"]),
+  safetyNotice: z.string(),
+  nextStep: z.string(),
 });
 
 type PreDiagnosticResult = z.infer<typeof preDiagnosticSchema>;
@@ -45,25 +40,10 @@ export const PreDiagnostic = async (formData: {
 }): Promise<PreDiagnosticResult> => {
 	const startedAt = Date.now();
 	const prompt = `
-You are a clinical assistant. Analyze the form below and generate a PRE-DIAGNOSIS for a physician.
-
-Rules:
-
-- Create a short, neutral, clinical title based on the patient's main complaint.
-
-- Use at most 8 words.
-
-- Do not use diagnosis names.
-
-- Do not make a definitive diagnosis.
-
-- Be objective and technical.
-
-- Return ONLY valid JSON.
-
-- Include a summary, alerts, suggestions for the physician, suggested tests, and observations.
-
-- If information is missing, state this in the observations.
+- Never present this as a diagnosis.
+- If emergency warning signs are present, set urgencyLevel to "high".
+- If urgencyLevel is "high", include a clear safetyNotice telling the user to seek immediate medical attention.
+- Keep the title neutral and non-diagnostic.
 
 Form data:
 ${JSON.stringify(

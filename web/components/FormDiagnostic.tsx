@@ -201,11 +201,9 @@ const FormDiagnostic = () => {
                       id="consent"
                       required
                     />
-                    <div>
-                      <span>
-                        I authorize the use of my data for medical analysis and
-                        AI-assisted diagnosis.
-                      </span>
+                    <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+                      <strong>Atenção:</strong> esta análise é preliminar e não substitui avaliação médica.
+                      Se houver falta de ar, dor intensa, desmaio ou piora importante, procure atendimento imediatamente.
                     </div>
                   </div>
                 </div>

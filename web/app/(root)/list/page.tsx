@@ -58,25 +58,18 @@ const Page = () => {
         )}
 
         {!loading && !error && (
-          <div className="space-y-8 mt-12 grid gap-6 lg:grid-cols-3 md:grid-cols-2 justify-center">
-            {data.length > 0 ? (
-              data.map((el) => (
-                <article
-                  key={el.id}
-                  className="cursor-pointer rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-                >
-                  <h1 className="text-2xl font-semibold">{el.result.title}</h1>
-                  <p className="mt-4 text-base leading-7 text-slate-600">
-                    {el.result.summary}
-                  </p>
-                  <p></p>
-                </article>
-              ))
-            ) : (
-              <div className="my-5 flex items-center justify-center">
-                <h1>None Pré-diagnostics</h1>
-              </div>
-            )}
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
+            {data.map((el) => (
+              <article
+                key={el.id}
+                className="flex h-full cursor-pointer flex-col rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <h1 className="text-2xl font-semibold">{el.result.title}</h1>
+                <p className="mt-4 text-base leading-7 text-slate-600 line-clamp-7">
+                  {el.result.summary}
+                </p>
+              </article>
+            ))}
           </div>
         )}
       </section>

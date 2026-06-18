@@ -1,6 +1,6 @@
 import { SectionRefsProvider } from "@/hooks/useSectionRefs";
 import type { ReactNode } from "react";
-import { FormDiagnosticProvider } from "../../hooks/FormContext";
+import { FormDiagnosticProvider } from "../../hooks/WindowContext";
 import NavbarMobile from "@/components/NavbarMobile";
 import FormDiagnostic from "@/components/FormDiagnostic";
 

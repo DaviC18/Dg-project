@@ -7,7 +7,7 @@ import { useFormDiagnostic } from "@/hooks/FormContext";
 import Link from "next/link";
 
 const NavbarMobile = () => {
-  const { openForm } = useFormDiagnostic();
+  const { openWindow } = useFormDiagnostic();
 
   return (
     <div className="max-sm:flex hidden px-3 fixed z-10 bottom-5 left-0 w-full bg-cover justify-center items-center gap-2">
@@ -34,7 +34,7 @@ const NavbarMobile = () => {
           <li className="w-1/5">
             <button
               type="button"
-              onClick={openForm}
+              onClick={openWindow}
               className="cursor-pointer w-9.5 h-9.5 bg-linear-to-br from-blue-500 to-cyan-400  shadow-xl text-center rounded-full "
             >
               <div className="w-full h-full flex justify-center items-center text-white">

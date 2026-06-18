@@ -8,7 +8,7 @@ import { useFormDiagnostic } from "@/hooks/FormContext";
 import { navLinks } from "@/app/(root)/constants";
 
 const NavbarDesktop = () => {
-  const { openForm } = useFormDiagnostic();
+  const { openWindow } = useFormDiagnostic();
 
   return (
     <header className="w-full flex items-center">
@@ -52,7 +52,7 @@ const NavbarDesktop = () => {
           </Link>
           <button
             type="button"
-            onClick={openForm}
+            onClick={openWindow}
             className="p-2 max-sm:hidden group text-inherit opacity-75 rounded-full cursor-pointer transition-all duration-300 hover:bg-slate-500/25 hover:opacity-100"
           >
             <Plus size={23} className="" />

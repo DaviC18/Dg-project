@@ -3,9 +3,9 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 
 type FormDiagnosticContextType = {
-  isOpen: boolean;
-  openForm: () => void;
-  closeForm: () => void;
+  window: boolean;
+  openWindow: () => void;
+  closeWindow: () => void;
 };
 
 const FormDiagnosticContext = createContext<FormDiagnosticContextType | null>(
@@ -13,13 +13,13 @@ const FormDiagnosticContext = createContext<FormDiagnosticContextType | null>(
 );
 
 export function FormDiagnosticProvider({ children }: { children: ReactNode }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [window, setWindow] = useState(false);
 
-  const openForm = () => setIsOpen(true);
-  const closeForm = () => setIsOpen(false);
+  const openWindow = () => setWindow(true);
+  const closeWindow = () => setWindow(false);
 
   return (
-    <FormDiagnosticContext.Provider value={{ isOpen, openForm, closeForm }}>
+    <FormDiagnosticContext.Provider value={{ window, openWindow, closeWindow }}>
       {children}
     </FormDiagnosticContext.Provider>
   );

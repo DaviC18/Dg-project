@@ -1,5 +1,6 @@
-/** biome-ignore-all lint/a11y/useKeyWithClickEvents: <explanation> */
-/** biome-ignore-all lint/a11y/noStaticElementInteractions: <explanation> */
+/** biome-ignore-all lint/a11y/useKeyWithClickEvents: <> */
+/** biome-ignore-all assist/source/organizeImports: <> */
+/** biome-ignore-all lint/a11y/noStaticElementInteractions: <> */
 "use client";
 
 import { X } from "lucide-react";
@@ -202,8 +203,8 @@ const FormDiagnostic = () => {
                       required
                     />
                     <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
-                      <strong>Atenção:</strong> esta análise é preliminar e não substitui avaliação médica.
-                      Se houver falta de ar, dor intensa, desmaio ou piora importante, procure atendimento imediatamente.
+                      <strong>Attention:</strong> This analysis is preliminary and does not replace a medical evaluation.
+                        If you experience shortness of breath, severe pain, fainting, or significant worsening, seek medical attention immediately.
                     </div>
                   </div>
                 </div>

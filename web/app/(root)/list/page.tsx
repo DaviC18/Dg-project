@@ -2,7 +2,7 @@
 /** biome-ignore-all lint/suspicious/noShadowRestrictedNames: <> */
 "use client";
 
-import { usePreDiagnostics } from "@/app/hooks/usePreDiagnostics";
+import { usePreDiagnostics } from "@/hooks/usePreDiagnostics";
 import NavbarDesktop from "@/components/NavbarDesktop";
 import NavbarMobile from "@/components/NavbarMobile";
 import Loader from "@/components/Loader"

@@ -5,9 +5,9 @@
 
 import { X } from "lucide-react";
 import { useEffect } from "react";
-import { Tokenkey } from "../app/hooks/TokenKey";
-import { useSubmitFormToken } from "@/app/hooks/useSubmitFormToken";
-import { useFormDiagnostic } from "@/app/hooks/FormContext";
+import { Tokenkey } from "../hooks/TokenKey";
+import { useSubmitFormToken } from "@/hooks/useSubmitFormToken";
+import { useFormDiagnostic } from "@/hooks/FormContext";
 
 
 const FormDiagnostic = () => {

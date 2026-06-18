@@ -14,7 +14,7 @@ vi.mock("@clerk/nextjs", () => ({
     })
 })) 
 
-import { useSubmitFormToken } from "@/app/hooks/useSubmitFormToken";
+import { useSubmitFormToken } from "@/hooks/useSubmitFormToken";
 
 function buildForm(): HTMLFormElement {
     // Cria um <form> real, porque o hook usa new FormData(e.currentTarget).

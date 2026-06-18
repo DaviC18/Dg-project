@@ -3,8 +3,8 @@
 // biome-ignore assist/source/organizeImports: <>
 import { Plus, Search } from "lucide-react";
 import Link from "next/link";
-import UserClerkDesktop from "@/app/hooks/UserClerkDesktop";
-import { useFormDiagnostic } from "@/app/hooks/FormContext";
+import UserClerkDesktop from "@/hooks/UserClerkDesktop";
+import { useFormDiagnostic } from "@/hooks/FormContext";
 import { navLinks } from "@/app/(root)/constants";
 
 const NavbarDesktop = () => {

@@ -1,14 +1,15 @@
+/** biome-ignore-all assist/source/organizeImports: <> */
 "use client";
 
 import { createContext, useContext, useState, type ReactNode } from "react";
 
-type FormDiagnosticContextType = {
+type WindowContextType = {
   window: boolean;
   openWindow: () => void;
   closeWindow: () => void;
 };
 
-const FormDiagnosticContext = createContext<FormDiagnosticContextType | null>(
+const WindowContext = createContext<WindowContextType | null>(
   null,
 );
 
@@ -19,14 +20,14 @@ export function FormDiagnosticProvider({ children }: { children: ReactNode }) {
   const closeWindow = () => setWindow(false);
 
   return (
-    <FormDiagnosticContext.Provider value={{ window, openWindow, closeWindow }}>
+    <WindowContext.Provider value={{ window, openWindow, closeWindow }}>
       {children}
-    </FormDiagnosticContext.Provider>
+    </WindowContext.Provider>
   );
 }
 
 export function useFormDiagnostic() {
-  const context = useContext(FormDiagnosticContext);
+  const context = useContext(WindowContext);
 
   if (!context) {
     throw new Error(

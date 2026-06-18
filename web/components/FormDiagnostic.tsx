@@ -7,21 +7,21 @@ import { X } from "lucide-react";
 import { useEffect } from "react";
 import { Tokenkey } from "../hooks/TokenKey";
 import { useSubmitFormToken } from "@/hooks/useSubmitFormToken";
-import { useFormDiagnostic } from "@/hooks/WindowContext";
+import { useWindow } from "@/hooks/WindowContext";
 
 const FormDiagnostic = () => {
   const { handleSubmit, loading, error, success } = useSubmitFormToken();
-  const { window, closeWindow } = useFormDiagnostic();
+  const { isOpen, closeWindow } = useWindow();
 
   useEffect(() => {
-    document.body.style.overflow = window ? "hidden" : "auto";
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
 
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [window]);
+  }, [isOpen]);
 
-  if (!window) return null;
+  if (!isOpen) return null;
 
   return (
     <section className="fixed overflow-auto inset-0 bg-black/60 z-30 select-none flex justify-center items-center max-lg:items-start">

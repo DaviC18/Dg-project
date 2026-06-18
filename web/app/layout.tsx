@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Montserrat, Geist, Inter } from "next/font/google";
+import { Montserrat, Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { ptBR } from "@clerk/localizations";
+import { enUS } from "@clerk/localizations";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "next-themes";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -26,12 +25,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
-      lang="pt-BR"
+      lang="en-US"
       suppressHydrationWarning
       className={cn("font-sans", inter.variable)}
     >
       <body className={`${montserratSans.variable} antialiased`}>
-        <ClerkProvider localization={ptBR}>{children}</ClerkProvider>
+        <ClerkProvider localization={enUS}>{children}</ClerkProvider>
       </body>
     </html>
   );

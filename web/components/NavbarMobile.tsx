@@ -3,11 +3,11 @@
 // biome-ignore assist/source/organizeImports: <>
 import { BrainCircuit, Home, Library, Plus } from "lucide-react";
 import UserClerkMobile from "@/hooks/UserClerkMobile";
-import { useFormDiagnostic } from "@/hooks/WindowContext";
+import { useWindow } from "@/hooks/WindowContext";
 import Link from "next/link";
 
 const NavbarMobile = () => {
-  const { openWindow } = useFormDiagnostic();
+  const { openWindow } = useWindow();
 
   return (
     <div className="max-sm:flex hidden px-3 fixed z-10 bottom-5 left-0 w-full bg-cover justify-center items-center gap-2">

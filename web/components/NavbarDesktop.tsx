@@ -4,11 +4,11 @@
 import { Plus, Search } from "lucide-react";
 import Link from "next/link";
 import UserClerkDesktop from "@/hooks/UserClerkDesktop";
-import { useFormDiagnostic } from "@/hooks/WindowContext";
+import { useWindow } from "@/hooks/WindowContext";
 import { navLinks } from "@/app/(root)/constants";
 
 const NavbarDesktop = () => {
-  const { openWindow } = useFormDiagnostic();
+  const { openWindow } = useWindow();
 
   return (
     <header className="w-full flex items-center">

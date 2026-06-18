@@ -1,16 +1,18 @@
+/** biome-ignore-all assist/source/organizeImports: <> */
 import { SectionRefsProvider } from "@/hooks/useSectionRefs";
 import type { ReactNode } from "react";
-import { FormDiagnosticProvider } from "../../hooks/WindowContext";
-import NavbarMobile from "@/components/NavbarMobile";
+import { WindowProvider } from "../../hooks/WindowContext";
 import FormDiagnostic from "@/components/FormDiagnostic";
+import PreDiagnostic from "@/components/PreDiagnostic";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <SectionRefsProvider>
-      <FormDiagnosticProvider>
+      <WindowProvider>
         <FormDiagnostic />
+        <PreDiagnostic />
         {children}
-      </FormDiagnosticProvider>
+      </WindowProvider>
     </SectionRefsProvider>
   );
 }

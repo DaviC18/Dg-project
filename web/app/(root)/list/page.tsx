@@ -8,9 +8,11 @@ import NavbarMobile from "@/components/NavbarMobile";
 import Loader from "@/components/Loader"
 import { Search } from "lucide-react";
 import Error from "@/components/Error";
+import { useWindow } from "@/hooks/WindowContext";
 
 const Page = () => {
   const { data, loading, error } = usePreDiagnostics();
+  const { openWindow } = useWindow()
 
   return (
     <main className="min-h-screen bg-white text-slate-950">
@@ -60,15 +62,17 @@ const Page = () => {
         {!loading && !error && (
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
             {data.map((el) => (
-              <article
+              <button
+                type="button"
+                onClick={() => openWindow(el)}
                 key={el.id}
-                className="flex h-full cursor-pointer flex-col rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                className="flex h-full cursor-pointer flex-col justify-start text-start rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <h1 className="text-2xl font-semibold">{el.result.title}</h1>
                 <p className="mt-4 text-base leading-7 text-slate-600 line-clamp-7">
                   {el.result.summary}
                 </p>
-              </article>
+              </button>
             ))}
           </div>
         )}

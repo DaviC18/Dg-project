@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
-import type { PreDiagnostics } from "../app/types/preDiagnotics";
+import type { PreDiagnostics } from "../types/preDiagnotics";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
 

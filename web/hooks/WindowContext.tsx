@@ -1,49 +1,52 @@
 /** biome-ignore-all assist/source/organizeImports: <> */
-/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation> */
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {
+	createContext,
+	useContext,
+	useState,
+	type ReactNode,
+} from "react";
+
+export type ActiveWindow = "form" | "prediagnostic" | null;
 
 type WindowContextType = {
-  isOpen: boolean;
-  selectedPreDiagnostic: any | null;
-  openWindow: (item: any) => void;
-  closeWindow: () => void;
+	activeWindow: ActiveWindow;
+	openWindow: (window: ActiveWindow) => void;
+	closeWindow: () => void;
 };
 
-const WindowContext = createContext<WindowContextType | null>(
-  null,
-);
+const WindowContext = createContext<WindowContextType | null>(null);
 
 export function WindowProvider({ children }: { children: ReactNode }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedPreDiagnostic, setSelectedPreDiagnostic] = useState<any | null>(null);
+	// Guarda qual janela está aberta no momento.
+	const [activeWindow, setActiveWindow] = useState<ActiveWindow>(null);
 
-  const openWindow = (item: any) => {
-    setSelectedPreDiagnostic(item);
-    setIsOpen(true);
-  };
+	// Abre uma janela específica: form ou prediagnostic.
+	const openWindow = (window: ActiveWindow) => setActiveWindow(window);
 
-  const closeWindow = () => {
-    setIsOpen(false);
-    setSelectedPreDiagnostic(null);
-  };
+	// Fecha qualquer janela aberta.
+	const closeWindow = () => setActiveWindow(null);
 
-  return (
-    <WindowContext.Provider value={{ isOpen, openWindow, closeWindow, selectedPreDiagnostic }}>
-      {children}
-    </WindowContext.Provider>
-  );
+	return (
+		<WindowContext.Provider
+			value={{
+				activeWindow,
+				openWindow,
+				closeWindow,
+			}}
+		>
+			{children}
+		</WindowContext.Provider>
+	);
 }
 
 export function useWindow() {
-  const context = useContext(WindowContext);
+	const context = useContext(WindowContext);
 
-  if (!context) {
-    throw new Error(
-      "useWindow deve ser usado dentro de Window",
-    );
-  }
+	if (!context) {
+		throw new Error("useWindow deve ser usado dentro de WindowProvider");
+	}
 
-  return context;
+	return context;
 }

@@ -16,8 +16,13 @@ export const preDiagnostics = pgTable(
 		formId: uuid("form_id").notNull(),
 		userId: text("user_id").notNull(),
 		title: text().notNull(),
+		urgencyLevel: text().$type<"low" | "medium" | "urgent" | "life_threatening">().notNull(),
 		result: jsonb("result").notNull(),
 		model: text("model").notNull(),
+		analysisStatus: text("analysis_status")
+		.$type<"pending" | "processing" | "success" | "failed">()
+		.notNull()
+		.default("pending"),
 		createdAt: timestamp("created_at").defaultNow().notNull(),
 	},
 	(table) => ({

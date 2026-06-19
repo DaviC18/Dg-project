@@ -20,7 +20,7 @@ const preDiagnosticSchema = z.object({
   suggestionsToTheDoctor: z.array(z.string()),
   examsSuggested: z.array(z.string()),
   observations: z.array(z.string()),
-  urgencyLevel: z.enum(["low", "medium", "high"]),
+  urgencyLevel: z.enum(["low", "medium", "urgent", "life_threatening"]),
   safetyNotice: z.string(),
   nextStep: z.string(),
 });
@@ -40,10 +40,26 @@ export const PreDiagnostic = async (formData: {
 }): Promise<PreDiagnosticResult> => {
 	const startedAt = Date.now();
 	const prompt = `
-- Never present this as a diagnosis.
-- If emergency warning signs are present, set urgencyLevel to "high".
-- If urgencyLevel is "high", include a clear safetyNotice telling the user to seek immediate medical attention.
-- Keep the title neutral and non-diagnostic.
+- Never present this as a definitive diagnosis.
+- Keep the title neutral, objective, and non-diagnostic.
+
+- Include a field called "urgencyLevel" with ONLY one of the following values:
+  - "mild": Mild symptoms, no warning signs, routine medical follow-up recommended.
+  - "moderate": Symptoms require medical evaluation but do not suggest immediate danger.
+  - "urgent": Symptoms may indicate a serious condition and the patient should seek medical attention as soon as possible.
+  - "life_threatening": Strong signs of a potentially life-threatening condition requiring immediate emergency care.
+
+- Determine the urgencyLevel exclusively from the symptoms and warning signs provided by the patient.
+
+- Include a field called "safetyNotice".
+- If urgencyLevel is:
+  - "mild": safetyNotice may be null.
+  - "moderate": Provide brief guidance encouraging medical evaluation.
+  - "urgent": Clearly advise the patient to seek prompt medical attention.
+  - "life_threatening": Clearly instruct the patient to seek emergency medical care immediately or contact emergency services.
+
+- Never exaggerate the urgency level.
+- When information is insufficient, choose the safest reasonable assessment and mention the limitation in observations.
 
 Form data:
 ${JSON.stringify(

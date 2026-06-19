@@ -3,7 +3,7 @@
 "use client";
 
 import { useAuth } from "@clerk/nextjs";
-import type { SymptomsStatus } from "../app/types/status";
+import type { SymptomsStatus } from "../types/status";
 import { useState } from "react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");

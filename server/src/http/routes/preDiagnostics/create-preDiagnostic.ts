@@ -5,9 +5,7 @@ import { getAuth } from "@clerk/fastify";
 import { eq } from "drizzle-orm";
 import type { FastifyPluginCallbackZod } from "fastify-type-provider-zod";
 import { z } from "zod";
-
 import { db } from "../../../db/connections";
-import { forms } from "../../../db/schema/forms";
 import { preDiagnostics } from "../../../db/schema/preDiagnostics";
 import { PreDiagnostic } from "../../../services/gemini";
 
@@ -16,6 +14,9 @@ const bodySchema = z.object({
 });
 
 const MODEL = "gemini-3-flash-preview";
+
+type UrgencyLevel = "low" | "medium" | "urgent" | "life_threatening";
+
 
 export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 	app.post(
@@ -73,12 +74,19 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 				});
 			}
 
-			await db
-				.update(forms)
-				.set({
+			const [createdPreDiagnostic] = await db
+				.insert(preDiagnostics)
+				.values({
+					userId,
+					formId,
+					title: "Generating pre-diagnostic...",
+					urgencyLevel: "low",
+					model: MODEL,
+					result: {},
 					analysisStatus: "processing",
 				})
-				.where(eq(forms.id, formId));
+				.returning();
+
 
 			request.log.info({
 				event: "prediagnostic_creation_start",
@@ -87,25 +95,20 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 			});
 
 			try {
+				// Chama a IA com os dados do formulário.
 				const iaResults = await PreDiagnostic(form);
 
-				const [preDiagnostic] = await db
-					.insert(preDiagnostics)
-					.values({
-						userId,
-						formId,
-						title: iaResults.title,
-						model: MODEL,
-						result: iaResults,
-					})
-					.returning();
-
-				await db
-					.update(forms)
+				// Atualiza o mesmo registro com o resultado final.
+				const [updatedPreDiagnostic] = await db
+					.update(preDiagnostics)
 					.set({
+						title: iaResults.title,
+						urgencyLevel: iaResults.urgencyLevel as UrgencyLevel,
+						result: iaResults,
 						analysisStatus: "success",
 					})
-					.where(eq(forms.id, formId));
+					.where(eq(preDiagnostics.id, createdPreDiagnostic.id))
+					.returning();
 
 				request.log.info({
 					event: "prediagnostic_created",
@@ -114,14 +117,15 @@ export const createPreDiagnostic: FastifyPluginCallbackZod = (app) => {
 					durationMs: Date.now() - startedAt,
 				});
 
-				return reply.code(201).send(preDiagnostic);
+				return reply.code(201).send(updatedPreDiagnostic);
 			} catch (err) {
+				// Se a IA falhar, marca o registro como failed.
 				await db
-					.update(forms)
+					.update(preDiagnostics)
 					.set({
 						analysisStatus: "failed",
 					})
-					.where(eq(forms.id, formId));
+					.where(eq(preDiagnostics.id, createdPreDiagnostic.id));
 
 				request.log.error({
 					event: "prediagnostic_creation_failed",

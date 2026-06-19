@@ -64,7 +64,7 @@ const Page = () => {
             {data.map((el) => (
               <button
                 type="button"
-                onClick={() => openWindow(el)}
+                onClick={() => openWindow("prediagnostic")}
                 key={el.id}
                 className="flex h-full cursor-pointer flex-col justify-start text-start rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >

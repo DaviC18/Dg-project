@@ -11,17 +11,17 @@ import { useWindow } from "@/hooks/WindowContext";
 
 const FormDiagnostic = () => {
   const { handleSubmit, loading, error, success } = useSubmitFormToken();
-  const { isOpen, closeWindow } = useWindow();
+  const { activeWindow, closeWindow } = useWindow();
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "auto";
+    document.body.style.overflow = activeWindow ? "hidden" : "auto";
 
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [isOpen]);
+  }, [activeWindow]);
 
-  if (!isOpen) return null;
+  if (!activeWindow) return null;
 
   return (
     <section className="fixed overflow-auto inset-0 bg-black/60 z-30 select-none flex justify-center items-center max-lg:items-start">
@@ -252,11 +252,9 @@ const FormDiagnostic = () => {
                       required
                       disabled={loading}
                     />
-                    <div>
-                      <span>
-                        I authorize the use of my data for medical analysis and
-                        AI-assisted diagnosis.
-                      </span>
+                    <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+                      <strong>Attention:</strong> This analysis is preliminary and does not replace a medical evaluation.
+If you experience shortness of breath, severe pain, fainting, or significant worsening, seek medical attention immediately.
                     </div>
                   </div>
                 </div>

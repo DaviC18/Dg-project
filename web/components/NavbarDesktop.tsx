@@ -52,7 +52,7 @@ const NavbarDesktop = () => {
           </Link>
           <button
             type="button"
-            onClick={openWindow}
+            onClick={() => openWindow("form")}
             className="p-2 max-sm:hidden group text-inherit opacity-75 rounded-full cursor-pointer transition-all duration-300 hover:bg-slate-500/25 hover:opacity-100"
           >
             <Plus size={23} className="" />

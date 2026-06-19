@@ -34,7 +34,7 @@ const NavbarMobile = () => {
           <li className="w-1/5">
             <button
               type="button"
-              onClick={openWindow}
+              onClick={() => openWindow("form")}
               className="cursor-pointer w-9.5 h-9.5 bg-linear-to-br from-blue-500 to-cyan-400  shadow-xl text-center rounded-full "
             >
               <div className="w-full h-full flex justify-center items-center text-white">

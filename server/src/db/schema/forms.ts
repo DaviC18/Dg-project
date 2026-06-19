@@ -21,9 +21,5 @@ export const forms = pgTable("forms", {
 	seenByProfessional: boolean("seen_by_professional").notNull(),
 	seenByWho: text("seen_by_who"),
 	consent: boolean("consent").notNull(),
-	analysisStatus: text("analysis_status")
-		.$type<"pending" | "processing" | "success" | "failed">()
-		.notNull()
-		.default("pending"),
 	createdAt: timestamp("created_at").defaultNow().notNull(),
 });

@@ -11,17 +11,17 @@ import { useWindow } from "@/hooks/WindowContext";
 
 const FormDiagnostic = () => {
   const { handleSubmit, loading, error, success } = useSubmitFormToken();
-  const { activeWindow, closeWindow } = useWindow();
+  const { activeWindow, closeWindow } = useWindow(); 
 
   useEffect(() => {
-    document.body.style.overflow = activeWindow ? "hidden" : "auto";
+    document.body.style.overflow = activeWindow === "form" ? "hidden" : "auto";
 
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [activeWindow]);
 
-  if (!activeWindow) return null;
+  if (activeWindow !== "form") return null;
 
   return (
     <section className="fixed overflow-auto inset-0 bg-black/60 z-30 select-none flex justify-center items-center max-lg:items-start">

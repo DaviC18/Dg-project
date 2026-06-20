@@ -14,6 +14,30 @@ const Page = () => {
   const { data, loading, error } = usePreDiagnostics();
   const { openWindow } = useWindow()
 
+  const DataGrid = () => {
+  if (data.length === 1) {
+    return "grid-cols-1";
+  }
+
+  if (data.length === 2) {
+    return "grid-cols-1 lg:grid-cols-2";
+  }
+
+  return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
+};
+
+const widthGrid = () => {
+  if (data.length === 1) {
+    return "w-1/3";
+  }
+
+  if (data.length === 2) {
+    return "min-w-96 w-1/3";
+  }
+
+  return "w-";
+};
+
   return (
     <main className="min-h-screen bg-white text-slate-950">
       <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6">
@@ -54,19 +78,19 @@ const Page = () => {
         )}
 
         {error && (
-          <div className="my-5 flex items-center justify-center">
+          <div className="my-5 flex w- items-center justify-center">
             <Error />
           </div>
         )}
 
         {!loading && !error && (
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
+          <div className={`mt-12 grid place-items-center gap-6 ${DataGrid()} items-stretch`}>
             {data.map((el) => (
               <button
                 type="button"
                 onClick={() => openWindow("prediagnostic")}
                 key={el.id}
-                className="flex h-full cursor-pointer flex-col justify-start text-start rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                className={`flex h-full ${widthGrid()} cursor-pointer flex-col justify-start text-start rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md`}
               >
                 <h1 className="text-2xl font-semibold">{el.result.title}</h1>
                 <p className="mt-4 text-base leading-7 text-slate-600 line-clamp-7">

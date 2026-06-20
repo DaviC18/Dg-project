@@ -1,4 +1,5 @@
 /** biome-ignore-all assist/source/organizeImports: <> */
+/** biome-ignore-all lint/correctness/useJsxKeyInIterable: <explanation> */
 /** biome-ignore-all lint/a11y/noStaticElementInteractions: <> */
 /** biome-ignore-all lint/a11y/useKeyWithClickEvents: <> */
 "use client";
@@ -6,9 +7,11 @@
 import { X } from "lucide-react";
 import { useEffect } from "react";
 import { useWindow } from "@/hooks/WindowContext";
+import { usePreDiagnostics } from "@/hooks/usePreDiagnostics";
 
 const PreDiagnostic = () => {
 	const { activeWindow, closeWindow } = useWindow();
+	const {data} = usePreDiagnostics()
 
 	// Só abre quando a janela ativa for "prediagnostic".
 	useEffect(() => {
@@ -42,7 +45,9 @@ const PreDiagnostic = () => {
 
 				{/* Aqui você renderiza os dados do pré-diagnóstico selecionado depois */}
 				<div className="rounded-xl border border-dashed border-slate-300 p-4 text-slate-600">
-					Pre-diagnostic modal opened.
+					{data.map((el)=>(
+						<h1 key={el.id} className="text-2xl">{el.result.title}</h1>
+					))}
 				</div>
 			</div>
 		</section>

@@ -8,11 +8,14 @@ import NavbarMobile from "@/components/NavbarMobile";
 import Loader from "@/components/Loader"
 import { Search } from "lucide-react";
 import Error from "@/components/Error";
-import { useWindow } from "@/hooks/WindowContext";
+import { useWindow } from "@/hooks/WindowContextForm";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const { data, loading, error } = usePreDiagnostics();
   const { openWindow } = useWindow()
+
+  const router = useRouter()
 
   const DataGrid = () => {
   if (data.length === 1) {
@@ -24,18 +27,6 @@ const Page = () => {
   }
 
   return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
-};
-
-const widthGrid = () => {
-  if (data.length === 1) {
-    return "w-1/3";
-  }
-
-  if (data.length === 2) {
-    return "min-w-96 w-1/3";
-  }
-
-  return "w-";
 };
 
   return (
@@ -88,9 +79,9 @@ const widthGrid = () => {
             {data.map((el) => (
               <button
                 type="button"
-                onClick={() => openWindow("prediagnostic")}
+                onClick={() => router.push(`/pre-diagnostics/${el.id}`)}
                 key={el.id}
-                className={`flex h-full ${widthGrid()} cursor-pointer flex-col justify-start text-start rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md`}
+                className={`flex h-full ${data.length === 1 ? "w-1/3" : "w-full"} cursor-pointer flex-col justify-start text-start rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md`}
               >
                 <h1 className="text-2xl font-semibold">{el.result.title}</h1>
                 <p className="mt-4 text-base leading-7 text-slate-600 line-clamp-7">

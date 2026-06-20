@@ -7,7 +7,7 @@ import { X } from "lucide-react";
 import { useEffect } from "react";
 import { Tokenkey } from "../hooks/TokenKey";
 import { useSubmitFormToken } from "@/hooks/useSubmitFormToken";
-import { useWindow } from "@/hooks/WindowContext";
+import { useWindow } from "@/hooks/WindowContextForm";
 
 const FormDiagnostic = () => {
   const { handleSubmit, loading, error, success } = useSubmitFormToken();

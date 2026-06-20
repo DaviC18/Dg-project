@@ -1,11 +1,11 @@
 // biome-ignore assist/source/organizeImports: <>
 import { GoogleGenAI } from "@google/genai";
 import { env } from "../env";
-import { z } from "zod";
 import { loggerConfig } from "../lib/logger";
+import { z } from "zod";
 import pino from "pino";
 
-const logger = pino(loggerConfig);
+const logger = pino(loggerConfig)
 
 const gemini = new GoogleGenAI({
 	apiKey: env.GEMINI_API_KEY,
@@ -13,16 +13,23 @@ const gemini = new GoogleGenAI({
 
 const model = "gemini-3-flash-preview";
 
+const URGENCY_LEVELS = [
+	"low",
+	"medium",
+	"urgent",
+	"life_threatening",
+] as const;
+
 const preDiagnosticSchema = z.object({
-  title: z.string().min(1).max(80),
-  summary: z.string(),
-  alerts: z.array(z.string()),
-  suggestionsToTheDoctor: z.array(z.string()),
-  examsSuggested: z.array(z.string()),
-  observations: z.array(z.string()),
-  urgencyLevel: z.enum(["low", "medium", "urgent", "life_threatening"]),
-  safetyNotice: z.string(),
-  nextStep: z.string(),
+	title: z.string().min(1).max(80),
+	summary: z.string().min(1),
+	alerts: z.array(z.string()),
+	suggestionsToTheDoctor: z.array(z.string()),
+	examsSuggested: z.array(z.string()),
+	observations: z.array(z.string()),
+	urgencyLevel: z.enum(URGENCY_LEVELS),
+	safetyNotice: z.string().nullable(),
+	nextStep: z.string().min(1),
 });
 
 type PreDiagnosticResult = z.infer<typeof preDiagnosticSchema>;
@@ -39,38 +46,46 @@ export const PreDiagnostic = async (formData: {
 	consent: boolean;
 }): Promise<PreDiagnosticResult> => {
 	const startedAt = Date.now();
-	const prompt = `
-- Never present this as a definitive diagnosis.
-- Keep the title neutral, objective, and non-diagnostic.
 
-- Include a field called "urgencyLevel" with ONLY one of the following values:
-  - "mild": Mild symptoms, no warning signs, routine medical follow-up recommended.
-  - "moderate": Symptoms require medical evaluation but do not suggest immediate danger.
-  - "urgent": Symptoms may indicate a serious condition and the patient should seek medical attention as soon as possible.
-  - "life_threatening": Strong signs of a potentially life-threatening condition requiring immediate emergency care.
-
-- Determine the urgencyLevel exclusively from the symptoms and warning signs provided by the patient.
-
-- Include a field called "safetyNotice".
-- If urgencyLevel is:
-  - "mild": safetyNotice may be null.
-  - "moderate": Provide brief guidance encouraging medical evaluation.
-  - "urgent": Clearly advise the patient to seek prompt medical attention.
-  - "life_threatening": Clearly instruct the patient to seek emergency medical care immediately or contact emergency services.
-
-- Never exaggerate the urgency level.
-- When information is insufficient, choose the safest reasonable assessment and mention the limitation in observations.
-
-Form data:
-${JSON.stringify(
-	{
+	const normalizedFormData = {
 		...formData,
 		hadBefore: formData.hadBefore ? "yes" : "no",
 		seenByProfessional: formData.seenByProfessional ? "yes" : "no",
-	},
-	null,
-	2
-)}
+	};
+
+	const prompt = `
+You are a clinical assistant. Analyze the form below and generate a PRE-DIAGNOSIS for a physician.
+
+Rules:
+- Never present this as a definitive diagnosis.
+- Keep the title neutral, objective, and non-diagnostic.
+- Use at most 8 words for the title.
+- Do not use diagnosis names in the title.
+- Return ONLY valid JSON.
+- Include exactly these fields:
+  - title
+  - summary
+  - alerts
+  - suggestionsToTheDoctor
+  - examsSuggested
+  - observations
+  - urgencyLevel
+  - safetyNotice
+  - nextStep
+- urgencyLevel must be exactly one of:
+  - low
+  - medium
+  - urgent
+  - life_threatening
+- safetyNotice:
+  - may be null for low
+  - should be brief for medium
+  - should clearly advise prompt care for urgent
+  - should clearly advise emergency care for life_threatening
+- If information is insufficient, choose the safest reasonable assessment and mention the limitation in observations.
+
+Form data:
+${JSON.stringify(normalizedFormData, null, 2)}
 `;
 
 	try {
@@ -83,6 +98,12 @@ ${JSON.stringify(
 			},
 		});
 
+		if (!response.text) {
+			throw new Error("Gemini returned empty response");
+		}
+
+		const parsed = preDiagnosticSchema.parse(JSON.parse(response.text));
+
 		logger.info({
 			event: "ai_generation",
 			model,
@@ -90,11 +111,7 @@ ${JSON.stringify(
 			status: "success",
 		});
 
-		if (!response.text) {
-			throw new Error("Gemini returned empty response");
-		}
-
-		return preDiagnosticSchema.parse(JSON.parse(response.text));
+		return parsed;
 	} catch (err) {
 		logger.error({
 			event: "ai_generation",
@@ -110,6 +127,7 @@ ${JSON.stringify(
 
 export const generateEmbeddings = async (text: string) => {
 	const startedAt = Date.now();
+
 	try {
 		const response = await gemini.models.embedContent({
 			model: "gemini-embedding-2",
@@ -119,18 +137,18 @@ export const generateEmbeddings = async (text: string) => {
 			},
 		});
 
+		const values = response.embeddings?.[0].values;
+
+		if (!values) {
+			throw new Error("It was not possible to generate the embeddings.");
+		}
+
 		logger.info({
 			event: "embedding_generation",
 			model: "gemini-embedding-2",
 			durationMs: Date.now() - startedAt,
 			status: "success",
 		});
-
-		const values = response.embeddings?.[0].values;
-
-		if (!values) {
-			throw new Error("It was not possible to generate the embeddings.");
-		}
 
 		return values;
 	} catch (err) {

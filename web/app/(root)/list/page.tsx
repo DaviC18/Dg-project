@@ -8,7 +8,7 @@ import { Search } from "lucide-react";
 import Error from "@/components/Error";
 import { useRouter } from "next/navigation";
 
-export const ListPage = () => {
+const ListPage = () => {
   const { data, loading, error } = usePreDiagnostics();
 
   const router = useRouter()
@@ -86,3 +86,5 @@ export const ListPage = () => {
     </main>
   );
 };
+
+export default ListPage;

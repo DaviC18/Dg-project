@@ -15,6 +15,11 @@ const navLinks = [
     title: "IA",
     link: "http://localhost:3000/ia",
   },
+  {
+    id: "list",
+    title: "List",
+    link: "http://localhost:3000/list"
+  }
 ];
 
 const steps = [

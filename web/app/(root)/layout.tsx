@@ -5,6 +5,7 @@ import { WindowProvider } from "../../hooks/WindowContextForm";
 import FormDiagnostic from "@/components/FormDiagnostic";
 import NavbarDesktop from "@/components/NavbarDesktop";
 import NavbarMobile from "@/components/NavbarMobile";
+import Footer from "@/components/Footer";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -14,6 +15,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <NavbarDesktop />
         <NavbarMobile />
         {children}
+        <Footer />
       </WindowProvider>
     </SectionRefsProvider>
   );

@@ -9,7 +9,7 @@ const envSchema = z.object({
 	NODE_ENV: z
 		.enum(["development", "production", "test"])
 		.default("development"),
-	PORT: z.coerce.number().default(5234),
+	PORT: z.coerce.number().default(3333),	
 	CLERK_SECRET_KEY: z.string().min(1),
 	CLERK_PUBLISHABLE_KEY: z.string().min(1),
 	GEMINI_API_KEY: z.string().min(1),

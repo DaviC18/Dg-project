@@ -17,6 +17,8 @@ import { createPreDiagnostic } from "./http/routes/preDiagnostics/create-preDiag
 import { loggerConfig } from "./lib/logger";
 import { getIdPreDiagnostic } from "./http/routes/preDiagnostics/get-id-preDiagnostic";
 
+const port = Number(process.env.PORT) || 3333;
+
 const app = fastify({
 	logger: loggerConfig,
 }).withTypeProvider<ZodTypeProvider>();
@@ -54,9 +56,10 @@ app.register(getForm);
 app.register(getPreDiagnostic);
 app.register(getIdPreDiagnostic)
 
-app.listen({ port: env.PORT || 3333 }, (err) => {
+app.listen({port, host: "0.0.0.0"}, (err, address) => {
 	if (err) {
 		app.log.error(err);
 		process.exit(1);
 	}
+	app.log.info(`Server Running at ${address}`)
 });

@@ -4,7 +4,6 @@
 
 import { usePreDiagnostics } from "@/hooks/usePreDiagnostics";
 import Loader from "@/components/Loader"
-import { Search } from "lucide-react";
 import Error from "@/components/Error";
 import { useRouter } from "next/navigation";
 

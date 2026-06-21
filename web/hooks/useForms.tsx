@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
-import type { PreDiagnostics } from "../app/types/preDiagnotics";
+import type { PreDiagnostics } from "@/types/preDiagnotics";
 
 export function useForms() {
   const { getToken, isLoaded, isSignedIn } = useAuth();

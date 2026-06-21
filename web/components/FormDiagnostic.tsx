@@ -29,8 +29,7 @@ const FormDiagnostic = () => {
 
       <div className="absolute group z-50 w-3/4 px-7 pt-4 pb-7.5 max-lg:my-5 bg-[#f4f4f4] rounded-2xl flex flex-col justify-between gap-5">
         <div className="w-full flex justify-end items-center">
-          <button onClick={closeWindow} type="button" className="cursor-pointer">
-            {error && (
+          {error && (
               <div
                 role="alert"
                 className="rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800"
@@ -47,6 +46,7 @@ const FormDiagnostic = () => {
                 {success}
               </div>
             )}
+          <button onClick={closeWindow} type="button" className="cursor-pointer">
             <X size={30} className="text-gray-700" />
           </button>
         </div>

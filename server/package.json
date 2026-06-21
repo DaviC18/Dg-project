@@ -38,6 +38,7 @@
     "db:seed": "tsx src/db/seed.ts",
     "start": "node dist/server.js",
     "build": "tsup src/server.ts --format esm --platform node --target node22 --out-dir dist --clean",
+    "tsup": "...",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "dev": "tsx watch src/server.ts",

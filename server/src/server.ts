@@ -30,10 +30,17 @@ app.addHook("onResponse", async (request, reply) => {
 	});
 });
 
+const allowedOrigins: string[] = [
+	"http://localhost:3000",
+	"http://localhost:5173",
+	process.env.FRONTEND_URL,
+].filter((origin): origin is string => Boolean(origin));
+
 app.register(fastifyCors, {
-	origin: ["http://localhost:3000", "http://localhost:5173"],
+	origin: allowedOrigins,
 	allowedHeaders: ["Content-Type", "Authorization"],
 	methods: ["GET", "POST", "OPTIONS"],
+	credentials: true,
 });
 
 app.register(fastifyMultipart);

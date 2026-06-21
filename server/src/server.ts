@@ -17,7 +17,6 @@ import { createPreDiagnostic } from "./http/routes/preDiagnostics/create-preDiag
 import { loggerConfig } from "./lib/logger";
 import { getIdPreDiagnostic } from "./http/routes/preDiagnostics/get-id-preDiagnostic";
 
-const port = Number(process.env.PORT) || 3333;
 
 const app = fastify({
 	logger: loggerConfig,
@@ -56,10 +55,27 @@ app.register(getForm);
 app.register(getPreDiagnostic);
 app.register(getIdPreDiagnostic)
 
-app.listen({port, host: "0.0.0.0"}, (err, address) => {
-	if (err) {
+const host = "0.0.0.0";
+const port = Number(process.env.PORT) || 3333;
+
+async function start() {
+	try {
+		console.log(`[BOOT] Starting server on ${host}:${port}`);
+		console.log(`[BOOT] NODE_ENV=${process.env.NODE_ENV}`);
+		console.log(`[BOOT] PORT=${process.env.PORT}`);
+
+		const address = await app.listen({
+			port,
+			host,
+		});
+
+		app.log.info(`Server running at ${address}`);
+		console.log(`[BOOT] Server running at ${address}`);
+	} catch (err) {
 		app.log.error(err);
+		console.error("[BOOT] Failed to start server:", err);
 		process.exit(1);
 	}
-	app.log.info(`Server Running at ${address}`)
-});
+}
+
+start();

@@ -36,6 +36,7 @@
   "scripts": {
     "db:seed": "tsx src/db/seed.ts",
     "start": "tsx src/server.ts",
+    "build": "tsc",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "dev": "tsx watch src/server.ts",

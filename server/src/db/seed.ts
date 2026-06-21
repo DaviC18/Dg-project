@@ -1,14 +1,18 @@
-// biome-ignore assist/source/organizeImports: <>
+// biome-ignore assist/source/organizeImports: <drizzle-seed>
+/** biome-ignore-all lint/style/noNestedTernary: <explanation> */
 import { db, sql } from "./connections.js";
 import { forms } from "./schema/forms.js";
-import { reset, seed } from "drizzle-seed";
 import { preDiagnostics } from "./schema/preDiagnostics.js";
+import { reset, seed } from "drizzle-seed";
+
+type UrgencyLevel = "low" | "medium" | "urgent" | "life_threatening";
 
 async function main() {
-	// limpa apenas as duas tabelas que vamos seedar
+	// limpa as tabelas antes de seedar
 	await reset(db, { forms, preDiagnostics });
 
-	await seed(db, { forms, preDiagnostics }).refine((f) => ({
+	// seed da tabela forms
+	await seed(db, { forms }).refine((f) => ({
 		forms: {
 			count: 9,
 			columns: {
@@ -20,9 +24,9 @@ async function main() {
 				}),
 				symptomsStatus: f.string(),
 				painLevel: f.int(),
-				hadBefore: f.string(),
+				hadBefore: f.boolean(),
 				hadBeforeWhen: f.string(),
-				seenByProfessional: f.string(),
+				seenByProfessional: f.boolean(),
 				seenByWho: f.string(),
 				consent: f.boolean(),
 			},
@@ -35,37 +39,45 @@ async function main() {
 		throw new Error("Nenhum form foi criado.");
 	}
 
+	// seed da tabela preDiagnostics
 	await db.insert(preDiagnostics).values(
-		formsTable.map((f) => ({
-			formId: f.id,
-			userId: f.userId,
-			model: "gemini-3-flash-preview ",
-			result: {
-				summary: `Patient reports general symptoms. ${f.symptomsDescription}`,
-				alerts:
-					f.painLevel > 7
-						? ["Intense pain reported"]
-						: ["No critical warnings apparent."],
-				suggestionsToTheDoctor: [
-					"Evaluate complete medical history.",
-					"Correlate symptoms with physical examination.",
-				],
-				examsSuggested:
-					f.painLevel > 5
-						? ["Complete blood count (CBC), Imaging test"]
-						: ["Clinical observation"],
-				observations: [
-					"Preliminary diagnosis generated automatically",
-					"Does not replace medical evaluation",
-				],
-			},
-		}))
+	    formsTable.map((f) => {
+	        const urgencyLevel: UrgencyLevel =
+	            f.painLevel >= 9
+	                ? "life_threatening"
+	                : f.painLevel >= 7
+	                    ? "urgent"
+	                    : f.painLevel >= 4
+	                        ? "medium"
+	                        : "low";
+
+	        return {
+	            formId: f.id,
+	            userId: f.userId,
+	            title: "Pré-diagnóstico automático",
+	            urgencyLevel,
+	            model: "gemini-3-flash-preview",
+	            result: {
+	                summary: `Paciente relata sintomas gerais: ${f.symptomsDescription}`,
+	                alerts:
+	                    f.painLevel >= 7
+	                        ? ["Dor intensa relatada"]
+	                        : ["Sem alertas críticos aparentes"],
+	                suggestionsToTheDoctor: [
+	                    "Avaliar histórico clínico completo",
+	                ],
+	                examsSuggested: [],
+	                observations: [],
+	            },
+	            analysisStatus: "pending" as const,
+	        };
+	    })
 	);
 
 	await sql.end();
 }
 
 main().catch((err) => {
-	console.log(err);
+	console.error(err);
 	process.exit(1);
 });

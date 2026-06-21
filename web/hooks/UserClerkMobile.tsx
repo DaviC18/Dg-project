@@ -32,7 +32,7 @@ const UserClerkMobile = ({ children }: { children: ReactNode }) => {
   } else {
     return (
       <div className="w-9 h-9 flex flex-col items-center justify-center text-inherit rounded-full cursor-pointer transition-all duration-300 ">
-        <SignInButton>
+        <SignInButton mode="modal">
           <div>
             <UserRound />
           </div>

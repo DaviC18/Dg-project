@@ -9,22 +9,22 @@ export default function Footer() {
 	const year = useMemo(() => new Date().getFullYear(), []);
 
 	return (
-		<footer className="border-t border-slate-200 bg-slate-950">
-			<div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-10 lg:flex-row lg:items-center lg:justify-between">
-				<div className="max-w-md space-y-3">
-					<div className="flex items-center gap-2">
-						<ShieldAlert className="h-5 w-5 text-cyan-600" />
-						<h2 className="text-lg font-semibold text-white">
+		<footer className="border-t border-slate-200 bg-slate-100 sm:pb-0 pb-12">
+			<div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-10 place-items-center lg:flex-row lg:items-center lg:justify-between">
+				<div className="max-w-md lg:text-start text-center space-y-3">
+					<div className="flex lg:justify-start justify-center items-center gap-2">
+						<ShieldAlert className="h-5 w-5 text-cyan-500" />
+						<h2 className="text-lg font-semibold text-slate-950">
 							Doctor Genesis
 						</h2>
 					</div>
 
-					<p className="text-sm leading-6 text-slate-50">
+					<p className="text-sm leading-6 text-slate-950">
 						AI-assisted clinical pre-diagnosis platform designed to help with
 						triage support, structured intake, and case organization.
 					</p>
 
-					<p className="text-xs leading-5 text-slate-50">
+					<p className="text-xs leading-5 text-slate-950">
 						This product does not replace medical evaluation, diagnosis, or
 						emergency care.
 					</p>
@@ -32,10 +32,10 @@ export default function Footer() {
 
 				<div className="grid grid-cols-2 gap-8 sm:grid-cols-2">
 					<div className="space-y-3">
-						<h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-50">
+						<h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-950">
 							Product
 						</h3>
-						<ul className="space-y-2 text-sm text-slate-50">
+						<ul className="space-y-2 text-sm text-slate-950">
 							<li>
 								<Link href="/" className="transition hover:text-cyan-600">
 									Home
@@ -59,10 +59,10 @@ export default function Footer() {
 						</ul>
 					</div>
 					<div className="space-y-3">
-						<h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-50">
+						<h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-950">
 							Project
 						</h3>
-						<ul className="space-y-2 text-sm text-slate-50">
+						<ul className="space-y-2 text-sm text-slate-950">
 							<li>
 								<a
 									href="https://github.com/DaviC18/Dg-project"
@@ -74,10 +74,10 @@ export default function Footer() {
 								</a>
 							</li>
 							<li>
-								<span className="text-slate-50">v1.0</span>
+								<span className="text-slate-950">v1.0</span>
 							</li>
 							<li>
-								<span className="text-slate-50">{year}</span>
+								<span className="text-slate-950">{year}</span>
 							</li>
 						</ul>
 					</div>

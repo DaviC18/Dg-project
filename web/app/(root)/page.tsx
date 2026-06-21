@@ -10,7 +10,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-white text-slate-950 border-blue-500">
       <section className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start justify-center gap-12 px-6 py-10 lg:grid-cols-2 lg:py-10">
         <div className="space-y-8">
-          <p className="text-sm uppercase tracking-[0.35em] text-cyan-500">
+          <p className="text-sm uppercase max-sm:text-center tracking-[0.35em] text-cyan-500">
             Pre-diagnosis assistant
           </p>
 
@@ -44,19 +44,21 @@ export default function HomePage() {
         </div>
 
         <div className="flex flex-col justify-center items-end lg:justify-end">
-          <div>
-            <div className="rounded-4xl border border-slate-950/10 bg-slate-950/5 p-6 shadow-2xl shadow-cyan-950/30">
-            <Image
-              src={DG}
-              alt="Doctor Genesis"
-              width={420}
-              height={420}
-              priority
-              className="h-auto w-full max-w-md"
-            />
+          <div className="w-full flex justify-center">
+            <div className="max-sm:flex  justify-center">
+              <div className="rounded-4xl flex justify-center  border border-slate-950/10 bg-slate-950/5 p-6 shadow-2xl shadow-cyan-950/30">
+                <Image
+                  src={DG}
+                  alt="Doctor Genesis"
+                  width={420}
+                  height={420}
+                  priority
+                  className="h-auto w-full max-w-md"
+                />
+              </div>
+            </div>
           </div>
-          </div>
-          <div className="grid gap-4 pt-4 sm:grid-cols-3">
+          <div className="grid sm:w-auto w-full gap-4 pt-4 sm:grid-cols-3">
             {details.map((item) => (
               <article
                 key={item.title}

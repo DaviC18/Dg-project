@@ -26,7 +26,7 @@ const UserClerkDesktop = () => {
   }
 
   return (
-    <SignInButton>
+    <SignInButton mode="modal">
       <button
         type="button"
         className="w-9 h-9 flex items-center w- justify-center  text-inherit rounded-full cursor-pointer transition-all duration-300 hover:bg-slate-500/25"

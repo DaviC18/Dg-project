@@ -38,6 +38,9 @@ const NavbarDesktop = () => {
         </div>
 
         <figure className="relative max-sm:w-1/2 w-1/3 flex items-center justify-end gap-2">
+          <Link href={`/list`} className="p-2 group sm:hidden text-inherit opacity-75 rounded-full cursor-pointer transition-all duration-300 hover:bg-slate-500/25 hover:opacity-100">
+            <Search size={23}/>
+          </Link>
           <button
             type="button"
             onClick={() => openWindow("form")}

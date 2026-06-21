@@ -47,6 +47,7 @@ app.get("/", async (request) => {
 });
 
 app.register(clerkPlugin, {
+	publishableKey: env.CLERK_PUBLISHABLE_KEY,
 	secretKey: env.CLERK_SECRET_KEY,
 });
 app.register(createForm);

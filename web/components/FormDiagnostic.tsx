@@ -28,11 +28,11 @@ const FormDiagnostic = () => {
       <div onClick={closeWindow} className="absolute z-40 w-full h-full" />
 
       <div className="absolute group z-50 w-3/4 px-7 pt-4 pb-7.5 max-lg:my-5 bg-[#f4f4f4] rounded-2xl flex flex-col justify-between gap-5">
-        <div className="w-full flex justify-end items-center">
+        <div className="w-full flex-row flex justify-between gap-5 items-center">
           {error && (
               <div
                 role="alert"
-                className="rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800"
+                className="w-full rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800"
               >
                 {error}
               </div>
@@ -41,12 +41,12 @@ const FormDiagnostic = () => {
             {success && (
               <div
                 role="status"
-                className="rounded-lg border border-green-300 bg-green-50 px-4 py-3 text-sm text-green-800"
+                className=" w-full rounded-lg border border-green-300 bg-green-50 px-4 py-3 text-sm text-green-800"
               >
                 {success}
               </div>
             )}
-          <button onClick={closeWindow} type="button" className="cursor-pointer">
+          <button onClick={closeWindow} type="button" className=" cursor-pointer">
             <X size={30} className="text-gray-700" />
           </button>
         </div>

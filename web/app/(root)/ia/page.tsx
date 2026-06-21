@@ -1,29 +1,8 @@
-import NavbarDesktop from "@/components/NavbarDesktop";
-import NavbarMobile from "@/components/NavbarMobile";
-
-const cards = [
-  {
-    title: "Input",
-    text: "The patient form is sent to the backend after authentication and consent validation.",
-  },
-  {
-    title: "Processing",
-    text: "The backend looks up the form, sends the clinical data to Gemini, and waits for a structured response.",
-  },
-  {
-    title: "Output",
-    text: "The IA returns summary, alerts, suggested exams, clinical suggestions, and observations.",
-  },
-];
+import { cards } from "../constants";
 
 export default function IaPage() {
   return (
     <main className="min-h-screen bg-white text-slate-950">
-      <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6">
-        <NavbarDesktop />
-        <NavbarMobile />
-      </header>
-
       <section className="mx-auto w-full max-w-7xl px-6 py-10 lg:py-16">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm uppercase tracking-[0.35em] text-cyan-600">

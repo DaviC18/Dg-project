@@ -8,10 +8,12 @@ export type PreDiagnostics = {
     title: string;
     summary: string;
     alerts: string[];
-    urgencyLevel: string[]
     suggestionsToTheDoctor: string[];
     examsSuggested: string[];
     observations: string[];
+    urgencyLevel: "low" | "medium" | "urgent" | "life_threatening";
+    safetyNotice: string;
+    nextStep: string
   };
   form: {
     id: string;

@@ -15,6 +15,7 @@ import { getPreDiagnostic } from "./http/routes/preDiagnostics/get-preDiagnostic
 import { clerkPlugin } from "@clerk/fastify";
 import { createPreDiagnostic } from "./http/routes/preDiagnostics/create-preDiagnostic";
 import { loggerConfig } from "./lib/logger";
+import { getIdPreDiagnostic } from "./http/routes/preDiagnostics/get-id-preDiagnostic";
 
 const app = fastify({
 	logger: loggerConfig,
@@ -51,6 +52,7 @@ app.register(createForm);
 app.register(createPreDiagnostic);
 app.register(getForm);
 app.register(getPreDiagnostic);
+app.register(getIdPreDiagnostic)
 
 app.listen({ port: env.PORT || 3333 }, (err) => {
 	if (err) {

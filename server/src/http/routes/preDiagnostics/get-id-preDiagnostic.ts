@@ -1,4 +1,4 @@
-/** biome-ignore-all lint/suspicious/useAwait: <explanation> */
+/** biome-ignore-all lint/suspicious/useAwait: <> */
 import { getAuth } from "@clerk/fastify";
 import type { FastifyPluginCallbackZod } from "fastify-type-provider-zod";
 import { db } from "../../../db/connections";

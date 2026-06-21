@@ -1,33 +1,8 @@
-import NavbarDesktop from "@/components/NavbarDesktop";
-import NavbarMobile from "@/components/NavbarMobile";
-
-const steps = [
-  {
-    title: "1. Patient intake",
-    text: "The patient fills out the symptom form with history, duration, and context.",
-  },
-  {
-    title: "2. Secure storage",
-    text: "The backend validates the data and stores the form with the authenticated user.",
-  },
-  {
-    title: "3. AI analysis",
-    text: "Gemini reads the form and produces a structured pre-diagnosis in JSON.",
-  },
-  {
-    title: "4. Clinical review",
-    text: "The result is used only as support. The doctor keeps the final decision.",
-  },
-];
+import { steps } from "../constants";
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-white text-slate-950">
-      <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6">
-        <NavbarDesktop />
-        <NavbarMobile />
-      </header>
-
       <section className="mx-auto w-full max-w-7xl px-6 py-10 lg:py-16 container">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm uppercase tracking-[0.35em] text-cyan-600">

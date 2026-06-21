@@ -8,7 +8,7 @@ import {
 	type ReactNode,
 } from "react";
 
-export type ActiveWindow = "form" | "prediagnostic" | null;
+export type ActiveWindow = "form" | null;
 
 type WindowContextType = {
 	activeWindow: ActiveWindow;

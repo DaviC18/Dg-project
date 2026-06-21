@@ -3,17 +3,13 @@
 "use client";
 
 import { usePreDiagnostics } from "@/hooks/usePreDiagnostics";
-import NavbarDesktop from "@/components/NavbarDesktop";
-import NavbarMobile from "@/components/NavbarMobile";
 import Loader from "@/components/Loader"
 import { Search } from "lucide-react";
 import Error from "@/components/Error";
-import { useWindow } from "@/hooks/WindowContextForm";
 import { useRouter } from "next/navigation";
 
-const Page = () => {
+export const ListPage = () => {
   const { data, loading, error } = usePreDiagnostics();
-  const { openWindow } = useWindow()
 
   const router = useRouter()
 
@@ -31,11 +27,6 @@ const Page = () => {
 
   return (
     <main className="min-h-screen bg-white text-slate-950">
-      <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6">
-        <NavbarDesktop />
-        <NavbarMobile />
-      </header>
-
       <section className="mx-auto w-full max-w-7xl px-6 py-10 lg:py-16">
         <div className="space-y-8">
           <p className="text-center text-sm uppercase tracking-[0.35em] text-cyan-600">
@@ -79,7 +70,7 @@ const Page = () => {
             {data.map((el) => (
               <button
                 type="button"
-                onClick={() => router.push(`/pre-diagnostics/${el.id}`)}
+                onClick={() => router.push(`/preDiagnostic/${el.id}`)}
                 key={el.id}
                 className={`flex h-full ${data.length === 1 ? "w-1/3" : "w-full"} cursor-pointer flex-col justify-start text-start rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md`}
               >
@@ -95,5 +86,3 @@ const Page = () => {
     </main>
   );
 };
-
-export default Page;

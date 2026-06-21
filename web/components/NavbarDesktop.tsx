@@ -11,8 +11,8 @@ const NavbarDesktop = () => {
   const { openWindow } = useWindow();
 
   return (
-    <header className="w-full flex items-center">
-      <nav className="w-full flex items-center justify-between max-w-360 mx-auto px-4 sm:px-6 lg:px-8 ">
+    <header className=" w-full bg-transparent flex items-center mx-auto max-w-7xl justify-between px-6 py-6">
+      <nav className="w-full flex items-center justify-between max-w-360 mx-auto">
         <div className="w-1/3 max-sm:w-1/2 max-sm:flex max-sm:justify-start max-sm:items-center">
           <Link href="/">
             <span className="text-3xl font-semibold text-inherit ">DG</span>

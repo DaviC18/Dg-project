@@ -20,7 +20,7 @@ const NavbarDesktop = () => {
         </div>
 
         <div className="max-[640px]:hidden w-1/3 menu flex items-center justify-center">
-          <ul className="flex w-62.5 justify-between items-center gap-3">
+          <ul className="flex justify-between items-center gap-3">
             {navLinks.map((el) => (
               <li
                 key={el.id}

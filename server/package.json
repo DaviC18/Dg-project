@@ -28,6 +28,7 @@
     "@types/pg": "^8.20.0",
     "drizzle-kit": "^0.31.10",
     "drizzle-seed": "^0.3.1",
+    "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "ultracite": "^7.6.2"
@@ -35,8 +36,8 @@
   "name": "dg-server",
   "scripts": {
     "db:seed": "tsx src/db/seed.ts",
-    "start": "tsx src/server.ts",
-    "build": "tsc",
+    "start": "node dist/server.js",
+    "build": "tsup src/server.ts --format esm --platform node --target node22 --out-dir dist --clean",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "dev": "tsx watch src/server.ts",

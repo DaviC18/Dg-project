@@ -34,7 +34,8 @@ const ListPage = () => {
         </div>
 
         {loading && (
-          <div className="mt-7 flex items-center justify-center">
+          <div className="mt-7 flex flex-col place-items-center gap-5 justify-center">
+            <p className="text-xl text-slate-950 text-center font-semibold">Please wait a few seconds to access your pre-diagnosis.</p>
             <Loader />
           </div>
         )}

@@ -37,7 +37,7 @@ export default function Footer() {
 						</h3>
 						<ul className="space-y-2 text-sm text-slate-950">
 							<li>
-								<Link href="/" className="transition hover:text-cyan-600">
+								<Link href="/" translate="no" className="transition hover:text-cyan-600">
 									Home
 								</Link>
 							</li>
@@ -47,7 +47,7 @@ export default function Footer() {
 								</Link>
 							</li>
 							<li>
-								<Link href="/ia" className="transition hover:text-cyan-600">
+								<Link href="/ia" translate="no" className="transition hover:text-cyan-600">
 									AI
 								</Link>
 							</li>

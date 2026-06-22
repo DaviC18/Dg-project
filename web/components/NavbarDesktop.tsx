@@ -5,10 +5,12 @@ import { Plus, Search } from "lucide-react";
 import Link from "next/link";
 import UserClerkDesktop from "@/hooks/UserClerkDesktop";
 import { useWindow } from "@/hooks/WindowContextForm";
-import { navLinks } from "@/app/(root)/constants";
+import { navLinksDesktop } from "@/app/(root)/constants";
+import { usePathname } from "next/navigation";
 
 const NavbarDesktop = () => {
   const { openWindow } = useWindow();
+  const pathname = usePathname()
 
   return (
     <header className=" w-full bg-transparent flex items-center mx-auto max-w-7xl justify-between px-6 py-6">
@@ -21,19 +23,25 @@ const NavbarDesktop = () => {
 
         <div className="max-[640px]:hidden w-1/3 menu flex items-center justify-center">
           <ul className="flex justify-between items-center gap-3">
-            {navLinks.map((el) => (
-              <li
+            {navLinksDesktop.map((el) => {
+              const isActive =
+              el.link === "/"
+                ? pathname === "/"
+                : pathname.startsWith(el.link);
+              return (
+                <li
                 key={el.id}
                 className="w-1/3 flex justify-center items-center text-inherit opacity-75 px-3.5 py-0.5 rounded-full hover:bg-slate-500/25 hover:opacity-100 duration-200 all ease-in"
               >
                 <Link
-                  className="w-full flex justify-center" translate={el.id === "home" || el.id === "ai" ? "no" : "yes"}
+                  className={`w-full flex justify-center ${isActive ? "text-[#2b7fff] border-b-2 border-[#2b7fff]" : "text-slate-950"}`} translate={el.id === "home" || el.id === "ai" ? "no" : "yes"}
                   href={`/${el.id === "home" ? "/" : el.id}`}
                 >
                   {el.title}
                 </Link>
               </li>
-            ))}
+              )
+          })}
           </ul>
         </div>
 

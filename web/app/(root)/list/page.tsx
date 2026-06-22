@@ -30,7 +30,7 @@ const ListPage = () => {
       <section className="mx-auto w-full max-w-7xl px-6 py-10 lg:py-16">
         <div className="space-y-8">
           <p className="text-center text-lg uppercase tracking-[0.35em] text-cyan-600">
-            List of the yours pre-diagnosis most recent
+            List of the yours pre-diagnostics most recent
           </p>
         </div>
 

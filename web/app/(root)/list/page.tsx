@@ -6,6 +6,7 @@ import { usePreDiagnostics } from "@/hooks/usePreDiagnostics";
 import Loader from "@/components/Loader"
 import Error from "@/components/Error";
 import { useRouter } from "next/navigation";
+import { formatDateBR } from "@/lib/time";
 
 const ListPage = () => {
   const { data, loading, error } = usePreDiagnostics();
@@ -53,12 +54,13 @@ const ListPage = () => {
                 type="button"
                 onClick={() => router.push(`/pre-diagnostic/${el.id}`)}
                 key={el.id}
-                className={`flex h-full ${data.length === 1 ? "w-1/3" : "w-full"} cursor-pointer flex-col justify-start text-start rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md`}
+                className={`flex relative h-full ${data.length === 1 ? "w-1/3" : "w-full"} cursor-pointer flex-col justify-start text-start rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md`}
               >
                 <h1 className="text-2xl font-semibold">{el.result.title}</h1>
                 <p className="mt-4 text-base leading-7 text-slate-600 line-clamp-7">
                   {el.result.summary}
                 </p>
+                <p className="absolute mx-auto w-9/10 pb-3 pt-48 bottom-0 bg-linear-to-t from-slate-50 via-slate-50/85 to-transparent">Created in {formatDateBR(el.createdAt)}</p>
               </button>
             ))}
           </div>

@@ -14,6 +14,7 @@ import {
 
 import type { PreDiagnostics } from "@/types/preDiagnotics";
 import { usePreDiagnosticId } from "@/hooks/PrediagnosticId";
+import { formatDateBR } from "@/lib/time";
 
 
 function urgencyLabel(
@@ -112,6 +113,10 @@ export default function Page() {
 						{data.result.title}
 					</h1>
 
+					<p className="text-sm text-slate-500">
+						Created at: {" "}
+						<span className="font-medium text-slate-700">{formatDateBR(data.createdAt)}</span>
+					</p>
 					<p className="text-sm text-slate-500">
 						Patient:{" "}
 						<span className="font-medium text-slate-700">{clerkName}</span>

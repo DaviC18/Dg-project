@@ -50,7 +50,7 @@ const ListPage = () => {
             {data.map((el) => (
               <button
                 type="button"
-                onClick={() => router.push(`/preDiagnostic/${el.id}`)}
+                onClick={() => router.push(`/pre-diagnostic/${el.id}`)}
                 key={el.id}
                 className={`flex h-full ${data.length === 1 ? "w-1/3" : "w-full"} cursor-pointer flex-col justify-start text-start rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md`}
               >

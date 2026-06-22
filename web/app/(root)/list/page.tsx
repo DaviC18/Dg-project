@@ -29,8 +29,8 @@ const ListPage = () => {
     <main className="py-10 pb-32 bg-white text-slate-950">
       <section className="mx-auto w-full max-w-7xl px-6 py-10 lg:py-16">
         <div className="space-y-8">
-          <p className="text-center text-sm uppercase tracking-[0.35em] text-cyan-600">
-            Search your pre-diagnosis by Date
+          <p className="text-center text-lg uppercase tracking-[0.35em] text-cyan-600">
+            List of the yours pre-diagnosis most recent
           </p>
         </div>
 

@@ -9,25 +9,29 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-white text-slate-950 border-blue-500">
       <section className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start justify-center gap-12 px-6 py-10 lg:grid-cols-2 lg:py-10">
-        <div className="space-y-8">
+        <div className="space-y-5">
           <p className="text-sm uppercase max-sm:text-center tracking-[0.35em] text-cyan-500">
             Pre-diagnosis assistant
           </p>
 
           <div className="space-y-5">
-            <h1 className="max-w-xl text-5xl font-semibold leading-tight sm:text-6xl">
-              Doctor Genesis brings speed to triage without stealing the final
-              word from the doctor.
+            <h1 className="max-w-xl sm:text-start text-center text-6xl font-semibold leading-tight sm:text-6xl">
+              Doctor Genesis
             </h1>
 
-            <p className="max-w-2xl text-base leading-7 text-black/75 sm:text-lg">
+            <p className="max-w-2xl sm:text-start text-center font-semibold text-lg leading-7 text-slate-950 sm:text-xl">
+              Brings speed to triage without stealing the final
+              word from the doctor.
+            </p>
+
+            <p className="max-w-2xl sm:text-start text-center text-base leading-7 text-black/75 sm:text-lg">
               Patients fill out a guided form, the backend sends the data to AI,
               and the system returns a structured pre-diagnosis to support the
               consultation. Clear, fast, and always under medical supervision.
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex sm:justify-start justify-center flex-wrap gap-4">
             <Link
               href="/about"
               className="rounded-full bg-slate-950/85 px-6 py-3 text-sm font-medium text-white transition hover:bg-black/90 duration-150 ease-in"

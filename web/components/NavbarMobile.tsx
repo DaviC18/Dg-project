@@ -19,7 +19,7 @@ const NavbarMobile = () => {
               className="flex flex-col justify-center items-center"
             >
               <Home className="text-inherit" size={22} />
-              <span className="text-sm text-inherit text-center">Home</span>
+              <span translate="no" className="text-sm text-inherit text-center">Home</span>
             </Link>
           </li>
           <li className="w-1/5">
@@ -48,7 +48,7 @@ const NavbarMobile = () => {
               className="flex flex-col justify-center items-center"
             >
               <BrainCircuit />
-              <span className="text-sm">IA</span>
+              <span translate="no" className="text-sm">IA</span>
             </Link>
           </li>
           <li className="w-1/5 flex justify-center items-center">

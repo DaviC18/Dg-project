@@ -27,7 +27,7 @@ const NavbarDesktop = () => {
                 className="w-1/3 flex justify-center items-center text-inherit opacity-75 px-3.5 py-0.5 rounded-full hover:bg-slate-500/25 hover:opacity-100 duration-200 all ease-in"
               >
                 <Link
-                  className="w-full flex justify-center"
+                  className="w-full flex justify-center" translate={el.id === "home" || el.id === "ai" ? "no" : "yes"}
                   href={`/${el.id === "home" ? "/" : el.id}`}
                 >
                   {el.title}

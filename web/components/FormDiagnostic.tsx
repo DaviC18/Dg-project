@@ -27,7 +27,7 @@ const FormDiagnostic = () => {
     <section className="fixed overflow-auto inset-0 bg-black/60 z-30 select-none flex justify-center items-center max-lg:items-start">
       <div onClick={closeWindow} className="absolute z-40 w-full h-full" />
 
-      <div className="absolute group z-50 w-3/4 px-7 pt-4 pb-7.5 max-lg:my-5 bg-[#f4f4f4] rounded-2xl flex flex-col justify-between gap-5">
+      <div className="absolute group z-50 lg:w-3/4 w-auto px-7 pt-4 pb-7.5 lg:my-5 m-2 bg-[#f4f4f4] rounded-2xl flex flex-col justify-between gap-5">
         <div className={`w-full flex-row flex ${error || success ? "justify-between" : "justify-end"} gap-5 items-center`}>
           {error && (
               <div

@@ -11,7 +11,7 @@ export default function HomePage() {
       <section className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start justify-center gap-12 px-6 py-10 lg:grid-cols-2 lg:py-10">
         <div className="space-y-5">
           <p className="text-sm uppercase max-lg:text-center tracking-[0.35em] text-cyan-500">
-            Pre-diagnosis assistant
+            Pre-diagnostics assistant
           </p>
 
           <div className="space-y-5">

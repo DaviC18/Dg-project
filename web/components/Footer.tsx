@@ -20,7 +20,7 @@ export default function Footer() {
 					</div>
 
 					<p className="text-sm leading-6 text-slate-950">
-						AI-assisted clinical pre-diagnosis platform designed to help with
+						AI-assisted clinical pre-diagnostics platform designed to help with
 						triage support, structured intake, and case organization.
 					</p>
 
@@ -64,7 +64,7 @@ export default function Footer() {
 						</h3>
 						<ul className="space-y-2 text-sm text-slate-950">
 							<li>
-								<a
+								<a  translate="no"
 									href="https://github.com/DaviC18/Dg-project"
 									target="_blank"
 									rel="noreferrer"

@@ -1,4 +1,6 @@
 /** biome-ignore-all lint/a11y/useKeyWithClickEvents: <> */
+/** biome-ignore-all lint/suspicious/noShadowRestrictedNames: <> */
+/** biome-ignore-all lint/suspicious/noRedeclare: <> */
 /** biome-ignore-all assist/source/organizeImports: <> */
 /** biome-ignore-all lint/a11y/noStaticElementInteractions: <> */
 "use client";
@@ -8,10 +10,13 @@ import { useEffect } from "react";
 import { Tokenkey } from "../hooks/TokenKey";
 import { useSubmitFormToken } from "@/hooks/useSubmitFormToken";
 import { useWindow } from "@/hooks/WindowContextForm";
+import { usePreDiagnostics } from "@/hooks/usePreDiagnostics";
+import Error from "./Error";
 
 const FormDiagnostic = () => {
-  const { handleSubmit, loading, error, success } = useSubmitFormToken();
+  const { handleSubmit, loading, error: submitError, success } = useSubmitFormToken();
   const { activeWindow, closeWindow } = useWindow(); 
+  const {error: preDiagnosticsError} = usePreDiagnostics()
 
   useEffect(() => {
     document.body.style.overflow = activeWindow === "form" ? "hidden" : "auto";
@@ -24,17 +29,16 @@ const FormDiagnostic = () => {
   if (activeWindow !== "form") return null;
 
   return (
-    <section className="fixed overflow-auto inset-0 bg-black/60 z-30 select-none flex justify-center items-center max-lg:items-start">
+    <section className={`fixed overflow-auto inset-0 bg-black/60 z-30 select-none flex justify-center items-center ${preDiagnosticsError ? "lg:items-center" : "items-start"}`}>
       <div onClick={closeWindow} className="absolute z-40 w-full h-full" />
-
       <div className="absolute group z-50 lg:w-3/4 w-auto px-7 pt-4 pb-7.5 lg:my-5 m-2 bg-[#f4f4f4] rounded-2xl flex flex-col justify-between gap-5">
-        <div className={`w-full flex-row flex ${error || success ? "justify-between" : "justify-end"} gap-5 items-center`}>
-          {error && (
+        <div className={`w-full flex-row flex ${submitError || success ? "justify-between" : "justify-end"} gap-5 items-center`}>
+          {submitError && (
               <div
                 role="alert"
                 className="w-full rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800"
               >
-                {error}
+                {submitError}
               </div>
             )}
     
@@ -51,7 +55,14 @@ const FormDiagnostic = () => {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        {preDiagnosticsError && (
+           <div className="my-5 flex w- items-center justify-center">
+            <Error />
+          </div>
+        )}
+
+        {!preDiagnosticsError && (
+          <form onSubmit={handleSubmit}>
           <div className="content flex justify-between gap-15 max-lg:flex-col">
             <div className="left w-1/2 max-lg:w-full">
               <div className="w-full flex flex-col gap-10">
@@ -271,6 +282,7 @@ If you experience shortness of breath, severe pain, fainting, or significant wor
             </div>
           </div>
         </form>
+        )}
       </div>
     </section>
   );

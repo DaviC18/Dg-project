@@ -11,9 +11,10 @@ import { usePathname } from "next/navigation";
 const NavbarDesktop = () => {
   const { openWindow } = useWindow();
   const pathname = usePathname()
+  const listLink = navLinksDesktop.find((el) => el.id === "list");
 
   return (
-    <header className=" w-full bg-transparent flex items-center mx-auto max-w-7xl justify-between px-6 py-6">
+    <header className="w-full bg-transparent flex items-center mx-auto max-w-7xl justify-between px-6 py-6">
       <nav className="w-full flex items-center justify-between max-w-360 mx-auto">
         <div className="w-1/3 max-sm:w-1/2 max-sm:flex max-sm:justify-start max-sm:items-center">
           <Link href="/">
@@ -46,9 +47,23 @@ const NavbarDesktop = () => {
         </div>
 
         <figure className="relative max-sm:w-1/2 w-1/3 flex items-center justify-end gap-2">
-          <Link href={`/list`} className="p-2 group sm:hidden text-inherit opacity-75 rounded-full cursor-pointer transition-all duration-300 hover:bg-slate-500/25 hover:opacity-100">
-            <Search size={23}/>
-          </Link>
+          {listLink && (
+            <Link
+              href="/list"
+              className={` p-2 group sm:hidden text-inherit opacity-75 rounded-full cursor-pointer transition-all duration-300 hover:bg-slate-500/25 hover:opacity-100`}
+            >
+              <Search
+                size={26}
+                className={listLink.link === "/"
+                    ? pathname === "/"
+                      ? "text-[#2b7fff]"
+                      : "text-slate-950"
+                    : pathname.startsWith(listLink.link)
+                      ? "text-[#2b7fff] "
+                      : "text-slate-950"}
+              />
+            </Link>
+          )}
           <button
             type="button"
             onClick={() => openWindow("form")}

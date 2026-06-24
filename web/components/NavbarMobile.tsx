@@ -13,7 +13,7 @@ const NavbarMobile = () => {
   const pathname = usePathname()
 
   return (
-    <div className="max-sm:flex hidden px-3 fixed z-10 bottom-5 left-0 w-full bg-cover justify-center items-center gap-2">
+    <div className="max-sm:flex hidden px-3 fixed z-10 bottom-3 left-0 w-full bg-cover justify-center items-center gap-2">
       <div className="w-4/5 bg-white/25 backdrop-blur-xl border border-black/20 shadow-xl py-1.5 px-2.5 text-center rounded-full text-black">
         <ul className="flex items-center justify-center gap-2">
         {navLinksMobile.map((el) => {
@@ -36,25 +36,14 @@ const NavbarMobile = () => {
                 ${isActive ? "text-[#2b7fff]" : "text-slate-950"}
               `}
             >
-              <Icon size={22} className={isActive ? "text-[#2b7fff]" : "text-slate-950"} />
-
-              <span
-                translate={shouldNotTranslate ? "no" : "yes"}
-                className={`text-center text-sm text-inherit ${
-                  shouldNotTranslate ? "notranslate" : ""
-                }`}
-              >
-                {el.title}
-              </span>
+              <Icon size={26} strokeWidth={1.8} className={isActive ? "text-[#2b7fff]" : "text-slate-950"} />
             </Link>
           </li>
         );
       })}
 
       <li className="flex w-1/4 items-center justify-center">
-        <UserClerkMobile>
-          <span className="text-sm">User</span>
-        </UserClerkMobile>
+        <UserClerkMobile />
       </li>
     </ul>
       </div>
@@ -62,7 +51,7 @@ const NavbarMobile = () => {
         <button
               type="button"
               onClick={() => openWindow("form")}
-              className="cursor-pointer w-full min-w-[58.6px] h-[58.6px] bg-linear-to-br from-blue-500 to-cyan-400  shadow-xl text-center rounded-full "
+              className="cursor-pointer w-full min-w-[49.6px] h-[49.6px] bg-linear-to-br from-blue-500 to-cyan-400  shadow-xl text-center rounded-full "
             >
               <div className="w-full h-full flex justify-center items-center text-white">
                 <Plus size={42} />

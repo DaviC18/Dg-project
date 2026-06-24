@@ -2,16 +2,14 @@
 
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import { UserRound } from "lucide-react";
-import type { ReactNode } from "react";
 
-const UserClerkMobile = ({ children }: { children: ReactNode }) => {
+const UserClerkMobile = () => {
   const { isLoaded, isSignedIn, user } = useUser();
 
   if (!isLoaded) {
     return (
       <div className="flex flex-col justify-center items-center">
         <UserRound />
-        {children}
       </div>
     );
   }
@@ -22,11 +20,10 @@ const UserClerkMobile = ({ children }: { children: ReactNode }) => {
         <UserButton
           appearance={{
             elements: {
-              userButtonAvatarBox: { width: "25px", height: "25px" },
+              userButtonAvatarBox: { width: "26px", height: "26px" },
             },
           }}
         />
-        {children}
       </div>
     );
   } else {
@@ -34,10 +31,9 @@ const UserClerkMobile = ({ children }: { children: ReactNode }) => {
       <div className="w-9 h-9 flex flex-col items-center justify-center text-inherit rounded-full cursor-pointer transition-all duration-300 ">
         <SignInButton mode="modal">
           <div>
-            <UserRound />
+            <UserRound size={26}/>
           </div>
         </SignInButton>
-        {children}
       </div>
     );
   }
